@@ -8,9 +8,11 @@ services:
     healthCheckPath: /health
     autoDeploy: true
 
-  - type: static
+  - type: web
     name: nortek-frontend
+    env: static
     rootDir: frontend
+    buildCommand: echo "No build step"
     staticPublishPath: public
     pullRequestPreviewsEnabled: true
     autoDeploy: true
