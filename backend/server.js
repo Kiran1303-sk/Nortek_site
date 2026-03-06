@@ -13,6 +13,8 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
+// Render/other reverse proxies set X-Forwarded-For. Required for express-rate-limit.
+app.set('trust proxy', 1);
 const ADMIN_ROLES = ['super_admin', 'admin', 'recruiter', 'user'];
 
 // ================= CONFIG =================
