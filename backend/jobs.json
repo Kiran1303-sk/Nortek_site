@@ -1,0 +1,880 @@
+[
+  {
+    "jobCode": "NTC-134",
+    "title": "Software Developer",
+    "openings": 5,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA",
+    "experience":"0-2",
+    "email": "venkatareddy@nortekconsulting.com",
+    "postedOn": "2024-12-18",
+    "description": "Nortek Consulting Inc. has openings for Software Developers for Irving, TX & various unanticipated sites throughout the US.",
+    "duties": [
+      "Research, design, develop, implement, test, and support applications in complex software solutions as per business requirements.",
+      "Perform requirements gathering. Code, debug, Deploy, and resolve production issues.",
+      "Use various skills like JAVA/Python/.Net, J2EE, Spring MVC/Spring Core/ Web Services (SOAP/REST), Angular/JavaScript, SQL/PLSQL and HTML.",
+      "Experience in application software development using Java and knowledge of Java frameworks is required.",
+      "Will need to analyze and design databases interacting with Java software applications."
+    ],
+    "education": [
+      "Master’s or equivalent in Science, Engineering, Information Systems/Technology, Business Administration or related field with 1 year of experience in job offered or related occupation is required.",
+      "Travel and/or relocation to unanticipated client sites throughout the USA is required."
+    ]
+  },
+  {
+    "jobCode": "NTC-133",
+    "title": "Business Analyst",
+    "openings": 3,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA",
+     "experience":"0-2",
+    "email": "hr@nortekconsulting.com",
+    "postedOn": "2024-11-20",
+    "description": "Nortek Consulting Inc. is looking for Business Analysts to analyze business processes, gather requirements, and improve operational efficiency.",
+    "duties": [
+      "Collect and analyze business requirements and translate them into functional specifications.",
+      "Perform process analysis and suggest improvements.",
+      "Work closely with stakeholders and development teams to implement solutions.",
+      "Create reports, dashboards, and document business processes."
+    ],
+    "education": [
+      "Bachelor’s degree in Business Administration, Management, or related field.",
+      "1-2 years of experience in business analysis or related role."
+    ]
+  },
+  {
+    "jobCode": "NTC-127",
+    "title": "Software Engineer",
+    "openings": 4,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA and remote locations",
+     "experience":"0-2",
+    "email": "frontend@nortekconsulting.com",
+    "postedOn": "2024-10-15",
+    "description": "We are hiring Frontend Developers to build responsive and interactive web applications using modern frameworks.",
+    "duties": [
+      "Develop user-facing features using React, Angular, or Vue.js.",
+      "Optimize applications for speed and scalability.",
+      "Collaborate with backend developers and UI/UX designers.",
+      "Maintain code quality and perform code reviews."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "Experience with JavaScript, HTML, CSS, and modern frontend frameworks."
+    ]
+  },
+  {
+    "jobCode": "NTC-126",
+    "title": "RPA Solution Architect",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA",
+     "experience":"2-5",
+    "email": "rpa@nortekconsulting.com",
+    "postedOn": "2024-09-05",
+    "description": "We are seeking RPA Solution Architects to design and implement automation solutions for clients.",
+    "duties": [
+      "Design and implement RPA solutions using tools like UiPath, Automation Anywhere, or Blue Prism.",
+      "Analyze business processes to identify automation opportunities.",
+      "Collaborate with business stakeholders to ensure alignment.",
+      "Provide guidance and mentorship to RPA developers."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science, Engineering, or related field.",
+      "3+ years of experience in RPA development and architecture."
+    ]
+  },
+  {
+    "jobCode": "NTC-125",
+    "title": "Software Developer",
+    "openings": 3,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA",
+     "experience":"2-5",
+    "email": "data@nortekconsulting.com",
+    "postedOn": "2024-08-25",
+    "description": "Looking for Data Analysts to interpret complex datasets, generate insights, and support data-driven decision making.",
+    "duties": [
+      "Collect, clean, and analyze large datasets.",
+      "Create reports, dashboards, and visualizations.",
+      "Collaborate with stakeholders to identify data requirements.",
+      "Provide actionable insights based on data analysis."
+    ],
+    "education": [
+      "Bachelor’s degree in Statistics, Mathematics, Computer Science, or related field.",
+      "1-2 years of experience in data analysis or business intelligence."
+    ]
+  },
+  {
+    "jobCode": "NTC-130",
+    "title": "Project Manager",
+    "openings": 1,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "pm@nortekconsulting.com",
+    "postedOn": "2024-09-03",
+    "description": "Manage end-to-end software development projects.",
+    "duties": [
+      "Plan and manage project timelines.",
+      "Coordinate team activities.",
+      "Track project progress.",
+      "Communicate with stakeholders."
+    ],
+    "education": [
+      "Bachelor’s degree or MBA.",
+      "5+ years of project management experience."
+    ]
+  },
+   {
+    "jobCode": "NTC-132",
+    "title": "QA Engineer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Hyderabad, India",
+     "experience":"2-5",
+    "email": "qa@nortekconsulting.com",
+    "postedOn": "2024-09-01",
+    "description": "Ensure software quality through testing processes.",
+    "duties": [
+      "Create and execute test cases.",
+      "Identify and report bugs.",
+      "Perform regression testing.",
+      "Collaborate with developers."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of QA experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-131",
+    "title": "DevOps Engineer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "devops@nortekconsulting.com",
+    "postedOn": "2024-08-31",
+    "description": "Automate deployments and manage cloud infrastructure.",
+    "duties": [
+      "Maintain CI/CD pipelines.",
+      "Manage cloud infrastructure.",
+      "Monitor system performance.",
+      "Improve deployment automation."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "3+ years of DevOps experience."
+    ]
+  },
+   {
+    "jobCode": "NTC-129",
+    "title": "Data Scientist",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Bangalore, India",
+     "experience":"5+",
+    "email": "ai@nortekconsulting.com",
+    "postedOn": "2024-08-30",
+    "description": "Build predictive models and advanced analytics solutions.",
+    "duties": [
+      "Develop machine learning models.",
+      "Analyze large datasets.",
+      "Deploy data-driven solutions.",
+      "Collaborate with engineering teams."
+    ],
+    "education": [
+      "Master’s degree in Data Science or related field.",
+      "3+ years of data science experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-128",
+    "title": "Data Analyst",
+    "openings": 3,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA",
+     "experience":"5+",
+    "email": "data@nortekconsulting.com",
+    "postedOn": "2024-08-29",
+    "description": "Interpret complex datasets to support business decisions.",
+    "duties": [
+      "Collect and analyze business data.",
+      "Prepare reports and dashboards.",
+      "Identify trends and patterns.",
+      "Support data-driven strategies."
+    ],
+    "education": [
+      "Bachelor’s degree in Statistics or related field.",
+      "1-2 years of data analysis experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-127",
+    "title": "Database Administrator",
+    "openings": 1,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Dallas, Texas, USA",
+     "experience":"5+",
+    "email": "db@nortekconsulting.com",
+    "postedOn": "2024-08-28",
+    "description": "Maintain and optimize enterprise databases.",
+    "duties": [
+      "Monitor database performance.",
+      "Ensure data security and backups.",
+      "Optimize queries and indexes.",
+      "Handle database migrations."
+    ],
+    "education": [
+      "Bachelor’s degree in IT or Computer Science.",
+      "3+ years of database administration experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-126",
+    "title": "Backend Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Austin, Texas, USA",
+     "experience":"5+",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-27",
+    "description": "Design and develop scalable backend services.",
+    "duties": [
+      "Develop RESTful APIs.",
+      "Manage databases and server logic.",
+      "Ensure application security and performance.",
+      "Collaborate with frontend developers."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "2-4 years of backend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-120",
+    "title": "Frontend Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-118",
+    "title": "Programmer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-110",
+    "title": "DevOps Engineer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"0-2",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-109",
+    "title": "React Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"0-2",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-108",
+    "title": "UI Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-201",
+    "title": "Java Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Onsite",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-213",
+    "title": "Python Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Onsite",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  
+  {
+    "jobCode": "NTC-345",
+    "title": "Software Developer",
+    "openings": 5,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Onsite",
+     "experience":"2-5",
+    "email": "venkatareddy@nortekconsulting.com",
+    "postedOn": "2024-12-18",
+    "description": "Nortek Consulting Inc. has openings for Software Developers for Irving, TX & various unanticipated sites throughout the US.",
+    "duties": [
+      "Research, design, develop, implement, test, and support applications in complex software solutions as per business requirements.",
+      "Perform requirements gathering. Code, debug, Deploy, and resolve production issues.",
+      "Use various skills like JAVA/Python/.Net, J2EE, Spring MVC/Spring Core/ Web Services (SOAP/REST), Angular/JavaScript, SQL/PLSQL and HTML.",
+      "Experience in application software development using Java and knowledge of Java frameworks is required.",
+      "Will need to analyze and design databases interacting with Java software applications."
+    ],
+    "education": [
+      "Master’s or equivalent in Science, Engineering, Information Systems/Technology, Business Administration or related field with 1 year of experience in job offered or related occupation is required.",
+      "Travel and/or relocation to unanticipated client sites throughout the USA is required."
+    ]
+  },
+  {
+    "jobCode": "NTC-245",
+    "title": "Business Analyst",
+    "openings": 3,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA",
+     "experience":"0-2",
+    "email": "hr@nortekconsulting.com",
+    "postedOn": "2024-11-20",
+    "description": "Nortek Consulting Inc. is looking for Business Analysts to analyze business processes, gather requirements, and improve operational efficiency.",
+    "duties": [
+      "Collect and analyze business requirements and translate them into functional specifications.",
+      "Perform process analysis and suggest improvements.",
+      "Work closely with stakeholders and development teams to implement solutions.",
+      "Create reports, dashboards, and document business processes."
+    ],
+    "education": [
+      "Bachelor’s degree in Business Administration, Management, or related field.",
+      "1-2 years of experience in business analysis or related role."
+    ]
+  },
+  {
+    "jobCode": "NTC-203",
+    "title": "Software Engineer",
+    "openings": 4,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA and remote locations",
+     "experience":"2-5",
+    "email": "frontend@nortekconsulting.com",
+    "postedOn": "2024-10-15",
+    "description": "We are hiring Frontend Developers to build responsive and interactive web applications using modern frameworks.",
+    "duties": [
+      "Develop user-facing features using React, Angular, or Vue.js.",
+      "Optimize applications for speed and scalability.",
+      "Collaborate with backend developers and UI/UX designers.",
+      "Maintain code quality and perform code reviews."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "Experience with JavaScript, HTML, CSS, and modern frontend frameworks."
+    ]
+  },
+  {
+    "jobCode": "NTC-205",
+    "title": "RPA Solution Architect",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA",
+     "experience":"0-2",
+    "email": "rpa@nortekconsulting.com",
+    "postedOn": "2024-09-05",
+    "description": "We are seeking RPA Solution Architects to design and implement automation solutions for clients.",
+    "duties": [
+      "Design and implement RPA solutions using tools like UiPath, Automation Anywhere, or Blue Prism.",
+      "Analyze business processes to identify automation opportunities.",
+      "Collaborate with business stakeholders to ensure alignment.",
+      "Provide guidance and mentorship to RPA developers."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science, Engineering, or related field.",
+      "3+ years of experience in RPA development and architecture."
+    ]
+  },
+  {
+    "jobCode": "NTC-456",
+    "title": "Software Developer",
+    "openings": 3,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA",
+     "experience":"0-2",
+    "email": "data@nortekconsulting.com",
+    "postedOn": "2024-08-25",
+    "description": "Looking for Data Analysts to interpret complex datasets, generate insights, and support data-driven decision making.",
+    "duties": [
+      "Collect, clean, and analyze large datasets.",
+      "Create reports, dashboards, and visualizations.",
+      "Collaborate with stakeholders to identify data requirements.",
+      "Provide actionable insights based on data analysis."
+    ],
+    "education": [
+      "Bachelor’s degree in Statistics, Mathematics, Computer Science, or related field.",
+      "1-2 years of experience in data analysis or business intelligence."
+    ]
+  },
+  {
+    "jobCode": "NTC-139",
+    "title": "Project Manager",
+    "openings": 1,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"5+",
+    "email": "pm@nortekconsulting.com",
+    "postedOn": "2024-09-03",
+    "description": "Manage end-to-end software development projects.",
+    "duties": [
+      "Plan and manage project timelines.",
+      "Coordinate team activities.",
+      "Track project progress.",
+      "Communicate with stakeholders."
+    ],
+    "education": [
+      "Bachelor’s degree or MBA.",
+      "5+ years of project management experience."
+    ]
+  },
+   {
+    "jobCode": "NTC-149",
+    "title": "QA Engineer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Hyderabad, India",
+     "experience":"5+",
+    "email": "qa@nortekconsulting.com",
+    "postedOn": "2024-09-01",
+    "description": "Ensure software quality through testing processes.",
+    "duties": [
+      "Create and execute test cases.",
+      "Identify and report bugs.",
+      "Perform regression testing.",
+      "Collaborate with developers."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of QA experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-142",
+    "title": "DevOps Engineer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "devops@nortekconsulting.com",
+    "postedOn": "2024-08-31",
+    "description": "Automate deployments and manage cloud infrastructure.",
+    "duties": [
+      "Maintain CI/CD pipelines.",
+      "Manage cloud infrastructure.",
+      "Monitor system performance.",
+      "Improve deployment automation."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "3+ years of DevOps experience."
+    ]
+  },
+   {
+    "jobCode": "NTC-141",
+    "title": "Data Scientist",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Bangalore, India",
+     "experience":"5+",
+    "email": "ai@nortekconsulting.com",
+    "postedOn": "2024-08-30",
+    "description": "Build predictive models and advanced analytics solutions.",
+    "duties": [
+      "Develop machine learning models.",
+      "Analyze large datasets.",
+      "Deploy data-driven solutions.",
+      "Collaborate with engineering teams."
+    ],
+    "education": [
+      "Master’s degree in Data Science or related field.",
+      "3+ years of data science experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-107",
+    "title": "Data Analyst",
+    "openings": 3,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Irving, Texas, USA",
+     "experience":"2-5",
+    "email": "data@nortekconsulting.com",
+    "postedOn": "2024-08-29",
+    "description": "Interpret complex datasets to support business decisions.",
+    "duties": [
+      "Collect and analyze business data.",
+      "Prepare reports and dashboards.",
+      "Identify trends and patterns.",
+      "Support data-driven strategies."
+    ],
+    "education": [
+      "Bachelor’s degree in Statistics or related field.",
+      "1-2 years of data analysis experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-206",
+    "title": "Database Administrator",
+    "openings": 1,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Dallas, Texas, USA",
+     "experience":"0-2",
+    "email": "db@nortekconsulting.com",
+    "postedOn": "2024-08-28",
+    "description": "Maintain and optimize enterprise databases.",
+    "duties": [
+      "Monitor database performance.",
+      "Ensure data security and backups.",
+      "Optimize queries and indexes.",
+      "Handle database migrations."
+    ],
+    "education": [
+      "Bachelor’s degree in IT or Computer Science.",
+      "3+ years of database administration experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-307",
+    "title": "Backend Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Austin, Texas, USA",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-27",
+    "description": "Design and develop scalable backend services.",
+    "duties": [
+      "Develop RESTful APIs.",
+      "Manage databases and server logic.",
+      "Ensure application security and performance.",
+      "Collaborate with frontend developers."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "2-4 years of backend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-140",
+    "title": "Frontend Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-100",
+    "title": "Programmer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"0-2",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-167",
+    "title": "DevOps Engineer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-168",
+    "title": "React Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"5+",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-164",
+    "title": "UI Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"5+",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-174",
+    "title": "Java Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"5+",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+  },
+  {
+    "jobCode": "NTC-188",
+    "title": "Python Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+    
+  },
+  {
+    "jobCode": "NTC-198",
+    "title": "Python Developer",
+    "openings": 2,
+    "type": "Full Time",
+    "hours": "40 Hours Per Week",
+    "location": "Remote",
+     "experience":"2-5",
+    "email": "careers@nortekconsulting.com",
+    "postedOn": "2024-08-26",
+    "description": "Build responsive and interactive user interfaces.",
+    "duties": [
+      "Develop UI using HTML, CSS, and JavaScript.",
+      "Integrate APIs with frontend components.",
+      "Optimize web applications for performance.",
+      "Ensure cross-browser compatibility."
+    ],
+    "education": [
+      "Bachelor’s degree in Computer Science or related field.",
+      "1-3 years of frontend development experience."
+    ]
+    
+  }
+  
+
+
+
+
+
+
+
+
+ 
+  
+  
+  
+  
+]
+

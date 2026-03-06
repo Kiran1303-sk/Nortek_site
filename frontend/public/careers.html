@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Careers</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site-theme.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      .box {
+        width: 275px;
+        height: 275px;
+        background-color: rgb(47, 50, 145);
+      }
+
+      .title-text {
+        font-weight: 800;
+        font-size: clamp(36px, 5vw, 50px);
+        margin-left: 70px;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+      }
+
+      header {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+
+      .bts {
+        background: white;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 6px;
+      }
+
+      .schedule-btn {
+        background-color: rgb(47, 50, 145);
+        color: white;
+        border-radius: 50px;
+      }
+
+      .schedule-btn:hover {
+        border: 2px solid#6f70ff;
+      }
+
+      .con {
+        background-color: rgb(47, 50, 145);
+        color: white;
+      }
+
+      .con:hover {
+        border: 2px solid rgb(47, 50, 145);
+        color: rgb(47, 50, 145);
+      }
+
+      /* Laptop & above → single line */
+      @media (min-width: 992px) {
+        .title-text {
+          white-space: nowrap;
+        }
+      }
+
+      li a {
+        list-style: none;
+        text-decoration: none;
+      }
+
+      .modern {
+        border-left: 4px solid rgb(47, 50, 145);
+        height: 250px;
+        border-radius: 3px;
+        padding-left: 20px;
+      }
+
+      .navbar-nav .nav-link {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      /* Dropdown toggle arrow alignment */
+      .nav-item.dropdown .nav-link.dropdown-toggle::after {
+        margin-left: 8px;
+        vertical-align: middle;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-left: 0.3em solid transparent;
+      }
+
+      /* Contact button styling */
+      .btn.schedule-btn {
+        font-weight: 700;
+
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Desktop specific alignment */
+      @media (min-width: 992px) {
+        .navbar-nav .nav-item {
+          display: flex;
+          align-items: center;
+        }
+
+        .navbar-nav .nav-link {
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+        }
+
+        .btn.schedule-btn {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+
+      /* Mobile dropdown alignment */
+      @media (max-width: 991px) {
+        .nav-item.dropdown .nav-link.dropdown-toggle::after {
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .navbar-nav .nav-link {
+          text-align: left;
+          justify-content: flex-start;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+
+      .nav-link {
+        font-weight: 700;
+      }
+
+      .nav-link:hover {
+        color: rgb(47, 50, 145);
+      }
+
+      .container {
+        max-width: 1200px;
+      }
+
+      @media (max-width: 991px) {
+        .container {
+          padding-left: 14px;
+          padding-right: 14px;
+        }
+      }
+
+      @media (max-width: 991px) {
+        .careers-hero {
+          height: 62vh;
+          min-height: 360px;
+        }
+
+        .box {
+          margin-top: -170px !important;
+          height: auto;
+          min-height: 180px;
+        }
+
+        form.py-5 {
+          padding-top: 2.2rem !important;
+        }
+
+        .filters-header {
+          gap: 12px;
+        }
+
+        #clearFiltersBtn {
+          width: auto !important;
+          min-width: 110px;
+          flex: 0 0 auto;
+          margin-left: 8px;
+        }
+      }
+
+      .nortek-title {
+        color: rgb(47, 50, 145);
+        font-weight: 900;
+        line-height: 1;
+        font-size: clamp(48px, 10vw, 130px);
+        /* responsive magic */
+      }
+
+      .modal.left .modal-dialog {
+        position: fixed;
+        left: 0;
+        margin: 0;
+        width: 400px;
+        /* modal width */
+        height: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+      }
+
+      .modal.left.show .modal-dialog {
+        transform: translateX(0);
+      }
+
+      .modal.left .modal-content {
+        height: 100%;
+        border-radius: 0;
+        background: #2b2d42;
+        color: #fff;
+      }
+
+      .close-btn {
+        font-size: 26px;
+        cursor: pointer;
+      }
+
+      .un:hover {
+        text-decoration: underline;
+      }
+
+      .job-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 20px;
+        transition: 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .careers-hero {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        background: url('/images/browes-jobs-banner.jpg') top center / cover no-repeat;
+        height: 100vh;
+      }
+
+      .job-title {
+        font-weight: 600;
+        font-size: 18px;
+        margin: 10px 0;
+        color: rgb(47, 50, 145);
+      }
+
+      .job-tags span {
+        background: #f0f1f2;
+        padding: 5px 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        margin-right: 6px;
+      }
+
+      .job-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 15px;
+      }
+
+      .apply-btn {
+        background: rgb(47, 50, 145);
+        color: white;
+        border: none;
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 14px;
+      }
+
+      .apply-btn:hover {
+        opacity: 0.9;
+      }
+
+      /*  Wrapper */
+      .pagination-wrapper {
+        margin: 40px 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      /*  Card Container */
+      .pagination-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 18px;
+        background: #ffffff;
+        border-radius: 50px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: 0.3s ease;
+      }
+
+      /*  Page Numbers */
+      .page-numbers {
+        display: flex;
+        gap: 8px;
+        max-width: 400px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .page-numbers::-webkit-scrollbar {
+        display: none;
+      }
+
+      /*  Page Buttons */
+      .page-numbers button {
+        min-width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: #f3f4f6;
+        color: #333;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .page-numbers button:hover {
+        background: rgb(47, 50, 145);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      /*  Active Page */
+      .page-numbers button.active {
+        background: rgb(47, 50, 145);
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(47, 50, 145, 0.3);
+      }
+
+      /*  Navigation Buttons */
+      .nav-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: rgb(47, 50, 145);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s ease;
+        cursor: pointer;
+      }
+
+      .page-select-wrapper {
+        display: none;
+      }
+
+      .nav-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(47, 50, 145, 0.4);
+      }
+
+      img[width],
+      img[height] {
+        max-width: none;
+      }
+    </style>
+    <script src="/js/api-config.js"></script>
+</head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid px-3 px-lg-4">
+          <!-- Desktop Side Menu Button -->
+          <button
+            class="btn p-0 border-0 bg-transparent d-none d-md-flex align-items-center"
+            data-bs-toggle="modal"
+            data-bs-target="#sideModal"
+          >
+            <img loading="lazy" decoding="async" src="/images/hamburger-svg.svg" height="45" alt="Menu" />
+          </button>
+
+          <!-- Logo -->
+          <a class="navbar-brand d-flex align-items-center ms-2" href="#">
+            <img loading="lazy" decoding="async" src="/images/Nortek_logo.png" alt="Nortek Logo" height="45" />
+          </a>
+
+          <!-- Mobile Hamburger -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Menu -->
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link px-lg-2 px-xl-3" href="/nortek.html">HOME</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link px-lg-2 px-xl-3" href="/about.html">ABOUT US</a>
+              </li>
+
+              <!-- Services Dropdown -->
+              <li class="nav-item dropdown">
+                <!-- Combined link with dropdown -->
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                  href="/services.html"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  SERVICES
+                </a>
+
+                <!-- Dropdown Menu -->
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="/webdesign.html">Web Design & App Development</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/AI-Services.html">AI Services</a></li>
+                  <li><a class="dropdown-item" href="/agentic.html">Agentic AI Solutions</a></li>
+                  <li><a class="dropdown-item" href="/Sap-Erp.html">SAP ERP Services</a></li>
+                  <li><a class="dropdown-item" href="/RPA.html">RPA</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/Business-int.html">Business Intelligence</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link px-lg-2 px-xl-3" href="/blog.html">BLOG</a>
+              </li>
+
+              <!-- Careers Dropdown -->
+              <li class="nav-item dropdown">
+                <!-- Combined link with dropdown -->
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                  href="/careers.html"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  CAREERS
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/careers.html">Browse Jobs</a></li>
+                  <li><a class="dropdown-item" href="/resume.html">Resume Marketing</a></li>
+                  <li><a class="dropdown-item" href="/visa.html">VISA Sponsorship</a></li>
+                </ul>
+              </li>
+
+              <!-- Contact -->
+              <li class="nav-item ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center">
+                <a class="btn con px-4 py-2 w-100 w-lg-auto text-center" href="/contact.html"
+                  >CONTACT</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div style="background: #f0f1f2; padding-bottom: 70px; margin-top: 0">
+      <div class="careers-hero"></div>
+
+      <div class="container">
+        <div class="box" style="margin-top: -250px">
+          <h4 style="color: gray; padding-top: 50px; margin-left: 70px">Nortek</h4>
+          <h1 class="text-white title-text">Browse Jobs</h1>
+        </div>
+      </div>
+
+      <!-- SEARCH -->
+      <form class="py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="keywordInput" class="visually-hidden">Search by keyword</label>
+              <input id="keywordInput" type="text" class="form-control" placeholder="Search By Keyword" aria-label="Search by keyword" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="locationInput" class="visually-hidden">Search by location</label>
+              <input id="locationInput" type="text" class="form-control" placeholder="Search By Location" aria-label="Search by location" />
+            </div>
+            <div class="col-md-4">
+              <button
+                type="button"
+                id="searchBtn"
+                class="btn w-100 con"
+                style="border-radius: 50px"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- JOB SECTION WITH RIGHT FILTER -->
+      <div class="container">
+        <div class="row">
+          <h6 class="mb-3">Total Jobs Found: <span id="totalCount">0</span></h6>
+
+          <!-- RIGHT SIDE FILTER CARD -->
+          <div class="col-12 col-lg-4 mt-4 mt-lg-0 mb-4">
+            <div class="card shadow-sm p-3" style="border-radius: 17px">
+              <div class="d-flex justify-content-between align-items-center mb-3 filters-header">
+                <h5 class="mb-0">Filters</h5>
+
+                <button
+                  type="button"
+                  id="clearFiltersBtn"
+                  class="btn btn-outline-danger btn-sm position-relative"
+                  disabled
+                >
+                  Clear
+                  <span
+                    id="activeFilterBadge"
+                    class="badge bg-danger position-absolute top-0 start-100 translate-middle"
+                    style="display: none; font-size: 10px"
+                  >
+                  </span>
+                </button>
+              </div>
+
+              <!-- Job Type -->
+              <div class="mb-3">
+                <p class="form-label d-block mb-1">Job Type</p>
+                <div class="btn-group flex-wrap" role="group">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="jobTypeFilter"
+                    id="jobTypeAll"
+                    aria-label="Job type all"
+                    value=""
+                    checked
+                  />
+                  <label class="btn btn-outline-secondary btn-sm m-2" for="jobTypeAll">All</label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="jobTypeFilter"
+                    id="jobTypeFull"
+                    aria-label="Job type full time"
+                    value="Full Time"
+                  />
+                  <label class="btn btn-outline-primary btn-sm m-2" for="jobTypeFull"
+                    >Full Time</label
+                  >
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="jobTypeFilter"
+                    id="jobTypePart"
+                    aria-label="Job type part time"
+                    value="Part Time"
+                  />
+                  <label class="btn btn-outline-success btn-sm m-2" for="jobTypePart"
+                    >Part Time</label
+                  >
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="jobTypeFilter"
+                    id="jobTypeContract"
+                    aria-label="Job type contract"
+                    value="Contract"
+                  />
+                  <label class="btn btn-outline-warning btn-sm m-2" for="jobTypeContract"
+                    >Contract</label
+                  >
+                </div>
+              </div>
+
+              <!-- Experience -->
+              <div class="mb-3">
+                <p class="form-label d-block mb-1">Experience</p>
+                <div class="btn-group flex-wrap" role="group">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="experienceFilter"
+                    id="expAll"
+                    aria-label="Experience all"
+                    value=""
+                    checked
+                  />
+                  <label class="btn btn-outline-secondary btn-sm m-2" for="expAll">All</label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="experienceFilter"
+                    id="exp0"
+                    aria-label="Experience 0 to 2 years"
+                    value="0-2"
+                  />
+                  <label class="btn btn-outline-primary btn-sm m-2" for="exp0">0-2 Years</label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="experienceFilter"
+                    id="exp2"
+                    aria-label="Experience 2 to 5 years"
+                    value="2-5"
+                  />
+                  <label class="btn btn-outline-success btn-sm m-2" for="exp2">2-5 Years</label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="experienceFilter"
+                    id="exp5"
+                    aria-label="Experience 5 to 15 years"
+                    value="5-15"
+                  />
+                  <label class="btn btn-outline-danger btn-sm m-2" for="exp5">5-15 Years</label>
+                </div>
+              </div>
+
+              <!-- Work Type -->
+              <div class="mb-3">
+                <p class="form-label d-block mb-1">Work Type</p>
+                <div class="btn-group flex-wrap" role="group">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="workTypeFilter"
+                    id="workAll"
+                    aria-label="Work type all"
+                    value=""
+                    checked
+                  />
+                  <label class="btn btn-outline-secondary btn-sm m-2" for="workAll">All</label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="workTypeFilter"
+                    id="workRemote"
+                    aria-label="Work type remote"
+                    value="Remote"
+                  />
+                  <label class="btn btn-outline-primary btn-sm m-2" for="workRemote">Remote</label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="workTypeFilter"
+                    id="workOnsite"
+                    aria-label="Work type onsite"
+                    value="Onsite"
+                  />
+                  <label class="btn btn-outline-success btn-sm m-2" for="workOnsite">Onsite</label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="workTypeFilter"
+                    id="workHybrid"
+                    aria-label="Work type hybrid"
+                    value="Hybrid"
+                  />
+                  <label class="btn btn-outline-warning btn-sm m-2" for="workHybrid">Hybrid</label>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <p class="form-label d-block mb-1">Latest Job (Month / Year)</p>
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label for="latestMonthFilter" class="visually-hidden">Latest job month filter</label>
+                    <select id="latestMonthFilter" class="form-select form-select-sm" aria-label="Latest job month filter">
+                      <option value="">All Months</option>
+                      <option value="0">January</option>
+                      <option value="1">February</option>
+                      <option value="2">March</option>
+                      <option value="3">April</option>
+                      <option value="4">May</option>
+                      <option value="5">June</option>
+                      <option value="6">July</option>
+                      <option value="7">August</option>
+                      <option value="8">September</option>
+                      <option value="9">October</option>
+                      <option value="10">November</option>
+                      <option value="11">December</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label for="latestYearFilter" class="visually-hidden">Latest job year filter</label>
+                    <select id="latestYearFilter" class="form-select form-select-sm" aria-label="Latest job year filter">
+                      <option value="">All Years</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-8">
+            <div id="jobsContainer" class="row row-cols-2"></div>
+
+            <!-- 🔹 MODERN PAGINATION -->
+            <div class="pagination-wrapper">
+              <div class="pagination-card">
+                <button id="prevGroupBtn" class="nav-btn">
+                  <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <div id="paginationContainer" class="page-numbers"></div>
+
+                <button id="nextGroupBtn" class="nav-btn">
+                  <i class="bi bi-chevron-right"></i>
+                </button>
+              </div>
+
+              <div class="page-select-wrapper">
+                <label for="pageDropdown" class="visually-hidden">Select page</label>
+                <select id="pageDropdown" class="page-select" aria-label="Select page"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="container-fluid bg-dark text-white py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-3">
+                <img loading="lazy" decoding="async" src="/images/nortek_white.png" />
+                <p>
+                  Nortek isn’t just a company, it’s a domicile of innovators where we craft
+                  futuristic tech solutions.
+                </p>
+              </div>
+              <div class="col-12 col-md-3">
+                <div>
+                  <h5 style="color: grey; font-size: 16px">SERVICES</h5>
+                  <ul style="padding: 0; list-style-type: none">
+                    <li><a>Web Design & App Development</a></li>
+                    <li><a>AI Solutions</a></li>
+                    <li><a>Agentic AI Solutions</a></li>
+                    <li><a>SAP ERP Services</a></li>
+                    <li><a>RPA</a></li>
+                    <li><a>Business Intelligence</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-12 col-md-3">
+                <div>
+                  <div>
+                    <h5 style="color: grey; font-size: 16px">WORK ENQUIRY</h5>
+                    <address>Interested in working with us? contact@nortekconsulting.com</address>
+                  </div>
+                  <div>
+                    <h5 style="color: grey; font-size: 16px">PHONE</h5>
+                    <span><a>903.857.0121</a></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-3">
+                <div>
+                  <div>
+                    <h5 style="color: grey; font-size: 16px">ADDRESS</h5>
+                    <address>
+                      2300, Valley View Ln, Ste #1040,<br />
+                      Irving, Tx, 75062.
+                    </address>
+                  </div>
+                  <div>
+                    <h5 style="color: grey; font-size: 16px">SOCIAL LINKS</h5>
+                    <span
+                      ><a href="#" style="color: inherit"
+                        ><span class="bi bi-facebook" style="margin-right: 20px"></span></a
+                    ></span>
+                    <span
+                      ><a href="#" style="color: inherit"
+                        ><span class="bi bi-instagram" style="margin-right: 20px"></span></a
+                    ></span>
+                    <span
+                      ><a href="#" style="color: inherit"
+                        ><span class="bi bi-linkedin" style="margin-right: 20px"></span></a
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row align-items-center text-center text-md-start text-white">
+              <!-- Left text -->
+              <div class="col-12 col-md-6 mb-3 mb-md-0">
+                <p class="mb-0">© 2021 Nortek. All rights reserved.</p>
+              </div>
+
+              <!-- Right links -->
+              <div class="col-12 col-md-6">
+                <ul
+                  class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end gap-3 mb-0 text-center"
+                >
+                  <li>
+                    <a href="unsubscribe.html" class="un" style="color: inherit">Unsubscribe</a>
+                  </li>
+                  <li>
+                    <a href="privacy.html" class="un" style="color: inherit">Privacy Policy</a>
+                  </li>
+                  <li>
+                    <a href="terms.html" class="un" style="color: inherit">Terms & Conditions</a>
+                  </li>
+                  <li><a href="sitemap.html" class="un" style="color: inherit">Sitemap</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      <div class="modal fade left" id="sideModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content p-5">
+            <!-- Close -->
+            <div class="d-flex justify-content-end">
+              <span class="close-btn" data-bs-dismiss="modal">&times;</span>
+            </div>
+
+            <!-- Content -->
+            <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%" />
+            <div style="margin-top: 50px">
+              <p class="small">
+                2300, Valley View Ln, Ste #1040,<br />
+                Irving, Tx, 75062.
+              </p>
+
+              <p class="mt-3 mb-1">903.857.0121</p>
+              <p class="mb-4">contact@nortekconsulting.com</p>
+            </div>
+
+            <!-- Social -->
+            <div class="mb-4 mt-2 d-flex gap-5">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+            <div style="margin-top: 50px">
+              <a href="/contact.html" class="btn btn-light w-50">CONTACT</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const API_URL = window.apiUrl('/jobs/public');
+
+          const jobsContainer = document.getElementById('jobsContainer');
+          const keywordInput = document.getElementById('keywordInput');
+          const locationInput = document.getElementById('locationInput');
+          const searchBtn = document.getElementById('searchBtn');
+          const totalCount = document.getElementById('totalCount');
+          const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+          const badge = document.getElementById('activeFilterBadge');
+          const latestMonthFilter = document.getElementById('latestMonthFilter');
+          const latestYearFilter = document.getElementById('latestYearFilter');
+
+          const paginationContainer = document.getElementById('paginationContainer');
+          const pageDropdown = document.getElementById('pageDropdown');
+          const prevGroupBtn = document.getElementById('prevGroupBtn');
+          const nextGroupBtn = document.getElementById('nextGroupBtn');
+
+          const JOBS_PER_PAGE = 4;
+          const RANGES_PER_GROUP = 4;
+
+          let currentPage = 1;
+          let currentGroup = 0;
+          let jobs = [];
+          let filteredJobs = [];
+
+          // ================= GET RADIO =================
+          function getSelectedValue(name) {
+            return document.querySelector(`input[name="${name}"]:checked`)?.value || '';
+          }
+          // ================= SAVE FILTERS =================
+          function saveFiltersToStorage() {
+            const filters = {
+              keyword: keywordInput.value,
+              location: locationInput.value,
+              jobType: getSelectedValue('jobTypeFilter'),
+              experience: getSelectedValue('experienceFilter'),
+              workType: getSelectedValue('workTypeFilter'),
+              latestMonth: latestMonthFilter.value,
+              latestYear: latestYearFilter.value,
+              currentPage: currentPage,
+              currentGroup: currentGroup,
+            };
+
+            localStorage.setItem('careersFilters', JSON.stringify(filters));
+          }
+
+          // ================= BADGE =================
+          function updateBadgeCount() {
+            let count = 0;
+
+            if (keywordInput.value.trim()) count++;
+            if (locationInput.value.trim()) count++;
+            if (getSelectedValue('jobTypeFilter')) count++;
+            if (getSelectedValue('experienceFilter')) count++;
+            if (getSelectedValue('workTypeFilter')) count++;
+            if (latestMonthFilter.value) count++;
+            if (latestYearFilter.value) count++;
+
+            if (count > 0) {
+              badge.textContent = count;
+              badge.style.display = 'inline-block';
+              clearFiltersBtn.disabled = false;
+            } else {
+              badge.style.display = 'none';
+              clearFiltersBtn.disabled = true;
+            }
+          }
+
+          async function fetchLiveJobs() {
+            try {
+              const res = await fetch(API_URL);
+              const data = await res.json();
+
+              jobs = data.jobs.map((job) => ({
+                title: job.title,
+                code: job.jobCode,
+                type: job.type || '',
+                hours: job.hours || '',
+                experience: job.experience || '',
+                workType: job.workType || '',
+                location: job.location,
+                createdAt: new Date(job.updatedAt || job.createdAt || job.postedOn),
+                postedOn: new Date(
+                  job.postedOn || job.updatedAt || job.createdAt
+                ).toLocaleDateString('en-US', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                }),
+              }));
+              // Always show latest jobs first
+              jobs.sort((a, b) => {
+                const aTime = Number.isNaN(a.createdAt?.getTime?.()) ? 0 : a.createdAt.getTime();
+                const bTime = Number.isNaN(b.createdAt?.getTime?.()) ? 0 : b.createdAt.getTime();
+                return bTime - aTime;
+              });
+
+              populateLatestYearOptions();
+
+              restoreFiltersFromStorage();
+
+              filterJobs();
+            } catch (err) {
+              jobsContainer.innerHTML = '<p>Error loading jobs</p>';
+            }
+          }
+
+          // ================= BUILD RANGE PAGINATION =================
+          function buildPagination() {
+            paginationContainer.innerHTML = '';
+            pageDropdown.innerHTML = '';
+
+            const totalJobs = filteredJobs.length;
+            const totalPages = Math.ceil(totalJobs / JOBS_PER_PAGE);
+            currentGroup = Math.floor((currentPage - 1) / RANGES_PER_GROUP);
+
+            if (totalPages <= 1) {
+              paginationContainer.style.display = 'none';
+              pageDropdown.style.display = 'none';
+              prevGroupBtn.style.display = 'none';
+              nextGroupBtn.style.display = 'none';
+              return;
+            }
+
+            paginationContainer.style.display = 'flex';
+            pageDropdown.style.display = 'block';
+            prevGroupBtn.style.display = 'inline-block';
+            nextGroupBtn.style.display = 'inline-block';
+
+            const startRangeIndex = currentGroup * RANGES_PER_GROUP;
+            const endRangeIndex = Math.min(startRangeIndex + RANGES_PER_GROUP, totalPages);
+
+            for (let i = startRangeIndex; i < endRangeIndex; i++) {
+              const start = i * JOBS_PER_PAGE + 1;
+              const end = Math.min((i + 1) * JOBS_PER_PAGE, totalJobs);
+
+              const btn = document.createElement('button');
+
+              btn.textContent = `${start}–${end}`;
+              btn.dataset.page = i + 1;
+
+              if (currentPage === i + 1) {
+                btn.classList.add('active');
+              }
+
+              btn.addEventListener('click', () => {
+                currentPage = i + 1;
+                buildPagination();
+                renderPage();
+              });
+
+              paginationContainer.appendChild(btn);
+
+              const option = document.createElement('option');
+              option.value = i + 1;
+              option.textContent = `${start}–${end}`;
+              pageDropdown.appendChild(option);
+            }
+
+            prevGroupBtn.disabled = currentGroup === 0;
+            nextGroupBtn.disabled = endRangeIndex >= totalPages;
+          }
+
+          // ================= RANGE NAVIGATION =================
+          prevGroupBtn.addEventListener('click', () => {
+            if (currentGroup > 0) {
+              currentGroup--;
+              currentPage = currentGroup * RANGES_PER_GROUP + 1;
+              buildPagination();
+              renderPage();
+            }
+          });
+
+          nextGroupBtn.addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredJobs.length / JOBS_PER_PAGE);
+            if ((currentGroup + 1) * RANGES_PER_GROUP < totalPages) {
+              currentGroup++;
+              currentPage = currentGroup * RANGES_PER_GROUP + 1;
+              buildPagination();
+              renderPage();
+            }
+          });
+
+          pageDropdown.addEventListener('change', (e) => {
+            currentPage = parseInt(e.target.value);
+            currentGroup = Math.floor((currentPage - 1) / RANGES_PER_GROUP);
+            buildPagination();
+            renderPage();
+          });
+
+          // ================= RENDER PAGE =================
+          function renderPage() {
+            const start = (currentPage - 1) * JOBS_PER_PAGE;
+            const end = start + JOBS_PER_PAGE;
+
+            renderJobs(filteredJobs.slice(start, end));
+            totalCount.textContent = filteredJobs.length;
+          }
+
+          // ================= RENDER JOBS =================
+          function renderJobs(list) {
+            jobsContainer.style.transition = 'opacity 0.3s ease';
+            jobsContainer.style.opacity = 0;
+
+            setTimeout(() => {
+              jobsContainer.innerHTML = '';
+
+              if (!list.length) {
+                jobsContainer.innerHTML = '<p>No jobs found</p>';
+                jobsContainer.style.opacity = 1;
+                return;
+              }
+
+              list.forEach((job) => {
+                jobsContainer.innerHTML += `
+                <div class="col mb-4">
+                    <div class="job-card p-3">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="text-muted small">Posted on ${job.postedOn}</div>
+                                <div class="job-title">${job.title}</div>
+                            </div>
+                        </div>
+
+                        <div class="job-tags mb-3">
+                            ${job.type ? `<span>${job.type}</span>` : ''}
+                            ${job.hours ? `<span>${job.hours}</span>` : ''}
+                            ${job.workType ? `<span>${job.workType}</span>` : ''}
+                            ${job.experience ? `<span>${job.experience} Exp</span>` : ''}
+                        </div>
+
+                        <div class="job-footer">
+                            <div>
+                                <strong>${job.location}</strong><br>
+                                <small>Job Code: ${job.code}</small>
+                            </div>
+
+                            <a href="job-details.html?jobCode=${job.code}">
+                                <button type="button" class="apply-btn">
+                                    View & Apply
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+              });
+
+              jobsContainer.style.opacity = 1;
+            }, 150);
+          }
+
+          function parseExperienceRange(value) {
+            if (!value) return null;
+            const text = String(value).toLowerCase();
+            const nums = text.match(/\d+/g);
+            if (!nums || !nums.length) return null;
+
+            const min = parseInt(nums[0], 10);
+            if (text.includes('+')) return { min, max: Infinity };
+            if (nums.length >= 2) return { min, max: parseInt(nums[1], 10) };
+            return { min, max: min };
+          }
+
+          function matchesExperienceFilter(jobExperience, selectedExperience) {
+            if (!selectedExperience) return true;
+
+            const selectedRange = parseExperienceRange(selectedExperience);
+            const jobRange = parseExperienceRange(jobExperience);
+
+            if (selectedRange && jobRange) {
+              // Overlap check between selected range and job's experience range
+              return jobRange.max >= selectedRange.min && jobRange.min <= selectedRange.max;
+            }
+
+            return String(jobExperience || '')
+              .toLowerCase()
+              .includes(String(selectedExperience).toLowerCase());
+          }
+
+          function isValidDate(value) {
+            return value instanceof Date && !Number.isNaN(value.getTime());
+          }
+
+          function populateLatestYearOptions() {
+            latestYearFilter.innerHTML = '<option value="">All Years</option>';
+            const startYear = 2023;
+            const currentYear = new Date().getFullYear();
+
+            for (let year = currentYear; year >= startYear; year--) {
+              const option = document.createElement('option');
+              option.value = String(year);
+              option.textContent = String(year);
+              latestYearFilter.appendChild(option);
+            }
+          }
+
+          // ================= FILTER =================
+          function filterJobs() {
+            const k = keywordInput.value.toLowerCase();
+            const l = locationInput.value.toLowerCase();
+            const jt = getSelectedValue('jobTypeFilter');
+            const exp = getSelectedValue('experienceFilter');
+            const wt = getSelectedValue('workTypeFilter');
+            const latestMonth = latestMonthFilter.value;
+            const latestYear = latestYearFilter.value;
+
+            filteredJobs = jobs.filter((j) => {
+              const matchKeyword = j.title.toLowerCase().includes(k);
+              const matchLocation = j.location.toLowerCase().includes(l);
+              const matchJobType = jt ? j.type.includes(jt) : true;
+              const matchExperience = matchesExperienceFilter(j.experience, exp);
+              const matchWorkType = wt ? j.location === wt : true;
+              const matchLatestMonth = latestMonth
+                ? isValidDate(j.createdAt) && j.createdAt.getMonth() === parseInt(latestMonth, 10)
+                : true;
+              const matchLatestYear = latestYear
+                ? isValidDate(j.createdAt) && j.createdAt.getFullYear() === parseInt(latestYear, 10)
+                : true;
+
+              return (
+                matchKeyword &&
+                matchLocation &&
+                matchJobType &&
+                matchExperience &&
+                matchWorkType &&
+                matchLatestMonth &&
+                matchLatestYear
+              );
+            });
+
+            currentPage = 1;
+            currentGroup = 0;
+
+            updateBadgeCount();
+            buildPagination();
+            renderPage();
+            saveFiltersToStorage();
+          }
+          // ================= RESTORE FILTERS =================
+          function restoreFiltersFromStorage() {
+            const saved = localStorage.getItem('careersFilters');
+            if (!saved) return;
+
+            const filters = JSON.parse(saved);
+
+            keywordInput.value = filters.keyword || '';
+            locationInput.value = filters.location || '';
+
+            function setRadio(name, value) {
+              const radios = document.querySelectorAll(`input[name="${name}"]`);
+              radios.forEach((r) => {
+                r.checked = r.value === value;
+              });
+            }
+
+            setRadio('jobTypeFilter', filters.jobType || '');
+            const savedExperience =
+              (filters.experience || '') === '5+' ? '5-15' : filters.experience || '';
+            setRadio('experienceFilter', savedExperience);
+            setRadio('workTypeFilter', filters.workType || '');
+            latestMonthFilter.value = filters.latestMonth || '';
+            const savedYear = parseInt(filters.latestYear, 10);
+            const currentYear = new Date().getFullYear();
+            latestYearFilter.value =
+              !Number.isNaN(savedYear) && savedYear >= 2023 && savedYear <= currentYear
+                ? String(savedYear)
+                : '';
+
+            currentPage = filters.currentPage || 1;
+            currentGroup = filters.currentGroup || 0;
+          }
+
+          function clearAllFilters() {
+            keywordInput.value = '';
+            locationInput.value = '';
+
+            document
+              .querySelectorAll('input[name="jobTypeFilter"]')
+              .forEach((r) => (r.checked = r.value === ''));
+            document
+              .querySelectorAll('input[name="experienceFilter"]')
+              .forEach((r) => (r.checked = r.value === ''));
+            document
+              .querySelectorAll('input[name="workTypeFilter"]')
+              .forEach((r) => (r.checked = r.value === ''));
+            latestMonthFilter.value = '';
+            latestYearFilter.value = '';
+
+            localStorage.removeItem('careersFilters');
+
+            filteredJobs = [...jobs];
+            currentPage = 1;
+            currentGroup = 0;
+
+            updateBadgeCount();
+            buildPagination();
+            renderPage();
+          }
+
+          // ================= EVENTS =================
+          searchBtn.addEventListener('click', filterJobs);
+          keywordInput.addEventListener('input', filterJobs);
+          locationInput.addEventListener('input', filterJobs);
+
+          document
+            .querySelectorAll('input[name="jobTypeFilter"]')
+            .forEach((r) => r.addEventListener('change', filterJobs));
+          document
+            .querySelectorAll('input[name="experienceFilter"]')
+            .forEach((r) => r.addEventListener('change', filterJobs));
+          document
+            .querySelectorAll('input[name="workTypeFilter"]')
+            .forEach((r) => r.addEventListener('change', filterJobs));
+          latestMonthFilter.addEventListener('change', filterJobs);
+          latestYearFilter.addEventListener('change', filterJobs);
+
+          clearFiltersBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!clearFiltersBtn.disabled) {
+              clearAllFilters();
+            }
+          });
+
+          fetchLiveJobs();
+          updateBadgeCount();
+        });
+      </script>
+      
+
+
+    </div>
+    
+
+
+    <script src="/js/nav-active.js"></script>
+  </body>
+</html>
+
+
+
+

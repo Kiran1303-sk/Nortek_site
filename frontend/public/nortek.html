@@ -1,0 +1,1740 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site-theme.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <style>
+      html body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      /* Left column line */
+      .service-process .line {
+        width: 30px;
+        height: 2px;
+        display: inline-block;
+        background: rgb(47, 50, 145);
+        position: relative;
+        top: -5px;
+        margin-right: 15px;
+      }
+
+      /* Text color */
+      .service-process .text-primary {
+        color: rgb(47, 50, 145);
+      }
+
+      /* Icon circle */
+      .icon-circle {
+        width: 50px;
+        height: 50px;
+        border: 1px solid rgb(47, 50, 145);
+        border-radius: 50%;
+      }
+
+      /* Boxes container */
+      .service-boxes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        align-items: stretch;
+      }
+
+      /* Each box */
+      .service-boxes .boxes {
+        width: 100%;
+        max-width: 260px;
+        margin: 0;
+        justify-self: center;
+        text-align: center;
+      }
+
+      /* Responsive for tablets */
+      @media (max-width: 768px) {
+        .service-boxes .boxes {
+          width: 100%;
+        }
+
+        .service-boxes {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Optional: adjust image & heading spacing */
+      .service-boxes .boxes img {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .service-boxes .boxes h4 {
+        font-size: 23px;
+        margin-top: 5px;
+      }
+
+      li a {
+        list-style: none;
+        text-decoration: none;
+      }
+
+      .hero-section {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .heroSwiper,
+      .heroSwiper .swiper-wrapper,
+      .heroSwiper .swiper-slide {
+        height: 100%;
+      }
+
+      .swiper-slide {
+        width: 100%;
+        height: 100%;
+      }
+
+      .hero-slide {
+        width: 100%;
+        height: 100%;
+        min-height: inherit;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #2b3154;
+        position: relative;
+      }
+
+      .hero-slide-1 {
+        background-image: url('/images/bg.jpg');
+      }
+
+      .hero-slide-2 {
+        background-image: url('/images/bg1.jpg');
+      }
+
+      .hero-slide-3 {
+        background-image: url('/images/bg2.jpg');
+      }
+
+      .hero-slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .hero-content {
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.6s ease;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-content.animate {
+        animation: heroFadeIn 0.6s ease;
+      }
+
+      @keyframes heroFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(34px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Ensure all nav links have same height and alignment */
+      .navbar-nav .nav-link {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      /* Dropdown toggle arrow alignment */
+      .nav-item.dropdown .nav-link.dropdown-toggle::after {
+        margin-left: 8px;
+        vertical-align: middle;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-left: 0.3em solid transparent;
+      }
+
+      /* Contact button styling */
+      .btn.con {
+        font-weight: 700;
+        border: none;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Desktop specific alignment */
+      @media (min-width: 992px) {
+        .navbar-nav .nav-item {
+          display: flex;
+          align-items: center;
+        }
+
+        .navbar-nav .nav-link {
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+        }
+
+        .btn.con {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+
+      /* Mobile dropdown alignment */
+      @media (max-width: 991px) {
+        .nav-item.dropdown .nav-link.dropdown-toggle::after {
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .navbar-nav .nav-link {
+          text-align: left;
+          justify-content: flex-start;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+
+      .nav-link {
+        font-weight: 700;
+      }
+
+      .nav-link:hover {
+        color: rgb(47, 50, 145);
+      }
+
+      .navbar .dropdown-menu {
+        border: 1px solid #dbe3f4;
+        border-radius: 12px;
+        box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
+        padding: 8px;
+        min-width: 260px;
+        margin-top: 10px;
+        background: #fff;
+        top: 100% !important;
+        bottom: auto !important;
+      }
+
+      .navbar .dropdown-menu[data-bs-popper] {
+        top: 100% !important;
+        left: 0 !important;
+        margin-top: 10px !important;
+        transform: none !important;
+      }
+
+      .navbar .dropdown-item {
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-weight: 600;
+        color: #253055;
+        transition:
+          background-color 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .navbar .dropdown-item:hover,
+      .navbar .dropdown-item:focus {
+        background: #eef2ff;
+        color: rgb(47, 50, 145);
+        transform: translateX(2px);
+      }
+
+      @media (min-width: 992px) {
+        .navbar .nav-item.dropdown .dropdown-menu {
+          display: block;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(8px);
+          transition:
+            opacity 0.2s ease,
+            transform 0.2s ease,
+            visibility 0.2s ease;
+        }
+
+        .navbar .nav-item.dropdown:hover .dropdown-menu,
+        .navbar .nav-item.dropdown .dropdown-menu.show {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+      }
+
+      video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+      }
+
+      .boxes {
+        height: 200px;
+        border: 1px solid gray;
+        background-color: white;
+        border: none;
+
+        border-top: 3px solid rgb(47, 50, 145);
+      }
+
+      .boxes:hover {
+        border-top: 15px solid rgb(47, 50, 145);
+      }
+
+      .service-process {
+        background-color: #f0f1f2;
+        padding-bottom: 150px;
+        padding-top: 150px;
+      }
+
+      .description {
+        font-weight: 600;
+      }
+
+      .con {
+        background-color: rgb(47, 50, 145);
+        color: white;
+      }
+
+      .bgi {
+        background-image:
+          linear-gradient(rgba(156, 62, 249, 0.7), rgba(8, 0, 58, 0.7)), url('/images/abt.png');
+        background-size: 106%;
+        background-position: center;
+        height: 650px;
+        width: 100%;
+        max-width: 500px;
+        overflow: hidden;
+        border-radius: 14px;
+        transition: background-size 0.4s ease;
+      }
+
+      .bgi:hover {
+        animation: aboutImageZoom 1.5s ease-in-out infinite alternate;
+      }
+
+      @keyframes aboutImageZoom {
+        0% {
+          background-size: 108%;
+        }
+
+        100% {
+          background-size: 120%;
+        }
+      }
+
+      .unr {
+        color: white;
+        padding-top: 225px;
+        text-align: center;
+      }
+
+      .para {
+        font-size: 18px;
+        line-height: 30.6px;
+
+        font-weight: 500;
+        margin-top: 40px;
+        text-align: center;
+        text-align: start;
+      }
+
+      .abt {
+        margin-left: 45px;
+        font-size: 20px;
+        color: navy;
+      }
+
+      .solutions:hover {
+        color: rgb(47, 50, 145);
+      }
+
+      .down {
+        padding-top: 50px;
+      }
+
+      .down1 {
+        padding: 20px;
+        border-left: 4px solid rgb(255, 255, 255);
+        border-radius: 3px;
+      }
+
+      .bin {
+        font-size: 38px;
+        color: white;
+        font-weight: bold;
+      }
+
+      .row2 {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 10px;
+      }
+
+      h6 {
+        line-height: 21px;
+        margin-block-start: 2.33em;
+        margin-block-end: 2.33em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        unicode-bidi: isolate;
+      }
+
+      .process {
+        gap: 5px;
+      }
+
+      .process .up h6 {
+        padding-bottom: 10px;
+        font-weight: normal;
+        display: flex;
+        column-gap: 10px;
+        color: #c2c2c2;
+        font-size: 13px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .process .up h6 i {
+        width: 60px;
+        height: 1px;
+        background: white;
+        display: inline-block;
+        margin-top: 10px;
+      }
+
+      .consultants .process img {
+        width: 50px;
+        height: 50px !important;
+        max-width: 50px;
+        object-fit: contain;
+      }
+
+      .how {
+        width: 40px;
+        height: 1px;
+        color: white;
+        display: inline-block;
+      }
+
+      h5 {
+        color: white;
+        font-size: 19px;
+      }
+
+      .consultants {
+        background-color: rgb(47, 50, 145);
+        background-size: contain;
+        background-repeat: no-repeat;
+
+        padding-top: 50px;
+        padding-bottom: 100px;
+      }
+
+      .blogs {
+        margin-top: 80px;
+
+        border-left: 4px solid rgb(47, 50, 145);
+        padding-left: 20px;
+        height: 120px;
+        border-radius: 4px;
+      }
+
+      .bk {
+        border-left: 4px solid rgb(47, 50, 145);
+        padding-left: 20px;
+        height: 85px;
+        border-radius: 4px;
+      }
+
+      .tin {
+        border-left: 4px solid rgb(47, 50, 145);
+
+        border-radius: 4px;
+      }
+
+      .bg-card {
+        padding-bottom: 70px;
+
+        margin-top: 80px;
+      }
+
+      .figure1 {
+        background-image:
+          linear-gradient(to bottom, rgba(255, 255, 255, 0), white 90%),
+          url('/images/cai-small.jpg');
+        height: 500px;
+        width: 340px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border-top: 3px solid rgb(47, 50, 145);
+        display: flex;
+        align-items: flex-end;
+      }
+
+      figcaption {
+        width: 100%;
+        margin: 0;
+        padding: 0 12px 14px;
+      }
+
+      .section {
+        background-color: rgb(47, 50, 145);
+        color: white;
+      }
+
+      .figure2 {
+        background-image:
+          linear-gradient(to bottom, rgba(255, 255, 255, 0), white 90%),
+          url('/images/5bss-small.jpg');
+        height: 500px;
+        width: 340px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        border-top: 3px solid rgb(47, 50, 145);
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .figure3 {
+        background-image:
+          linear-gradient(to bottom, rgba(255, 255, 255, 0), white 90%), url('/images/rn-small.jpg');
+        height: 500px;
+        width: 340px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        border-top: 3px solid rgb(47, 50, 145);
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .modal.left .modal-dialog {
+        position: fixed;
+        left: 0;
+        margin: 0;
+        width: 400px;
+        /* modal width */
+        height: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+      }
+
+      .modal.left.show .modal-dialog {
+        transform: translateX(0);
+      }
+
+      .modal.left .modal-content {
+        height: 100%;
+        border-radius: 0;
+        background: #2b2d42;
+        color: #fff;
+      }
+
+      .close-btn {
+        font-size: 26px;
+        cursor: pointer;
+      }
+
+      .un:hover {
+        text-decoration: underline;
+      }
+
+      /* ===== Nortek Page Refresh ===== */
+      :root {
+        --nt-primary: rgb(47, 50, 145);
+        --nt-primary-dark: rgb(35, 38, 120);
+        --nt-bg-soft: #f5f7fd;
+        --nt-surface: #ffffff;
+        --nt-text: #1f2a44;
+        --nt-muted: #64748b;
+        --nt-border: #dbe3f4;
+        --nt-radius: 14px;
+        --nt-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+      }
+
+      body {
+        background: var(--nt-bg-soft);
+        color: var(--nt-text);
+      }
+
+      .container {
+        max-width: 1200px;
+      }
+
+      .navbar {
+        background: rgba(255, 255, 255, 0.94) !important;
+        border-bottom: 1px solid var(--nt-border);
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08) !important;
+        backdrop-filter: blur(8px);
+      }
+
+      .navbar-brand img {
+        filter: none;
+      }
+
+      .hero-section {
+        margin-top: 0;
+        height: 100vh;
+      }
+
+      .hero-slide::before {
+        background: linear-gradient(120deg, rgba(6, 10, 32, 0.35), rgba(6, 10, 32, 0.12));
+      }
+
+      .hero-content {
+        max-width: 680px;
+        padding: 24px !important;
+      }
+
+      .hero-content h1,
+      .hero-content h4,
+      .hero-content p {
+        color: #ffffff !important;
+        text-align: left !important;
+      }
+
+      .hero-content .btn.btn-light {
+        border-radius: 999px;
+        font-weight: 700;
+        border: none;
+        min-height: 46px;
+        box-shadow: 0 8px 16px rgba(15, 23, 42, 0.16);
+      }
+
+      .service-process,
+      .consultants,
+      .bg-card {
+        border-top: 1px solid rgba(0, 0, 0, 0.04);
+      }
+
+      .service-process {
+        padding-top: 95px;
+        padding-bottom: 95px;
+      }
+
+      .service-process .bk,
+      .blogs,
+      .tin {
+        border-left-color: var(--nt-primary);
+      }
+
+      .boxes {
+        border-radius: var(--nt-radius);
+        border-top: 4px solid var(--nt-primary);
+        box-shadow: var(--nt-shadow);
+        height: 210px;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease,
+          border-top-width 0.25s ease;
+        overflow: hidden;
+      }
+
+      .boxes:hover {
+        transform: translateY(-6px);
+        border-top-width: 8px;
+        box-shadow: 0 20px 34px rgba(15, 23, 42, 0.14);
+      }
+
+      .figure1,
+      .figure2,
+      .figure3 {
+        border-radius: var(--nt-radius);
+        border-top: 4px solid var(--nt-primary);
+        box-shadow: var(--nt-shadow);
+        overflow: hidden;
+        background-color: #fff;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .figure1:hover,
+      .figure2:hover,
+      .figure3:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 34px rgba(15, 23, 42, 0.14);
+      }
+
+      .mySwiper .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 96px;
+      }
+
+      .mySwiper .swiper-slide img {
+        display: block;
+      }
+
+      figcaption h4 {
+        color: #1e2b58;
+        font-weight: 800;
+      }
+
+      .consultants {
+        padding-top: 70px;
+        padding-bottom: 90px;
+        background: linear-gradient(145deg, var(--nt-primary), #4850c8);
+      }
+
+      .process .up h6 {
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .process h5 {
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .down1 {
+        border-left-color: #fff;
+      }
+
+      .down {
+        padding-top: 30px;
+      }
+
+      footer .container-fluid.bg-dark {
+        background: #151e35 !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      @media (max-width: 991px) {
+        .container {
+          padding-left: 14px;
+          padding-right: 14px;
+        }
+
+        .hero-section {
+          margin-top: 0;
+          height: clamp(420px, 74vh, 680px);
+          min-height: clamp(420px, 74vh, 680px);
+        }
+
+        .hero-slide {
+          min-height: clamp(420px, 74vh, 680px);
+        }
+
+        .hero-content {
+          margin: 14px 0;
+          padding: 18px !important;
+        }
+
+        .hero-content h1 {
+          font-size: clamp(1.7rem, 7vw, 2.3rem);
+        }
+
+        .service-process {
+          padding-top: 65px;
+          padding-bottom: 65px;
+        }
+
+        .boxes {
+          height: auto;
+          min-height: 180px;
+          padding-bottom: 14px;
+        }
+
+        .figure1,
+        .figure2,
+        .figure3 {
+          width: 100%;
+          max-width: none;
+          margin: 0 auto 18px;
+          background-size: cover;
+          background-position: center;
+        }
+
+        .blog-section .bg-card {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        .blog-section .bg-card > [class*='col-'] {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .bgi {
+          height: 340px;
+          min-height: 300px;
+          max-width: 100%;
+          margin-bottom: 20px;
+        }
+
+        .bgd {
+          margin-top: 0 !important;
+          padding-left: 0;
+        }
+
+        .bgd > div {
+          margin-left: 0 !important;
+        }
+
+        .abt {
+          margin-left: 0 !important;
+        }
+
+        .para {
+          font-size: 16px;
+          line-height: 1.7;
+        }
+      }
+
+      .top-info-row {
+        row-gap: 0;
+        padding: 0;
+        min-height: 140px;
+      }
+
+      .top-info-item {
+        margin-left: 0 !important;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .top-info-item address,
+      .top-info-item ul {
+        margin-bottom: 0;
+      }
+
+      .top-info-video-wrap {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .top-info-video {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        display: block;
+        background: url('/images/video-bg.jpg') center/cover no-repeat;
+      }
+
+      @media (max-width: 991px) {
+        .top-info-row {
+          row-gap: 0;
+          padding: 0;
+          min-height: 0;
+        }
+
+        .top-info-video {
+          height: 220px;
+        }
+
+        .top-info-row > [class*='col-']:not(.top-info-video-wrap) {
+          padding-top: 12px;
+        }
+      }
+
+      .service-intro {
+        margin-top: 20px;
+      }
+
+      .about-intro-section {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .about-intro-section .row {
+        margin-bottom: 0;
+      }
+
+      .about-intro-section .bgi,
+      .about-intro-section .bgd {
+        margin-bottom: 0 !important;
+      }
+
+      .about-intro-section .bgd {
+        margin-top: 0 !important;
+      }
+
+      .about-intro-section .bgd > div > div:last-child {
+        margin-bottom: 0 !important;
+      }
+
+      .about-intro-section + .consultants {
+        margin-top: 0 !important;
+      }
+
+      @media (max-width: 991px) {
+        .about-intro-section .para {
+          text-align: left !important;
+          word-spacing: normal !important;
+        }
+
+        /* Add breathing room when columns stack on mobile */
+        .about-intro-section .bgd {
+          margin-top: 20px !important;
+        }
+
+        .about-intro-section .bgd > div {
+          margin-left: 16px !important;
+          margin-right: 16px !important;
+        }
+
+        /* Keep clear separation before next section */
+        .about-intro-section {
+          padding-bottom: 24px !important;
+        }
+
+        .about-intro-section + .consultants {
+          margin-top: 16px !important;
+        }
+      }
+
+      .blog-section .bg-card {
+        row-gap: 18px;
+        justify-content: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid px-3 px-lg-4">
+          <!-- Desktop Side Menu Button -->
+          <button
+            class="btn p-0 border-0 bg-transparent d-none d-md-flex align-items-center"
+            data-bs-toggle="modal"
+            data-bs-target="#sideModal"
+          >
+            <img loading="lazy" decoding="async" src="/images/hamburger-svg.svg" height="45" alt="Menu" />
+          </button>
+
+          <!-- Logo -->
+          <a class="navbar-brand d-flex align-items-center ms-2" href="#">
+            <img loading="lazy" decoding="async" src="/images/Nortek_logo.png" alt="Nortek Logo" height="45" />
+          </a>
+
+          <!-- Mobile Hamburger -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Menu -->
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link px-lg-2 px-xl-3" href="/nortek.html">HOME</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link px-lg-2 px-xl-3" href="/about.html">ABOUT US</a>
+              </li>
+
+              <!-- Services Dropdown -->
+              <li class="nav-item dropdown">
+                <!-- Combined link with dropdown -->
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                  href="/services.html"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  SERVICES
+                </a>
+
+                <!-- Dropdown Menu -->
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="/webdesign.html">Web Design & App Development</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/AI-Services.html">AI Services</a></li>
+                  <li><a class="dropdown-item" href="/agentic.html">Agentic AI Solutions</a></li>
+                  <li><a class="dropdown-item" href="/Sap-Erp.html">SAP ERP Services</a></li>
+                  <li><a class="dropdown-item" href="/RPA.html">RPA</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/Business-int.html">Business Intelligence</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link px-lg-2 px-xl-3" href="/blog.html">BLOG</a>
+              </li>
+
+              <!-- Careers Dropdown -->
+              <li class="nav-item dropdown">
+                <!-- Combined link with dropdown -->
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                  href="/careers.html"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  CAREERS
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/careers.html">Browse Jobs</a></li>
+                  <li><a class="dropdown-item" href="/resume.html">Resume Marketing</a></li>
+                  <li><a class="dropdown-item" href="/visa.html">VISA Sponsorship</a></li>
+                </ul>
+              </li>
+
+              <!-- Contact -->
+              <li class="nav-item ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center">
+                <a class="btn con px-4 py-2 w-100 w-lg-auto text-center" href="/contact.html"
+                  >CONTACT</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section class="hero-section">
+      <div class="swiper heroSwiper">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <div class="hero-slide hero-slide-1">
+              <div class="container h-100 d-flex align-items-center">
+                <div class="row w-100">
+                  <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+                    <div class="hero-content text-white py-4 py-md-5">
+                      <h4 style="color: rgb(47, 50, 145)">Nortek Difference</h4>
+                      <h1 class="display-4 display-md-3 display-lg-2 fw-bold mb-3 mb-md-4">
+                        Transforming businesses with state-of-art technology
+                      </h1>
+                      <p class="lead fs-5 fs-md-4 mb-4 mb-md-5" style="text-align: justify">
+                        We solve prevailing IT bottlenecks with innovative solutions and
+                        applications
+                      </p>
+                      <div class="row g-3 g-md-4">
+                        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                          <a href="/services.html"
+                            ><button class="btn btn-light w-100 py-2 py-md-3">
+                              <span style="color: rgb(47, 50, 145)">Discover</span>
+                            </button></a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <div class="hero-slide hero-slide-2">
+              <div class="container h-100 d-flex align-items-center">
+                <div class="row w-100">
+                  <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+                    <div class="hero-content text-white py-4 py-md-5">
+                      <h4 style="color: rgb(47, 50, 145)">Right Services for every business</h4>
+                      <h1 class="display-4 display-md-3 display-lg-2 fw-bold mb-3 mb-md-4">
+                        An adaptable framework for your Unique IT requirements
+                      </h1>
+                      <p class="lead fs-5 fs-md-4 mb-4 mb-md-5" style="text-align: justify">
+                        We provide scalable, robust, and high-quality IT solutions and services
+                      </p>
+                      <div class="row g-3 g-md-4">
+                        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                          <a href="/services.html"
+                            ><button class="btn btn-light w-100 py-2 py-md-3">
+                              <span style="color: rgb(47, 50, 145)">Discover</span>
+                            </button></a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <div class="hero-slide hero-slide-3">
+              <div class="container h-100 d-flex align-items-center">
+                <div class="row w-100">
+                  <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+                    <div class="hero-content text-white py-4 py-md-5">
+                      <h4 style="color: rgb(47, 50, 145)">Simplify lives with RPA</h4>
+                      <h1 class="display-4 display-md-3 display-lg-2 fw-bold mb-3 mb-md-4">
+                        Empower your employees. Allow them to focus.
+                      </h1>
+                      <p class="lead fs-5 fs-md-4 mb-4 mb-md-5" style="text-align: justify">
+                        We can help you with RPA Automate, Connect and reinvent
+                      </p>
+                      <div class="row g-3 g-md-4">
+                        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                          <a href="/services.html"
+                            ><button class="btn btn-light w-100 py-2 py-md-3">
+                              <span style="color: rgb(47, 50, 145)">Discover</span>
+                            </button></a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container-fluid p-0 top-info-bar" style="background: rgb(47, 50, 145)">
+        <div class="row align-items-center top-info-row">
+          <div class="col-12 col-md-2 top-info-video-wrap">
+            <video preload="metadata" class="top-info-video"
+              src="/videos/Nortek.mp4"
+              poster="/images/video-bg.jpg"
+              controls
+            ></video>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="top-info-item">
+              <address style="color: white">
+                2300, Valley View Ln, Ste #1040,<br />
+                Irving, Tx, 75062.
+              </address>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="top-info-item">
+              <address style="color: white">
+                903.857.0121<br />
+                contact@nortekconsulting.com
+              </address>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="top-info-item">
+              <ul class="d-flex gap-4 p-0" style="color: white; list-style-type: none">
+                <li class="bi bi-facebook"></li>
+                <li class="bi bi-instagram"></li>
+                <li class="bi bi-linkedin"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="service-process py-5">
+      <div class="container">
+        <div class="row">
+          <!-- Left Column: Description -->
+          <div class="col-12 col-md-5 mb-4 mb-md-0">
+            <div class="bk mb-3">
+              <h5>
+                <i class="line"></i>
+                <span style="color: rgb(47, 50, 145)">Services</span>
+              </h5>
+              <p class="fw-bold" style="font-size: 20px; margin-top: 10px">A futuristic approach</p>
+            </div>
+            <div class="service-intro">
+              <p style="font-size: 18px; text-align: justify">
+                At Nortek, we don’t strategize and deliver what is available. We transform, design,
+                innovate, and develop a solution unique to each customer.
+              </p>
+              <p style="font-size: 18px; text-align: justify">
+                Our business leaders strive to deliver flawless, high-quality IT services. With
+                technology becoming key to success, Nortek can be your technology partner.
+              </p>
+            </div>
+
+            <div class="pt-3">
+              <a
+                href="/services.html"
+                class="d-inline-flex align-items-center text-decoration-none"
+              >
+                <span class="icon-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-chevron-right" style="color: rgb(47, 50, 145)"></i>
+                </span>
+                <span style="color: rgb(47, 50, 145)">&nbsp;&nbsp;MORE SERVICES</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Services Grid -->
+          <div class="col-12 col-md-7 service-boxes justify-content-between">
+            <div class="boxes text-center">
+              <img loading="lazy" decoding="async" src="/images/ai.png" height="60" alt="AI Solutions" />
+              <div class="mt-2">
+                <span style="color: rgb(47, 50, 145)">01</span>
+                <h4 class="fw-bold solutions">AI Solutions</h4>
+              </div>
+            </div>
+
+            <div class="boxes text-center">
+              <img loading="lazy" decoding="async" src="/images/sap_erp.png" height="60" alt="SAP ERP Services" />
+              <div class="mt-2">
+                <span style="color: rgb(47, 50, 145)">02</span>
+                <h4 class="fw-bold solutions">SAP ERP Services</h4>
+              </div>
+            </div>
+
+            <div class="boxes text-center">
+              <img loading="lazy" decoding="async" src="/images/a-d.png" height="60" alt="Web Design & Development" />
+              <div class="mt-2">
+                <span style="color: rgb(47, 50, 145)">03</span>
+                <h4 class="fw-bold solutions">Web Design & Application Development</h4>
+              </div>
+            </div>
+
+            <div class="boxes text-center">
+              <img loading="lazy" decoding="async" src="/images/b-i.png" height="60" alt="Business Intelligence" />
+              <div class="mt-2">
+                <span style="color: rgb(47, 50, 145)">04</span>
+                <h4 class="fw-bold solutions">Business Intelligence</h4>
+              </div>
+            </div>
+
+            <div class="boxes text-center">
+              <img loading="lazy" decoding="async" src="/images/rpa.png" height="60" alt="RPA" />
+              <div class="mt-2">
+                <span style="color: rgb(47, 50, 145)">05</span>
+                <h4 class="fw-bold solutions">RPA</h4>
+              </div>
+            </div>
+
+            <div class="boxes text-center">
+              <img loading="lazy" decoding="async" src="/images/A-S.png" height="60" alt="Agentic AI Solutions" />
+              <div class="mt-2">
+                <span style="color: rgb(47, 50, 145)">06</span>
+                <h4 class="fw-bold solutions">Agentic AI Solutions</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container-fluid about-intro-section">
+      <div class="row gap-md-5">
+        <div class="col-12 col-md-6 bgi">
+          <h1 class="unr">
+            Unraveling the true<br />
+            essence of next-gen<br />
+            business
+          </h1>
+        </div>
+        <div class="col-12 col-md-6 bgd mt-5 align-content-center">
+          <div style="margin-left: 50px">
+            <div class="tin">
+              <h5 class="abt">
+                <i
+                  style="
+                    width: 30px;
+                    height: 1px;
+                    display: inline-block;
+                    background: rgb(47, 50, 145);
+                    position: relative;
+                    top: -5px;
+                    margin-right: 25px;
+                  "
+                ></i
+                >About
+              </h5>
+              <h4 style="margin-left: 45px">We are <span style="color: navy">Nortek</span></h4>
+            </div>
+            <div style="margin-top: -20px">
+              <p class="para" style="text-align: justify">
+                Intelligence meets innovation- that’s Nortek for you. Working with utmost dedication
+                to deliver exceptional IT solutions and applications is our forte as this job is our
+                passion more than a profession. We excel in creating mindful strategies to take your
+                business to the top of the stack through the sharp and technology-driven individuals
+                of our team.<br /><br />
+
+                Hop on to let us transform your business into the best of its sector.
+              </p>
+            </div>
+            <div style="margin-top: 30px; margin-bottom: 30px">
+              <a
+                href="/about.html"
+                class="d-inline-flex align-items-center gap-2 text-decoration-none"
+              >
+                <span
+                  class="border rounded-circle d-flex align-items-center justify-content-center"
+                  style="width: 50px; height: 50px"
+                >
+                  <i class="bi bi-chevron-right" style="color: rgb(47, 50, 145)"></i>
+                </span>
+                <span style="color: rgb(47, 50, 145)">MORE ABOUT</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="consultants container-fluid">
+      <div class="down container">
+        <div class="down1">
+          <h5 style="color: white">
+            <i
+              style="
+                width: 30px;
+                height: 2px;
+                display: inline-block;
+                background: white;
+                position: relative;
+                top: -5px;
+                margin-right: 25px;
+              "
+            ></i
+            >How we work
+          </h5>
+          <h2 class="bin">Instead of consultants, we have creative leaders</h2>
+        </div>
+      </div>
+      <div class="row2 container px-5">
+        <div class="col-12 col-md-4">
+          <div class="d-flex process">
+            <div>
+              <img loading="lazy" decoding="async" src="/images/problem.png" alt="image" height="50px" style="margin-top: 35px" />
+            </div>
+            <div class="up">
+              <h6>
+                <span>01</span>
+                <i></i>
+                IDENTIFYING
+              </h6>
+              <h5>
+                Defining the problem<br />
+                statement.
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="d-flex process">
+            <div>
+              <img loading="lazy" decoding="async" src="/images/brain.png" alt="image" height="50px" style="margin-top: 35px" />
+            </div>
+            <div class="up">
+              <h6>
+                <span>02</span>
+                <i></i>
+                Analyzing
+              </h6>
+              <h5>
+                Brainstorming<br />
+                possibilities.
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="d-flex process">
+            <div>
+              <img loading="lazy" decoding="async" src="/images/solution-1.png"
+                alt="image"
+                height="50px"
+                style="margin-top: 35px"
+              />
+            </div>
+            <div class="up">
+              <h6>
+                <span>03</span>
+                <i></i>
+                Planning
+              </h6>
+              <h5>
+                Finding an appropriate<br />
+                solution.
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="d-flex process">
+            <div>
+              <img loading="lazy" decoding="async" src="/images/prototype.png" alt="image" height="50px" style="margin-top: 35px" />
+            </div>
+            <div class="up">
+              <h6>
+                <span>04</span>
+                <i></i>
+                Prototyping
+              </h6>
+              <h5>
+                Implementing a working<br />
+                prototype.
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="d-flex process">
+            <div>
+              <img loading="lazy" decoding="async" src="/images/envi.png" alt="image" height="50px" style="margin-top: 35px" />
+            </div>
+            <div class="up">
+              <h6>
+                <span>05</span>
+                <i></i>
+                Testing
+              </h6>
+              <h5>
+                Discussing ROI with<br />
+                the client.
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="d-flex process">
+            <div>
+              <img loading="lazy" decoding="async" src="/images/project-execution.png"
+                alt="image"
+                height="50px"
+                style="margin-top: 35px"
+              />
+            </div>
+            <div class="up">
+              <h6>
+                <span>06</span>
+
+                <i></i>
+                Launch
+              </h6>
+              <h5>
+                Kick-starting the project<br />
+                execution.
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid blog-section" style="background-color: #f0f1f2">
+      <div class="container" style="padding-top: 50px">
+        <div class="blogs container">
+          <h5>
+            <i
+              style="
+                width: 30px;
+                height: 2px;
+                display: inline-block;
+                background: rgb(47, 50, 145);
+                position: relative;
+                top: -5px;
+                margin-right: 25px;
+              "
+            ></i
+            ><span style="color: rgb(47, 50, 145)">Blog</span>
+          </h5>
+          <p style="font-size: 20px; font-weight: bold; margin-top: 15px">News & Insights</p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row align-content-md-center bg-card gap-3 justify-content-center">
+          <div class="col-12 col-md-4 figure1">
+            <figcaption>
+              <div>12 March’ 20</div>
+              <h4>
+                Explore Conversational AI-<br />A Cognitive Leap for<br />
+                Enterprises
+              </h4>
+            </figcaption>
+          </div>
+          <div class="col-12 col-md-4 figure2">
+            <figcaption>
+              <div>25 March’ 20</div>
+              <h4>
+                5 Best Strategies for<br />
+                Successful Mobile App<br />
+                Development
+              </h4>
+            </figcaption>
+          </div>
+          <div class="col-12 col-md-4 figure3">
+            <figcaption>
+              <div>29 March’ 20</div>
+              <h4>
+                How React Native can be<br />
+                the next Biggest<br />
+                Transformation in Mobile<br />
+                App Developments?
+              </h4>
+            </figcaption>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center" style="padding-bottom: 70px">
+          <a href="/blog.html" class="d-inline-flex align-items-center gap-2 text-decoration-none">
+            <span
+              class="border rounded-circle d-flex align-items-center justify-content-center"
+              style="width: 50px; height: 50px"
+            >
+              <i class="bi bi-chevron-right" style="color: rgb(47, 50, 145)"></i>
+            </span>
+            <span style="color: rgb(47, 50, 145)">MORE BLOGS</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="container my-5 px-lg-5">
+      <div class="row align-items-center">
+        <div class="col-12">
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img loading="lazy" decoding="async" src="images/c1.png" class="img-fluid mx-auto d-block" alt=" img" />
+              </div>
+
+              <div class="swiper-slide">
+                <img loading="lazy" decoding="async" src="/images/c2.png" class="img-fluid mx-auto d-block" alt="img" />
+              </div>
+
+              <div class="swiper-slide">
+                <img loading="lazy" decoding="async" src="/images/c3.png" class="img-fluid mx-auto d-block" alt="img" />
+              </div>
+
+              <div class="swiper-slide">
+                <img loading="lazy" decoding="async" src="/images/c4.png" class="img-fluid mx-auto d-block" alt="img" />
+              </div>
+
+              <div class="swiper-slide">
+                <img loading="lazy" decoding="async" src="/images/c5.png" class="img-fluid mx-auto d-block" alt="img" />
+              </div>
+
+              <div class="swiper-slide">
+                <img loading="lazy" decoding="async" src="/images/c6.png" class="img-fluid mx-auto d-block" alt="img" />
+              </div>
+
+              <div class="swiper-slide">
+                <img loading="lazy" decoding="async" src="/images/c7.png" class="img-fluid mx-auto d-block" alt="img" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container-fluid bg-dark text-white py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <img loading="lazy" decoding="async" src="/images/nortek_white.png" />
+              <p>
+                Nortek isn’t just a company, it’s a domicile of innovators where we craft futuristic
+                tech solutions.
+              </p>
+            </div>
+            <div class="col-12 col-md-3">
+              <div>
+                <h5 style="color: grey; font-size: 16px">SERVICES</h5>
+                <ul style="padding: 0; list-style-type: none">
+                  <li><a>Web Design & App Development</a></li>
+                  <li><a>AI Solutions</a></li>
+                  <li><a>Agentic AI Solutions</a></li>
+                  <li><a>SAP ERP Services</a></li>
+                  <li><a>RPA</a></li>
+                  <li><a>Business Intelligence</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div>
+                <div>
+                  <h5 style="color: grey; font-size: 16px">WORK ENQUIRY</h5>
+                  <address>Interested in working with us? contact@nortekconsulting.com</address>
+                </div>
+                <div>
+                  <h5 style="color: grey; font-size: 16px">PHONE</h5>
+                  <span><a>903.857.0121</a></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div>
+                <div>
+                  <h5 style="color: grey; font-size: 16px">ADDRESS</h5>
+                  <address>
+                    2300, Valley View Ln, Ste #1040,<br />
+                    Irving, Tx, 75062.
+                  </address>
+                </div>
+                <div>
+                  <h5 style="color: grey; font-size: 16px">SOCIAL LINKS</h5>
+                  <span
+                    ><a href="#" style="color: inherit"
+                      ><span class="bi bi-facebook" style="margin-right: 20px"></span></a
+                  ></span>
+                  <span
+                    ><a href="#" style="color: inherit"
+                      ><span class="bi bi-instagram" style="margin-right: 20px"></span></a
+                  ></span>
+                  <span
+                    ><a href="#" style="color: inherit"
+                      ><span class="bi bi-linkedin" style="margin-right: 20px"></span></a
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="row align-items-center text-center text-md-start text-white">
+            <!-- Left text -->
+            <div class="col-12 col-md-6 mb-3 mb-md-0">
+              <p class="mb-0">© 2021 Nortek. All rights reserved.</p>
+            </div>
+
+            <!-- Right links -->
+            <div class="col-12 col-md-6">
+              <ul
+                class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end gap-3 mb-0 text-center"
+              >
+                <li>
+                  <a href="unsubscribe.html" class="un" style="color: inherit">Unsubscribe</a>
+                </li>
+                <li><a href="privacy.html" class="un" style="color: inherit">Privacy Policy</a></li>
+                <li>
+                  <a href="terms.html" class="un" style="color: inherit">Terms & Conditions</a>
+                </li>
+                <li><a href="sitemap.html" class="un" style="color: inherit">Sitemap</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper('.heroSwiper', {
+        direction: 'vertical',
+        loop: true,
+        speed: 700,
+        autoplay: { delay: 2500, disableOnInteraction: false },
+        on: {
+          init: function () {
+            this.slides[this.activeIndex].querySelector('.hero-content')?.classList.add('animate');
+          },
+          slideChangeTransitionStart: function () {
+            this.slides.forEach((slide) =>
+              slide.querySelector('.hero-content')?.classList.remove('animate')
+            );
+          },
+          slideChangeTransitionEnd: function () {
+            this.slides[this.activeIndex].querySelector('.hero-content')?.classList.add('animate');
+          },
+        },
+      });
+
+      new Swiper('.mySwiper', {
+        loop: true,
+        spaceBetween: 30,
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+        },
+        breakpoints: {
+          0: { slidesPerView: 1 }, // mobile
+          576: { slidesPerView: 1 }, // sm
+          768: { slidesPerView: 2 }, // md
+          992: { slidesPerView: 3 }, // lg
+          1200: { slidesPerView: 4 }, // xl
+        },
+      });
+    </script>
+    <div class="modal fade left" id="sideModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content p-5">
+          <!-- Close -->
+          <div class="d-flex justify-content-end">
+            <span class="close-btn" data-bs-dismiss="modal">&times;</span>
+          </div>
+
+          <!-- Content -->
+          <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%" />
+          <div style="margin-top: 50px">
+            <p class="small">
+              2300, Valley View Ln, Ste #1040,<br />
+              Irving, Tx, 75062.
+            </p>
+
+            <p class="mt-3 mb-1">903.857.0121</p>
+            <p class="mb-4">contact@nortekconsulting.com</p>
+          </div>
+
+          <!-- Social -->
+          <div class="mb-4 mt-2 d-flex gap-5">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+          <div style="margin-top: 50px">
+            <a href="/contact.html" class="btn btn-light w-50">CONTACT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/nav-active.js"></script>
+  </body>
+</html>
+

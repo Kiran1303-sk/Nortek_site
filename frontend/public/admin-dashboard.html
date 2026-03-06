@@ -1,0 +1,5087 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: #ffffff
+    }
+
+    .sidebar {
+      width: 230px;
+      height: 100vh;
+      background: linear-gradient(180deg,
+          rgb(47, 50, 145) 0%,
+          rgb(32, 35, 120) 50%,
+          rgb(20, 22, 90) 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 15px;
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+
+
+    .logo {
+      width: 160px;
+      margin-bottom: 30px;
+    }
+
+    .sidebar-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      border-radius: 10px;
+      color: #d1d5db;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .nav-link i {
+      font-size: 18px;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+    }
+
+    .nav-link.active {
+      background: linear-gradient(90deg, #6366f1, white);
+      color: white;
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+    }
+
+    .sidebar-profile {
+      margin-top: auto;
+    }
+
+    .profile-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .profile-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .profile-info .name {
+      font-weight: 600;
+    }
+
+    .dropdown-menu {
+      border-radius: 12px;
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    .dropdown-item {
+      border-radius: 8px;
+    }
+
+
+    .content {
+      margin-left: 220px;
+      padding: 20px
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      background: linear-gradient(120deg, #2f3291 0%, #4a56c8 100%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 24px rgba(47, 50, 145, 0.22);
+      color: #fff;
+      backdrop-filter: blur(6px);
+    }
+
+    .topbar-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+
+    .topbar-input,
+    .topbar-select {
+      min-width: 220px;
+      max-width: 320px;
+      border-radius: 999px;
+      border: 1px solid rgba(47, 50, 145, 0.18);
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+
+    .topbar-input:focus,
+    .topbar-select:focus {
+      border-color: rgba(47, 50, 145, 0.45);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.28);
+    }
+
+    #topbar select#typeFilter.form-select,
+    #appControls select#monthFilter.form-select,
+    #appControls select#statusFilter.form-select,
+    #appControls select#readFilter.form-select {
+      border-radius: 999px !important;
+      border: 1px solid #cfd7f2 !important;
+      background-color: #fff;
+      color: #24325f;
+      font-weight: 600;
+      padding: 0.5rem 2.25rem 0.5rem 0.9rem;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 16 16'%3E%3Cpath fill='%232f3291' d='M3.22 5.97a.75.75 0 0 1 1.06 0L8 9.69l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 7.03a.75.75 0 0 1 0-1.06'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.8rem center;
+      background-size: 14px;
+      min-height: 40px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    #topbar select#typeFilter.form-select:hover,
+    #appControls select#monthFilter.form-select:hover,
+    #appControls select#statusFilter.form-select:hover,
+    #appControls select#readFilter.form-select:hover {
+      border-color: #aebbe8 !important;
+      background-color: #fbfcff;
+    }
+
+    #topbar select#typeFilter.form-select:focus,
+    #appControls select#monthFilter.form-select:focus,
+    #appControls select#statusFilter.form-select:focus,
+    #appControls select#readFilter.form-select:focus {
+      border-color: #4a56c8 !important;
+      box-shadow: 0 0 0 3px rgba(74, 86, 200, 0.16) !important;
+      outline: none;
+    }
+
+    #topbar select#typeFilter.form-select option,
+    #appControls select#monthFilter.form-select option,
+    #appControls select#statusFilter.form-select option,
+    #appControls select#readFilter.form-select option {
+      background-color: #ffffff;
+      color: #24325f;
+      font-weight: 600;
+    }
+
+    .topbar-add-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-weight: 600;
+      background: #fff;
+      color: rgb(47, 50, 145);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .topbar-add-btn:hover {
+      background: #ffffff;
+      border-color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      color: rgb(47, 50, 145);
+    }
+
+    .topbar-add-btn:focus,
+    .topbar-add-btn:active {
+      background: #ffffff !important;
+      color: rgb(47, 50, 145) !important;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+    }
+
+    .topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topbar-notification-btn {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .topbar-notification-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-1px);
+      color: #fff;
+    }
+
+    @media (max-width: 992px) {
+      .topbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .topbar-group {
+        width: 100%;
+      }
+
+      .topbar-input,
+      .topbar-select,
+      .topbar-add-btn {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .topbar-right {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+
+    .job-card {
+      border-radius: 20px;
+      min-height: 260px;
+      cursor: pointer;
+      transition: .3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between
+    }
+
+    .job-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, .18)
+    }
+
+    .job-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .job-type {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 13px
+    }
+
+    #jobModal .dyn-list li {
+      word-break: break-word;
+    }
+
+
+    #jobModal .modal-dialog {
+      max-width: 950px;
+    }
+
+    #jobModal .modal-content {
+      height: 90vh;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    #jobModal .modal-body {
+      overflow-y: auto;
+      max-height: calc(90vh - 140px);
+      /* header + footer space */
+    }
+
+
+    .modal-header {
+      border: none
+    }
+
+    #pagination .btn-outline-secondary,
+    #appPagination .btn-outline-secondary {
+      border-color: rgb(47, 50, 145);
+      color: rgb(47, 50, 145);
+      background: #fff;
+      border-radius: 999px;
+      font-weight: 700;
+      padding: 6px 14px;
+    }
+
+    #pagination .btn-outline-secondary:hover,
+    #appPagination .btn-outline-secondary:hover {
+      background: rgb(47, 50, 145);
+      color: #fff;
+    }
+
+    #pagination .btn-outline-secondary:focus,
+    #appPagination .btn-outline-secondary:focus {
+      box-shadow: 0 0 0 3px rgba(47, 50, 145, 0.16);
+    }
+
+    #pagination .btn-outline-secondary:disabled,
+    #appPagination .btn-outline-secondary:disabled {
+      background: #f3f5ff;
+      color: #98a2c8;
+      border-color: #d8def6;
+      opacity: 1;
+    }
+
+    .active-page {
+      background: rgb(47, 50, 145);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .custom-download-btn {
+      border: 1px solid rgb(47, 50, 145);
+      color: rgb(47, 50, 145);
+      background-color: transparent;
+      transition: 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .custom-download-btn:hover {
+      background-color: rgb(47, 50, 145);
+      color: #fff;
+    }
+
+    .custom-download-btn i {
+      font-size: 16px;
+    }
+
+
+
+
+
+
+
+
+
+
+    .dashboard-card {
+      border-radius: 20px;
+      padding: 25px;
+      height: 160px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s;
+      color: #fff;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .dashboard-icon {
+      font-size: 40px;
+      opacity: 0.8;
+    }
+
+    .bg-jobs {
+      background: linear-gradient(135deg, #2f3291, #5a5fd8);
+    }
+
+    .bg-apps {
+      background: linear-gradient(135deg, #0d6efd, #4dabf7);
+    }
+
+    .bg-latest {
+      background: linear-gradient(135deg, #198754, #20c997);
+    }
+
+    .bg-unread {
+      background: linear-gradient(135deg, #dc3545, #ff7a59);
+    }
+
+    .dashboard-title {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .dashboard-value {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .read-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .read-pill.unread {
+      color: #b42318;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+    }
+
+    .read-pill.read {
+      color: #065f46;
+      background: #ecfdf3;
+      border: 1px solid #a6f4c5;
+    }
+
+    /* ===== SECTION ANIMATION (TOP TO BOTTOM) ===== */
+
+    .section-animate {
+      animation: slideDown 0.35s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .job-card {
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .job-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-card h5 {
+      font-size: 1.1rem;
+    }
+
+    .job-card p {
+      line-height: 1.5;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+
+
+    /* Custom Theme Color */
+    :root {
+      --primary-job-color: rgb(47, 50, 145);
+    }
+
+    /* Full Time Badge */
+    .job-type-badge {
+      background-color: var(--primary-job-color);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+    }
+
+    /* View Details Button */
+    .view-btn {
+      background-color: var(--primary-job-color);
+      color: #fff;
+      border: none;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      transition: 0.3s ease;
+    }
+
+    .view-btn:hover {
+      background-color: rgb(35, 38, 120);
+      /* darker shade */
+      color: #fff;
+    }
+
+    #notifCount {
+      font-size: 12px;
+      padding: 6px 6px;
+    }
+
+    /* ===== Modern Dynamic List UI ===== */
+    .job-modal {
+      border-radius: 20px;
+      overflow: hidden;
+      border: none;
+    }
+
+    .job-header {
+      background: linear-gradient(135deg, rgb(47, 50, 145), rgb(78, 84, 200));
+      color: white;
+      padding: 20px 25px;
+    }
+
+    #jobModal .modal-body {
+      background: #f5f7ff;
+      padding: 30px;
+    }
+
+    #jobModal .form-card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .custom-edit-btn {
+      color: rgb(47, 50, 145);
+      border: 2px solid rgb(47, 50, 145);
+      background-color: transparent;
+      transition: 0.3s ease;
+    }
+
+    .custom-edit-btn:hover {
+      background-color: rgb(47, 50, 145);
+      color: #fff;
+    }
+
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: rgb(47, 50, 145);
+    }
+
+    .modern-input {
+      border-radius: 12px;
+      border: 1px solid #e0e4ff;
+      padding: 10px 14px;
+      transition: 0.2s;
+    }
+
+    .modern-input:focus {
+      border-color: rgb(47, 50, 145);
+      box-shadow: 0 0 0 3px rgba(47, 50, 145, 0.15);
+    }
+
+    .card-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .add-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgb(47, 50, 145);
+      color: white;
+      transition: 0.3s;
+    }
+
+    .add-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(47, 50, 145, 0.3);
+    }
+
+    .job-footer {
+      background: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .list-item-modern {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .remove-item {
+      position: absolute;
+      right: 10px;
+      opacity: 0;
+      border: none;
+      background: #dc3545;
+      color: white;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 14px;
+      transition: 0.2s ease;
+    }
+
+    .list-item-modern:hover .remove-item {
+      opacity: 1;
+    }
+
+    /* ===== Modern Role Summary Cards ===== */
+
+    .role-card {
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ffffff, #f4f6ff);
+      box-shadow: 0 8px 25px rgba(47, 50, 145, 0.08);
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .role-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(47, 50, 145, 0.15);
+    }
+
+    .role-title {
+      font-size: 14px;
+      color: #6c757d;
+      font-weight: 500;
+    }
+
+    .role-count {
+      font-size: 28px;
+      font-weight: 700;
+      color: rgb(47, 50, 145);
+    }
+
+    .role-label {
+      font-size: 12px;
+      color: #9aa0c3;
+    }
+
+    .role-icon {
+      font-size: 38px;
+      color: rgb(47, 50, 145);
+      opacity: 0.2;
+    }
+
+    #roleSummary {
+      max-height: 420px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    #roleSummary::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #roleSummary::-webkit-scrollbar-track {
+      background: #edf1ff;
+      border-radius: 999px;
+    }
+
+    #roleSummary::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #4a56c8, #2f3291);
+      border-radius: 999px;
+    }
+
+    .view-all-btn {
+      color: rgb(47, 50, 145) !important;
+    }
+
+    .view-all-btn:hover,
+    .view-all-btn:focus,
+    .view-all-btn:active {
+      color: rgb(47, 50, 145) !important;
+      background-color: rgba(47, 50, 145, 0.08) !important;
+      box-shadow: none !important;
+    }
+
+    #notificationsList .dropdown-item:active,
+    #notificationsList .dropdown-item:focus,
+    #notificationsList .dropdown-item:hover {
+      background-color: rgba(47, 50, 145, 0.08) !important;
+      color: inherit !important;
+    }
+
+
+    #notificationsList .custom-designation {
+      color: rgb(47, 50, 145) !important;
+    }
+
+    /* ===== Modern Applications Table ===== */
+
+    .modern-app-table thead {
+      background: #f4f6ff;
+      font-size: 14px;
+    }
+
+    .modern-app-table thead th {
+      border: none;
+      color: rgb(47, 50, 145);
+      font-weight: 600;
+    }
+
+    .modern-app-table tbody td {
+      border-top: 1px solid #eef1ff;
+      font-size: 14px;
+    }
+
+    .modern-app-table tbody tr {
+      transition: all 0.2s ease;
+    }
+
+    .modern-app-table tbody tr:hover {
+      background-color: #f8f9ff;
+
+    }
+
+    /* Status dropdown rounded */
+    .modern-app-table .dropdown-toggle {
+      border-radius: 20px;
+      font-size: 13px;
+      padding: 4px 12px;
+    }
+
+    /* Resume button style */
+    .modern-app-table .btn-outline-primary {
+      border-radius: 20px;
+      padding: 4px 10px;
+    }
+
+
+    .modern-app-table .btn-outline-dark {
+      border-radius: 20px;
+      padding: 4px 12px;
+    }
+
+
+    .table-responsive {
+      overflow-x: auto;
+
+    }
+
+    /* ===== Professional UI Refresh ===== */
+    :root {
+      --brand-900: #1f2a7a;
+      --brand-800: #2f3291;
+      --brand-700: #4a56c8;
+      --brand-100: #e9ecff;
+      --text-main: #1f2937;
+      --text-soft: #5f6b85;
+      --surface: #ffffff;
+      --surface-soft: #f6f8ff;
+      --border-soft: #e4e9f7;
+      --radius-xl: 18px;
+      --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    body {
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(74, 86, 200, 0.08) 0%, rgba(74, 86, 200, 0) 40%),
+        radial-gradient(circle at 100% 100%, rgba(28, 165, 121, 0.05) 0%, rgba(28, 165, 121, 0) 35%),
+        #f3f6fd;
+    }
+
+    .sidebar {
+      width: 264px;
+      padding: 22px 16px 18px;
+      background:
+        linear-gradient(180deg, #121a44 0%, #1d2a63 48%, #2c2461 100%);
+      box-shadow: 16px 0 36px rgba(10, 14, 42, 0.28);
+      border-right: 1px solid rgba(255, 255, 255, 0.14);
+      overflow: hidden;
+    }
+
+    .sidebar::before {
+      content: "";
+      position: absolute;
+      top: -100px;
+      right: -50px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122, 136, 255, 0.35) 0%, rgba(122, 136, 255, 0) 70%);
+      pointer-events: none;
+    }
+
+    .sidebar::after {
+      content: "";
+      position: absolute;
+      bottom: -90px;
+      left: -40px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(43, 195, 181, 0.22) 0%, rgba(43, 195, 181, 0) 68%);
+      pointer-events: none;
+    }
+
+    .sidebar-top {
+      padding: 12px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 14px;
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+      margin-bottom: 16px;
+      backdrop-filter: blur(5px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 148px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar .sidebar-menu {
+      gap: 10px;
+      margin-top: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .sidebar .nav-link {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      color: rgba(240, 244, 255, 0.9);
+      font-weight: 700;
+      letter-spacing: 0.25px;
+      border-radius: 14px;
+      padding: 11px 12px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    }
+
+    .sidebar .nav-link:hover {
+      border-color: rgba(151, 169, 255, 0.42);
+      background: linear-gradient(130deg, rgba(116, 139, 255, 0.26), rgba(255, 255, 255, 0.08));
+      color: #fff;
+      transform: translateX(1px);
+    }
+
+    .sidebar .nav-link.active {
+      border-color: rgba(172, 188, 255, 0.58);
+      background: linear-gradient(110deg, rgba(126, 149, 255, 0.42), rgba(94, 124, 255, 0.2));
+      box-shadow:
+        0 10px 18px rgba(12, 19, 56, 0.28),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+      color: #fff;
+    }
+
+    .nav-icon-wrap {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      flex: 0 0 auto;
+    }
+
+    .sidebar .nav-link.active .nav-icon-wrap {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.14));
+      border-color: rgba(255, 255, 255, 0.34);
+    }
+
+    .sidebar .nav-link i {
+      font-size: 15px;
+    }
+
+    .sidebar .nav-label {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sidebar .nav-arrow {
+      font-size: 12px;
+      opacity: 0.45;
+      transform: translateX(-3px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .sidebar .nav-link:hover .nav-arrow,
+    .sidebar .nav-link.active .nav-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .nav-app-count-badge {
+      border-radius: 999px;
+      background: linear-gradient(120deg, #ef4444, #f97316);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      line-height: 1.4;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+    }
+
+    .sidebar-profile {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-btn {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+      font-weight: 600;
+      padding: 12px;
+      border-radius: 14px;
+      color: #fff;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    .profile-btn:hover {
+      border-color: rgba(168, 183, 255, 0.5);
+      background: linear-gradient(155deg, rgba(139, 159, 255, 0.34), rgba(255, 255, 255, 0.12));
+    }
+
+    .sidebar-profile-menu {
+      min-width: 220px;
+      border-radius: 14px;
+      border: 1px solid #d9e1fb;
+      padding: 8px;
+      background: #ffffff;
+      box-shadow: 0 14px 26px rgba(15, 23, 42, 0.14);
+    }
+
+    .sidebar-profile-menu .dropdown-item-action {
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: #253265;
+      transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    }
+
+    .sidebar-profile-menu .dropdown-item-action:hover {
+      background: #f1f5ff;
+      color: #1c2a66;
+      transform: translateX(1px);
+    }
+
+    .sidebar-profile-menu .dropdown-item-action .action-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #d8def6;
+      background: #edf2ff;
+      color: #31429a;
+      flex: 0 0 auto;
+      font-size: 14px;
+    }
+
+    .sidebar-profile-menu .dropdown-item-action.logout-action {
+      color: #b42318;
+    }
+
+    .sidebar-profile-menu .dropdown-item-action.logout-action:hover {
+      background: #fff1f1;
+      color: #8e1912;
+    }
+
+    .sidebar-profile-menu .dropdown-item-action.logout-action .action-icon {
+      border-color: #f4c7c7;
+      background: #ffe7e7;
+      color: #bf2d22;
+    }
+
+    .profile-img {
+      width: 42px;
+      height: 42px;
+      border: 2px solid rgba(255, 255, 255, 0.45);
+    }
+
+    .profile-info .name {
+      line-height: 1.1;
+    }
+
+    .profile-info .role {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      letter-spacing: 0.3px;
+    }
+
+    .content {
+      margin-left: 264px;
+      padding: 24px 26px 30px;
+      min-height: 100vh;
+    }
+
+    #topbar {
+      top: 12px;
+      z-index: 1050 !important;
+    }
+
+    .topbar {
+      border-radius: var(--radius-xl);
+      box-shadow: 0 16px 34px rgba(47, 50, 145, 0.2);
+      margin-bottom: 24px;
+    }
+
+    #homeSection h4,
+    #jobsSection h4 {
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: #1f2a55;
+      margin-bottom: 18px !important;
+    }
+
+    #homeSection h5 {
+      color: #2b3a7a;
+      font-weight: 700;
+    }
+
+    .dashboard-card {
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      position: relative;
+    }
+
+    .applications-unread-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border-radius: 999px;
+      background: #dc2626;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      letter-spacing: 0.2px;
+    }
+
+    .super-admin-banner {
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid #f0d396;
+      background: linear-gradient(120deg, #fff6dd, #ffe7b0);
+      color: #7a4a04;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.2px;
+      box-shadow: 0 8px 18px rgba(122, 74, 4, 0.14);
+    }
+
+    .super-admin-banner .icon-wrap {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(122, 74, 4, 0.12);
+      border: 1px solid rgba(122, 74, 4, 0.22);
+      font-size: 12px;
+    }
+
+    .super-admin-banner .label {
+      line-height: 1;
+    }
+
+    body.super-admin-ui .sidebar {
+      background: linear-gradient(180deg, #1a2048 0%, #272f6f 55%, #3f2f78 100%);
+    }
+
+    body.super-admin-ui .topbar {
+      background: linear-gradient(120deg, #1f2a7a 0%, #5a2e91 100%);
+    }
+
+    .role-card,
+    .job-card,
+    #applicationsSection .card {
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      background: var(--surface);
+    }
+
+    .job-card .card-body {
+      padding: 20px;
+    }
+
+    .job-card h5 {
+      color: #1f2a55;
+      font-weight: 700;
+    }
+
+    .job-card .text-muted {
+      color: var(--text-soft) !important;
+    }
+
+    .job-type-badge {
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-weight: 600;
+      letter-spacing: 0.15px;
+    }
+
+    .view-btn {
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-weight: 600;
+    }
+
+    .modern-app-table thead {
+      background: #f5f7ff;
+    }
+
+    .modern-app-table thead th {
+      color: #27346f;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-soft);
+      white-space: nowrap;
+    }
+
+    .modern-app-table tbody tr {
+      border-bottom: 1px solid #eff3ff;
+    }
+
+    .modern-app-table tbody td {
+      color: #384766;
+      vertical-align: middle;
+    }
+
+    .modern-app-table tbody tr:hover {
+      background-color: #f8faff;
+    }
+
+    .modern-users-table thead {
+      background: #f5f7ff;
+    }
+
+    .modern-users-table thead th {
+      color: #27346f;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-soft);
+      white-space: nowrap;
+    }
+
+    .modern-users-table tbody tr {
+      border-bottom: 1px solid #eff3ff;
+    }
+
+    .modern-users-table tbody td {
+      color: #384766;
+      vertical-align: middle;
+    }
+
+    .modern-users-table tbody tr:hover {
+      background-color: #f8faff;
+    }
+
+    .user-email-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 220px;
+    }
+
+    .user-avatar-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #e9ecff;
+      color: #2f3291;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid #d7dcfb;
+      flex: 0 0 auto;
+    }
+
+    .user-email-main {
+      font-weight: 700;
+      color: #1f2a55;
+      line-height: 1.15;
+    }
+
+    .user-email-sub {
+      font-size: 12px;
+      color: #6f7da7;
+    }
+
+    .role-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #d7dcfb;
+      color: #2f3291;
+      background: #eef1ff;
+      white-space: nowrap;
+    }
+
+    .user-action-note {
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 600;
+    }
+
+    .modern-users-table .form-select.form-select-sm {
+      border-radius: 10px;
+      border-color: #d6def5;
+      min-width: 140px;
+      font-weight: 600;
+    }
+
+    .modern-users-table .btn.btn-sm {
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .users-create-card {
+      border: 1px solid #dfe6fb !important;
+      background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+    }
+
+    .users-create-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #d7def5;
+    }
+
+    .users-create-title {
+      margin: 0;
+      font-weight: 800;
+      color: #223064;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .users-create-subtitle {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: #6f7da7;
+      font-weight: 600;
+    }
+
+    .users-create-form .form-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #41507f;
+      margin-bottom: 6px;
+    }
+
+    .users-create-form .form-control,
+    .users-create-form .form-select {
+      border-radius: 10px;
+      border-color: #d6def5;
+      min-height: 40px;
+      font-weight: 600;
+      color: #223064;
+    }
+
+    .users-create-form .form-control:focus,
+    .users-create-form .form-select:focus {
+      border-color: #4a56c8;
+      box-shadow: 0 0 0 3px rgba(74, 86, 200, 0.14);
+    }
+
+    .users-create-btn {
+      min-height: 40px;
+      border-radius: 10px;
+      font-weight: 700;
+      background: linear-gradient(120deg, #2f3291, #4a56c8);
+      border: none;
+    }
+
+    .users-create-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(47, 50, 145, 0.25);
+    }
+
+    #appControls {
+      margin-top: 0.75rem !important;
+      margin-bottom: 0.75rem;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      background: var(--surface);
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    #appControls .form-control,
+    #appControls .form-select {
+      border-radius: 10px;
+      border-color: #d6def5;
+    }
+
+    #appControls .btn-success {
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    #pagination .card,
+    #appPagination .card {
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+    }
+
+    .modal-content.job-modal {
+      border: 1px solid #dce3f8;
+      box-shadow: 0 24px 45px rgba(15, 23, 42, 0.2);
+    }
+
+    .job-header {
+      background: linear-gradient(120deg, var(--brand-900), var(--brand-700));
+    }
+
+    #jobModal .modal-body {
+      background: var(--surface-soft);
+    }
+
+    #jobModal .form-card {
+      border: 1px solid #e4e9f7;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    .modern-input {
+      border-color: #d8e0f3;
+      background: #fff;
+    }
+
+    .modern-input:focus {
+      border-color: var(--brand-700);
+      box-shadow: 0 0 0 3px rgba(74, 86, 200, 0.14);
+    }
+
+    .modern-input.readonly-view {
+      background-color: #ffffff;
+      opacity: 1;
+    }
+
+    .form-select.modern-input.readonly-view {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .btn.btn-outline-secondary,
+    .modern-app-table .btn-outline-dark,
+    .modern-app-table .btn-outline-primary {
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .dropdown-menu {
+      border: 1px solid #dfe5f4;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    #changePasswordModal .modal-content {
+      border: 1px solid #dbe4fb;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 20px 44px rgba(15, 23, 42, 0.2);
+    }
+
+    #changePasswordModal .modal-header {
+      border-bottom: 0;
+      padding: 18px 20px 10px;
+      background: linear-gradient(120deg, #eef2ff 0%, #f7f9ff 100%);
+    }
+
+    .change-pass-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .change-pass-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #d4def8;
+      background: #edf2ff;
+      color: #2f3f92;
+      font-size: 15px;
+    }
+
+    #changePasswordModal .modal-title {
+      color: #1f2b5f;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .change-pass-subtitle {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: #6878a4;
+      font-weight: 600;
+    }
+
+    #changePasswordModal .modal-body {
+      padding: 14px 20px 16px;
+      background: linear-gradient(180deg, #fbfcff 0%, #f6f8ff 100%);
+    }
+
+    .change-pass-form .form-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #41507f;
+      margin-bottom: 6px;
+    }
+
+    .change-pass-form .form-control {
+      border-radius: 10px;
+      border-color: #d6def5;
+      min-height: 42px;
+      font-weight: 600;
+      color: #223064;
+    }
+
+    .change-pass-form .form-control:focus {
+      border-color: #4a56c8;
+      box-shadow: 0 0 0 3px rgba(74, 86, 200, 0.14);
+    }
+
+    #changePasswordModal .modal-footer {
+      border-top: 1px solid #e4eafa;
+      padding: 12px 20px 16px;
+      background: #fff;
+    }
+
+    .change-pass-cancel-btn,
+    .change-pass-submit-btn {
+      border-radius: 10px;
+      font-weight: 700;
+      min-width: 128px;
+    }
+
+    .change-pass-submit-btn {
+      background: linear-gradient(120deg, #2f3291, #4a56c8);
+      border: none;
+      box-shadow: 0 8px 16px rgba(47, 50, 145, 0.25);
+    }
+
+    .change-pass-submit-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+    }
+
+    @media (max-width: 768px) {
+      #changePasswordModal .modal-dialog {
+        margin: 12px;
+      }
+
+      #changePasswordModal .modal-content {
+        border-radius: 14px;
+      }
+
+      #changePasswordModal .modal-header {
+        padding: 14px 14px 8px;
+      }
+
+      .change-pass-title-wrap {
+        gap: 8px;
+      }
+
+      .change-pass-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+      }
+
+      #changePasswordModal .modal-title {
+        font-size: 1rem;
+      }
+
+      .change-pass-subtitle {
+        font-size: 11px;
+      }
+
+      #changePasswordModal .modal-body {
+        padding: 10px 14px 12px;
+      }
+
+      #changePasswordModal .modal-footer {
+        padding: 10px 14px 14px;
+        gap: 8px;
+      }
+
+      .change-pass-cancel-btn,
+      .change-pass-submit-btn {
+        min-width: 0;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #changePasswordModal .modal-dialog {
+        margin: 8px;
+      }
+
+      #changePasswordModal .modal-header {
+        padding: 12px 12px 8px;
+      }
+
+      #changePasswordModal .modal-body {
+        padding: 10px 12px 12px;
+      }
+
+      #changePasswordModal .modal-footer {
+        padding: 8px 12px 12px;
+      }
+
+      .change-pass-form .form-control {
+        min-height: 40px;
+      }
+
+      .change-pass-cancel-btn,
+      .change-pass-submit-btn {
+        min-height: 40px;
+      }
+    }
+
+    .admin-login-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(67, 56, 202, 0.2) 0%, rgba(67, 56, 202, 0) 36%),
+        radial-gradient(circle at 88% 12%, rgba(15, 118, 110, 0.16) 0%, rgba(15, 118, 110, 0) 34%),
+        linear-gradient(135deg, #eef2ff 0%, #f6f9ff 42%, #eef8f9 100%);
+    }
+
+    .admin-login-wrap::before,
+    .admin-login-wrap::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(4px);
+    }
+
+    .admin-login-wrap::before {
+      width: 260px;
+      height: 260px;
+      top: -90px;
+      right: -80px;
+      background: rgba(67, 56, 202, 0.14);
+    }
+
+    .admin-login-wrap::after {
+      width: 300px;
+      height: 300px;
+      bottom: -120px;
+      left: -100px;
+      background: rgba(15, 118, 110, 0.12);
+    }
+
+    .admin-login-card {
+      width: 100%;
+      max-width: 470px;
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      border-radius: 24px;
+      padding: 30px 28px;
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+    }
+
+    .admin-login-brand {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .admin-login-brand img {
+      height: 44px;
+      width: auto;
+      filter: drop-shadow(0 8px 14px rgba(47, 50, 145, 0.2));
+    }
+
+    .admin-login-title {
+      text-align: center;
+      margin-bottom: 4px;
+      font-size: clamp(1.7rem, 1.2rem + 1vw, 2rem);
+      font-weight: 800;
+      color: #18224f;
+      letter-spacing: 0.2px;
+    }
+
+    .admin-login-subtitle {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #5f6d95;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .admin-login-form .form-label {
+      color: #24325f;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 7px;
+    }
+
+    .admin-login-form .form-control {
+      min-height: 48px;
+      border-radius: 12px;
+      border: 1px solid #d4def8;
+      background: rgba(255, 255, 255, 0.92);
+      color: #1e2a55;
+      font-weight: 600;
+      padding: 10px 14px;
+    }
+
+    .admin-login-form .form-control:focus {
+      border-color: #4a56c8;
+      box-shadow: 0 0 0 4px rgba(74, 86, 200, 0.16);
+      background: #fff;
+    }
+
+    .admin-login-form .input-group .form-control {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .admin-login-password-toggle {
+      border: 1px solid #d4def8;
+      border-left: 0;
+      background: rgba(255, 255, 255, 0.92);
+      color: #2f3f92;
+      font-weight: 700;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+      min-width: 56px;
+    }
+
+    .admin-login-password-toggle:hover {
+      background: #eef2ff;
+      color: #22338a;
+    }
+
+    .admin-login-password-toggle:focus {
+      box-shadow: none;
+    }
+
+    .admin-login-link {
+      color: #3242aa;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .admin-login-link:hover {
+      color: #202f8f;
+      text-decoration: underline;
+    }
+
+    .admin-login-btn {
+      min-height: 48px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      background: linear-gradient(115deg, #2439b4 0%, #3f59df 48%, #1f7cc7 100%);
+      box-shadow: 0 14px 28px rgba(47, 69, 190, 0.34);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .admin-login-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 30px rgba(47, 69, 190, 0.38);
+      filter: brightness(1.02);
+    }
+
+    .admin-login-btn:focus,
+    .admin-login-btn:active {
+      box-shadow: 0 0 0 4px rgba(63, 89, 223, 0.25) !important;
+    }
+
+    @media (max-width: 992px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-radius: 0 0 18px 18px;
+        box-shadow: 0 12px 26px rgba(10, 14, 42, 0.2);
+        margin-bottom: 16px;
+        overflow: visible;
+      }
+
+      .sidebar-menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .sidebar-top {
+        margin-bottom: 12px;
+      }
+
+      .sidebar .nav-link {
+        flex: 1 1 180px;
+      }
+
+      .sidebar .nav-arrow {
+        display: none;
+      }
+
+      .sidebar-profile {
+        margin-top: 14px;
+        overflow: visible;
+      }
+
+      .sidebar-profile .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        inset: auto !important;
+        width: 100%;
+        margin-top: 8px;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 16px;
+      }
+
+      .dashboard-card {
+        height: 150px;
+      }
+
+      #appControls .w-auto {
+        width: 100% !important;
+      }
+
+      .admin-login-wrap {
+        padding: 16px;
+      }
+
+      .admin-login-card {
+        max-width: 100%;
+        border-radius: 20px;
+        padding: 24px 18px;
+      }
+
+      .admin-login-subtitle {
+        font-size: 0.92rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .admin-login-wrap {
+        align-items: flex-start;
+        padding: 14px;
+      }
+
+      .admin-login-card {
+        margin-top: 12px;
+        border-radius: 18px;
+        padding: 20px 16px;
+      }
+
+      .admin-login-brand img {
+        height: 38px;
+      }
+
+      .admin-login-title {
+        font-size: clamp(1.4rem, 1.1rem + 1.8vw, 1.7rem);
+        line-height: 1.2;
+      }
+
+      .admin-login-subtitle {
+        font-size: 0.88rem;
+        margin-bottom: 16px;
+      }
+
+      .admin-login-form .form-label {
+        font-size: 0.9rem;
+      }
+
+      .admin-login-form .form-control,
+      .admin-login-btn {
+        min-height: 46px;
+      }
+
+      #integratedLoginAlert {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .admin-login-wrap {
+        padding: 10px;
+      }
+
+      .admin-login-card {
+        margin-top: 8px;
+        padding: 16px 14px;
+        border-radius: 16px;
+      }
+
+      .admin-login-brand {
+        margin-bottom: 10px;
+      }
+
+      .admin-login-brand img {
+        height: 34px;
+      }
+
+      .admin-login-title {
+        font-size: 1.35rem;
+      }
+
+      .admin-login-subtitle {
+        font-size: 0.83rem;
+      }
+
+      .admin-login-form .form-control,
+      .admin-login-password-toggle,
+      .admin-login-btn {
+        min-height: 44px;
+      }
+
+      .admin-login-password-toggle {
+        min-width: 52px;
+      }
+    }
+
+    /* ===== 2026 Modern UI Override ===== */
+    :root {
+      --ui-bg: #f4f7fb;
+      --ui-surface: #ffffff;
+      --ui-surface-soft: #f8fbff;
+      --ui-border: #dbe5ef;
+      --ui-text: #152238;
+      --ui-text-soft: #5d6b80;
+      --ui-accent: #2f3291;
+      --ui-accent-2: #4f5bd8;
+      --ui-sidebar-1: #181d57;
+      --ui-sidebar-2: #252d7a;
+      --ui-sidebar-3: #323b9f;
+      --ui-radius: 18px;
+      --ui-shadow: 0 14px 34px rgba(15, 23, 42, 0.1);
+    }
+
+    body {
+      font-family: "Sora", "Manrope", "Segoe UI", sans-serif;
+      color: var(--ui-text);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(14, 165, 233, 0.12) 0%, rgba(14, 165, 233, 0) 30%),
+        radial-gradient(circle at 100% 100%, rgba(15, 118, 110, 0.12) 0%, rgba(15, 118, 110, 0) 38%),
+        var(--ui-bg);
+    }
+
+    .sidebar {
+      background: linear-gradient(165deg, var(--ui-sidebar-1) 0%, var(--ui-sidebar-2) 55%, var(--ui-sidebar-3) 100%);
+      box-shadow: 16px 0 38px rgba(24, 29, 87, 0.32);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    body.super-admin-ui .sidebar {
+      background: linear-gradient(165deg, var(--ui-sidebar-1) 0%, var(--ui-sidebar-2) 55%, var(--ui-sidebar-3) 100%);
+    }
+
+    .sidebar .nav-link {
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+      color: rgba(247, 249, 255, 0.96);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .sidebar .nav-link:hover {
+      transform: translateX(2px);
+      border-color: rgba(188, 198, 255, 0.65);
+      background: linear-gradient(120deg, rgba(111, 124, 240, 0.45), rgba(73, 84, 199, 0.34));
+    }
+
+    .sidebar .nav-link.active {
+      border-color: rgba(209, 216, 255, 0.82);
+      background: linear-gradient(120deg, rgba(143, 155, 255, 0.58), rgba(93, 106, 232, 0.44));
+      box-shadow: 0 12px 22px rgba(19, 24, 76, 0.34);
+    }
+
+    .content {
+      padding-top: 20px;
+    }
+
+    .topbar {
+      background: linear-gradient(130deg, rgba(255, 255, 255, 0.96) 0%, rgba(246, 252, 255, 0.98) 100%);
+      border: 1px solid var(--ui-border);
+      color: var(--ui-text);
+      box-shadow: var(--ui-shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    body.super-admin-ui .topbar {
+      background: linear-gradient(130deg, rgba(255, 255, 255, 0.96) 0%, rgba(246, 252, 255, 0.98) 100%);
+      border-color: var(--ui-border);
+    }
+
+    .topbar-input,
+    .topbar-select,
+    #topbar select#typeFilter.form-select,
+    #appControls select#monthFilter.form-select,
+    #appControls select#statusFilter.form-select,
+    #appControls select#readFilter.form-select {
+      border-color: #cedae8 !important;
+      background-color: #fff !important;
+      color: var(--ui-text) !important;
+      font-weight: 600;
+    }
+
+    #topbar select#typeFilter.form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 16 16'%3E%3Cpath fill='%230f766e' d='M3.22 5.97a.75.75 0 0 1 1.06 0L8 9.69l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 7.03a.75.75 0 0 1 0-1.06'/%3E%3C/svg%3E");
+    }
+
+    .topbar-input:focus,
+    .topbar-select:focus,
+    #topbar select#typeFilter.form-select:focus,
+    #appControls select#monthFilter.form-select:focus,
+    #appControls select#statusFilter.form-select:focus,
+    #appControls select#readFilter.form-select:focus {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2) !important;
+    }
+
+    .topbar-add-btn,
+    .users-create-btn {
+      background: linear-gradient(120deg, var(--ui-accent), var(--ui-accent-2));
+      color: #fff !important;
+      border: 0;
+      box-shadow: 0 10px 20px rgba(15, 118, 110, 0.24);
+    }
+
+    .topbar-add-btn:focus,
+    .topbar-add-btn:active,
+    .users-create-btn:focus,
+    .users-create-btn:active {
+      background: linear-gradient(120deg, var(--ui-accent), var(--ui-accent-2)) !important;
+      color: #fff !important;
+    }
+
+    .topbar-add-btn:hover,
+    .users-create-btn:hover {
+      box-shadow: 0 14px 26px rgba(14, 165, 233, 0.25);
+    }
+
+    .topbar-notification-btn {
+      border-color: #c7d7ea;
+      background: #ffffff;
+      color: #0f3b58;
+    }
+
+    .topbar-notification-btn:hover {
+      background: #eef7ff;
+      color: #0b3a53;
+    }
+
+    #homeSection h4,
+    #jobsSection h4 {
+      color: #0f1f35;
+      letter-spacing: 0.15px;
+    }
+
+    .dashboard-card {
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: var(--ui-shadow);
+      overflow: hidden;
+    }
+
+    .dashboard-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+
+    .bg-jobs {
+      background: linear-gradient(135deg, #0369a1, #0ea5e9);
+    }
+
+    .bg-apps {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+    }
+
+    .bg-latest {
+      background: linear-gradient(135deg, #0f766e, #22c55e);
+    }
+
+    .bg-unread {
+      background: linear-gradient(135deg, #b91c1c, #ef4444);
+    }
+
+    .role-card,
+    .job-card,
+    #applicationsSection .card,
+    .users-create-card,
+    #pagination .card,
+    #appPagination .card,
+    #appControls {
+      border-color: var(--ui-border) !important;
+      background: var(--ui-surface) !important;
+      box-shadow: var(--ui-shadow) !important;
+    }
+
+    .modern-app-table thead,
+    .modern-users-table thead {
+      background: #f1f7ff;
+    }
+
+    .modern-app-table thead th,
+    .modern-users-table thead th {
+      color: #12324c;
+      border-bottom-color: #d7e5f2;
+      font-weight: 700;
+    }
+
+    .modern-app-table tbody tr,
+    .modern-users-table tbody tr {
+      border-bottom-color: #e7eef6;
+      transition: background-color 0.18s ease;
+    }
+
+    .modern-app-table tbody tr:hover,
+    .modern-users-table tbody tr:hover {
+      background: #f5faff;
+    }
+
+    .user-avatar-dot {
+      background: #e7f6ff;
+      color: #0f6b77;
+      border-color: #cde5ef;
+    }
+
+    .role-pill {
+      color: #0f5e6a;
+      background: #eaf8fb;
+      border-color: #bfe5ec;
+      font-weight: 700;
+    }
+
+    .btn.btn-sm {
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .btn-outline-danger {
+      color: #b42318;
+      border-color: #f1b2ad;
+      background: #fff;
+    }
+
+    .btn-outline-danger:hover {
+      color: #fff;
+      background: #dc2626;
+      border-color: #dc2626;
+    }
+
+    .btn-outline-success {
+      color: #0f766e;
+      border-color: #93ddd4;
+      background: #fff;
+    }
+
+    .btn-outline-success:hover {
+      color: #fff;
+      background: #0f766e;
+      border-color: #0f766e;
+    }
+
+    .section-animate {
+      animation: sectionRise 0.28s ease;
+    }
+
+    @keyframes sectionRise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Applications UI */
+    .applications-subtitle {
+      margin-top: 4px;
+      color: var(--ui-text-soft);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15px;
+    }
+
+    .applications-status-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .applications-status-card {
+      border: 1px solid var(--ui-border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+      min-height: 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .applications-status-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      color: #5f6e85;
+    }
+
+    .applications-status-value {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1;
+      color: #132842;
+    }
+
+    .applications-status-card.pending .applications-status-value {
+      color: #9a3412;
+    }
+
+    .applications-status-card.reviewed .applications-status-value {
+      color: #1d4ed8;
+    }
+
+    .applications-status-card.selected .applications-status-value {
+      color: #0f766e;
+    }
+
+    .applications-status-card.rejected .applications-status-value {
+      color: #b42318;
+    }
+
+    .applications-status-card.unread .applications-status-value {
+      color: #7c3aed;
+    }
+
+    #appControls {
+      padding: 12px !important;
+      border-radius: 12px;
+      border: 1px solid var(--ui-border);
+      background: #ffffff;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06) !important;
+    }
+
+    .applications-controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+      align-items: stretch;
+    }
+
+    .applications-controls-grid {
+      display: grid;
+      grid-template-columns: minmax(210px, 2.1fr) minmax(210px, 2.1fr) minmax(150px, 1fr) minmax(150px, 1fr) minmax(170px, 1.2fr);
+      gap: 7px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .applications-filter-input,
+    .applications-filter-select {
+      min-height: 38px;
+      border-radius: 10px;
+      border-color: #cfdeed;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 0.45rem 0.75rem;
+    }
+
+    .applications-filter-input::placeholder {
+      color: #5f6e85;
+      opacity: 1;
+    }
+
+    .applications-filter-input:focus,
+    .applications-filter-select:focus {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2) !important;
+    }
+
+    .applications-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      border-top: 1px solid #e6edf5;
+      padding-top: 9px;
+      margin-top: 2px;
+    }
+
+    .applications-actions-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .applications-actions .btn {
+      min-height: 34px;
+      border-radius: 10px;
+      padding: 0.35rem 0.8rem;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .applications-count {
+      padding: 7px 10px;
+      border-radius: 10px;
+      border: 1px solid #d3e3f0;
+      background: #f2f8ff;
+      color: #10324f;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .applications-table-card {
+      overflow: hidden;
+    }
+
+    .applications-table-wrap {
+      max-height: 68vh;
+      overflow: auto;
+    }
+
+    .modern-app-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #f1f7ff;
+    }
+
+    .app-candidate-cell {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .app-candidate-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(140deg, #d9f0ff, #d4faef);
+      color: #0f5764;
+      border: 1px solid #b9dfed;
+      font-size: 12px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .app-candidate-name {
+      font-weight: 700;
+      color: #16253d;
+    }
+
+    .app-role {
+      font-weight: 700;
+      color: #16415f;
+    }
+
+    .app-phone,
+    .app-date {
+      color: #465971;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .status-chip {
+      border-radius: 999px;
+      border-width: 1px;
+      font-weight: 700;
+      padding: 5px 12px;
+      min-width: 96px;
+    }
+
+    .status-chip.status-pending {
+      color: #9a3412;
+      border-color: #fed7aa;
+      background: #fff7ed;
+    }
+
+    .status-chip.status-reviewed {
+      color: #1d4ed8;
+      border-color: #bfdbfe;
+      background: #eff6ff;
+    }
+
+    .status-chip.status-selected {
+      color: #0f766e;
+      border-color: #99f6e4;
+      background: #f0fdfa;
+    }
+
+    .status-chip.status-rejected {
+      color: #b42318;
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .app-status-menu {
+      min-width: 170px;
+      padding: 6px;
+      border-radius: 12px;
+    }
+
+    .app-status-option {
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background-color 0.18s ease, color 0.18s ease;
+    }
+
+    .app-status-option:focus,
+    .app-status-option:hover {
+      background: #eef2ff;
+      color: #24325f;
+    }
+
+    .app-status-option:active {
+      background: #e2e8f0 !important;
+      color: #1e293b !important;
+    }
+
+    .app-status-option.status-option-pending {
+      color: #9a3412;
+    }
+
+    .app-status-option.status-option-reviewed {
+      color: #1d4ed8;
+    }
+
+    .app-status-option.status-option-selected {
+      color: #0f766e;
+    }
+
+    .app-status-option.status-option-rejected {
+      color: #b42318;
+    }
+
+    .app-status-option.status-option-pending:hover,
+    .app-status-option.status-option-pending:focus {
+      background: #fff3e8;
+      color: #9a3412;
+    }
+
+    .app-status-option.status-option-reviewed:hover,
+    .app-status-option.status-option-reviewed:focus {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .app-status-option.status-option-selected:hover,
+    .app-status-option.status-option-selected:focus {
+      background: #ecfdf5;
+      color: #0f766e;
+    }
+
+    .app-status-option.status-option-rejected:hover,
+    .app-status-option.status-option-rejected:focus {
+      background: #fef2f2;
+      color: #b42318;
+    }
+
+    .app-read-btn,
+    .app-job-btn,
+    .app-delete-btn {
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    .app-icon-btn {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 992px) {
+      .topbar {
+        padding: 12px;
+      }
+
+      .topbar-group {
+        gap: 8px;
+      }
+
+      .topbar-input,
+      .topbar-select {
+        min-width: 170px;
+      }
+
+      .applications-controls-grid {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+        min-width: 0;
+      }
+
+      .applications-actions {
+        justify-content: space-between;
+      }
+
+      .applications-status-grid {
+        grid-template-columns: repeat(3, minmax(120px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        padding: 14px;
+      }
+
+      .dashboard-card {
+        height: 140px;
+        padding: 18px;
+      }
+
+      .dashboard-value {
+        font-size: 24px;
+      }
+
+      .dashboard-icon {
+        font-size: 34px;
+      }
+
+      .applications-controls {
+        gap: 8px;
+      }
+
+      .applications-controls-grid {
+        grid-template-columns: 1fr;
+        min-width: 0;
+      }
+
+      .applications-actions {
+        width: 100%;
+        justify-content: stretch;
+      }
+
+      .applications-actions-left {
+        width: 100%;
+      }
+
+      .applications-actions .btn {
+        flex: 1 1 160px;
+      }
+
+      .applications-count {
+        width: 100%;
+        text-align: center;
+      }
+
+      .applications-status-grid {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+      }
+    }
+  </style>
+  <script src="/js/api-config.js"></script>
+</head>
+
+<body>
+
+  <div id="adminLoginView" class="admin-login-wrap d-none">
+    <div class="admin-login-card">
+      <div class="admin-login-brand">
+        <img loading="lazy" decoding="async" src="/images/Nortek_logo.png" alt="Nortek Logo" height="42">
+      </div>
+      <h4 class="admin-login-title">Admin Dashboard Login</h4>
+      <p class="admin-login-subtitle">Super Admin, Admin, Recruiter and User access</p>
+      <div id="integratedLoginAlert" class="alert d-none"></div>
+      <form id="integratedLoginForm" class="admin-login-form">
+        <div class="mb-3">
+          <label class="form-label" for="integratedLoginEmail">Email</label>
+          <input id="integratedLoginEmail" type="email" class="form-control" autocomplete="username" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="integratedLoginPassword">Password</label>
+          <div class="input-group">
+            <input id="integratedLoginPassword" type="password" class="form-control" autocomplete="current-password" required>
+            <button id="toggleLoginPassword" type="button" class="btn admin-login-password-toggle" aria-label="Show password">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="text-end mb-3">
+          <a href="#" id="adminForgotPasswordLink" class="small admin-login-link">Forgot Password?</a>
+        </div>
+        <button id="integratedLoginBtn" type="submit" class="btn btn-primary w-100 admin-login-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal fade" id="adminForgotModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Reset Password via OTP</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="adminForgotForm">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label" for="adminForgotEmail">Email</label>
+              <input id="adminForgotEmail" type="email" class="form-control" autocomplete="email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="adminForgotOtp">OTP</label>
+              <div class="input-group">
+                <input id="adminForgotOtp" type="text" class="form-control" maxlength="6" placeholder="Enter OTP" autocomplete="one-time-code">
+                <button id="adminSendOtpBtn" type="button" class="btn btn-outline-secondary">Send OTP</button>
+                <button id="adminVerifyOtpBtn" type="button" class="btn btn-outline-secondary">Verify OTP</button>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="adminForgotNewPassword">New Password</label>
+              <input id="adminForgotNewPassword" type="password" minlength="8" class="form-control" autocomplete="new-password" required>
+            </div>
+            <div>
+              <label class="form-label" for="adminForgotConfirmPassword">Confirm New Password</label>
+              <input id="adminForgotConfirmPassword" type="password" minlength="8" class="form-control" autocomplete="new-password" required>
+            </div>
+            <div id="adminForgotAlert" class="alert d-none mt-3"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Reset Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminApp" class="d-none">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sidebar-top">
+      <img loading="lazy" decoding="async" src="/images/nortek_white.png" class="logo" alt="nortek-logo">
+    </div>
+
+    <div class="sidebar-menu">
+      <a id="navHome" class="nav-link active">
+        <span class="nav-icon-wrap"><i class="bi bi-house-door-fill"></i></span>
+        <span class="nav-label">Dashboard</span>
+        <i class="bi bi-chevron-right nav-arrow"></i>
+      </a>
+
+      <a id="navJobs" class="nav-link">
+        <span class="nav-icon-wrap"><i class="bi bi-search"></i></span>
+        <span class="nav-label">Jobs</span>
+        <i class="bi bi-chevron-right nav-arrow"></i>
+      </a>
+
+      <a id="navApplications" class="nav-link">
+        <span class="nav-icon-wrap"><i class="bi bi-grid-fill"></i></span>
+        <span class="nav-label">Applications</span>
+        <span id="navApplicationsCount" class="nav-app-count-badge d-none">0</span>
+        <i class="bi bi-chevron-right nav-arrow"></i>
+      </a>
+
+      <a id="navUsers" class="nav-link">
+        <span class="nav-icon-wrap"><i class="bi bi-people-fill"></i></span>
+        <span class="nav-label">Profile</span>
+        <i class="bi bi-chevron-right nav-arrow"></i>
+      </a>
+    </div>
+
+    <!-- Admin Profile -->
+    <div class="sidebar-profile dropdown">
+      <button class="profile-btn" data-bs-toggle="dropdown">
+        <img loading="lazy" decoding="async" id="sidebarProfileImage" src="https://ui-avatars.com/api/?name=Admin" class="profile-img">
+        <div class="profile-info">
+          <span id="sidebarProfileName" class="name">Admin</span>
+          <span id="sidebarProfileRole" class="role">Administrator</span>
+        </div>
+        <i class="bi bi-chevron-down ms-auto"></i>
+      </button>
+
+      <ul class="dropdown-menu dropdown-menu-end sidebar-profile-menu">
+        <li>
+          <a id="changePasswordTrigger" class="dropdown-item dropdown-item-action">
+            <span class="action-icon"><i class="bi bi-key"></i></span>
+            <span>Change Password</span>
+          </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a id="logout" class="dropdown-item dropdown-item-action logout-action">
+            <span class="action-icon"><i class="bi bi-box-arrow-right"></i></span>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="content">
+
+    <!-- TOPBAR -->
+    <div id="topbar" class="topbar d-none position-sticky top-0 z-1">
+      <div class="topbar-group">
+        <input id="searchInput" class="form-control topbar-input" placeholder="Search title / code / location" aria-label="Search jobs by title, code, or location" autocomplete="off">
+
+        <select id="typeFilter" class="form-select topbar-select" aria-label="Filter jobs by type">
+          <option value="">All Types</option>
+          <option>Full Time</option>
+          <option>Part Time</option>
+          <option>Contract</option>
+        </select>
+
+        <button id="addJobBtn" class="btn topbar-add-btn">
+          <i class="bi bi-plus-circle me-1"></i>Add Job
+        </button>
+      </div>
+
+      <div class="topbar-right">
+        <div class="dropdown">
+          <button class="btn position-relative topbar-notification-btn" data-bs-toggle="dropdown">
+            <i class="bi bi-bell fs-5"></i>
+            <span id="notifCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              0
+            </span>
+          </button>
+
+          <ul id="notificationsList" class="dropdown-menu dropdown-menu-end p-2">
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- HOME -->
+    <div id="homeSection">
+
+      <h4 class="mb-4">Dashboard</h4>
+      <div id="superAdminBanner" class="super-admin-banner d-none">
+        <span class="icon-wrap"><i class="bi bi-shield-lock-fill"></i></span>
+        <span class="label">Super Admin</span>
+      </div>
+
+      <div class="row g-4 mb-4">
+
+        <!-- TOTAL JOBS -->
+        <div class="col-lg-3 col-md-6">
+          <div class="dashboard-card bg-jobs" id="cardJobs" style="cursor:pointer;">
+
+            <div>
+              <div class="dashboard-title">Total Jobs</div>
+              <div id="totalJobs" class="dashboard-value">0</div>
+            </div>
+            <i class="bi bi-briefcase-fill dashboard-icon"></i>
+          </div>
+        </div>
+
+        <!-- TOTAL APPLICATIONS -->
+        <div class="col-lg-3 col-md-6">
+          <div class="dashboard-card bg-apps" id="cardApplications" style="cursor:pointer;">
+            <span id="applicationsUnreadBadge" class="applications-unread-badge d-none">0 new</span>
+
+            <div>
+              <div class="dashboard-title">Total Applications</div>
+              <div id="totalApplications" class="dashboard-value">0</div>
+            </div>
+            <i class="bi bi-people-fill dashboard-icon"></i>
+          </div>
+        </div>
+
+        <!-- LATEST JOB -->
+        <div class="col-lg-3 col-md-6">
+          <div class="dashboard-card bg-latest" id="cardLatestJob" style="cursor:pointer;">
+
+            <div>
+              <div class="dashboard-title">Latest Job</div>
+              <div id="latestJob" class="dashboard-value">-</div>
+            </div>
+            <i class="bi bi-clock-history dashboard-icon"></i>
+          </div>
+        </div>
+
+        <!-- UNREAD APPLICATIONS -->
+        <div class="col-lg-3 col-md-6">
+          <div class="dashboard-card bg-unread" id="cardUnreadApplications" style="cursor:pointer;">
+            <div>
+              <div class="dashboard-title">Unread Applications</div>
+              <div id="totalUnreadApplications" class="dashboard-value">0</div>
+            </div>
+            <i class="bi bi-envelope-fill dashboard-icon"></i>
+          </div>
+        </div>
+
+      </div>
+      <!-- ROLE SUMMARY -->
+      <div class="mt-4">
+        <h5 class="mb-3">Job Role Summary</h5>
+        <div id="roleSummary" class="row g-3"></div>
+      </div>
+    </div>
+
+
+    <!-- JOBS -->
+    <div id="jobsSection" style="display:none">
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Jobs</h4>
+        <button id="backFromJobs" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </button>
+      </div>
+
+      <div id="jobsContainer" class="row g-4"></div>
+      <ul id="pagination" class="pagination justify-content-center mt-4"></ul>
+
+    </div>
+
+
+    <!-- APPLICATIONS -->
+    <div id="applicationsSection" style="display:none">
+
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <h4 class="mb-0">Applications</h4>
+          <p class="applications-subtitle mb-0">Track candidate progress, status, and resume actions.</p>
+        </div>
+        <button id="backFromApplications" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </button>
+      </div>
+
+      <div id="applicationsStatusCards" class="applications-status-grid"></div>
+
+      <div id="applicationsTableCard" class="card shadow-sm border-0 rounded-4 mt-3 applications-table-card">
+        <div class="card-body p-0">
+
+          <div class="table-responsive applications-table-wrap">
+            <table class="table align-middle table-hover modern-app-table mb-0">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Candidate</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Job Code</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Read</th>
+                  <th>Resume</th>
+                  <th>Job</th>
+                  <th>Action</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="applicationsTable"></tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div id="usersSection" style="display:none">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Profile</h4>
+        <button id="backFromUsers" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </button>
+      </div>
+
+      <div id="usersCreateCard" class="card users-create-card border-0 rounded-4 mt-3 d-none">
+        <div class="card-body">
+          <div class="users-create-header">
+            <div>
+              <h6 class="users-create-title"><i class="bi bi-person-plus-fill"></i>Create User</h6>
+              <p class="users-create-subtitle">Add dashboard accounts with role-based access.</p>
+            </div>
+          </div>
+          <form id="createUserForm" class="row g-2 users-create-form">
+            <div class="col-md-4">
+              <label class="form-label" for="newUserEmail">Email</label>
+              <input id="newUserEmail" type="email" class="form-control" placeholder="Email" autocomplete="email" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="newUserPassword">Password</label>
+              <input id="newUserPassword" type="password" class="form-control" placeholder="Password" minlength="8" autocomplete="new-password" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="newUserRole">Role</label>
+              <select id="newUserRole" class="form-select" required>
+                <option value="admin">Admin</option>
+                <option value="recruiter">Recruiter</option>
+                <option value="user">User</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="newUserDisplayName">Display Name</label>
+              <input id="newUserDisplayName" type="text" class="form-control" placeholder="Display name" autocomplete="name">
+            </div>
+            <div class="col-md-1 d-grid">
+              <span class="form-label invisible d-none d-md-block" aria-hidden="true">Action</span>
+              <button type="submit" class="btn btn-primary users-create-btn">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0 rounded-4 mt-3">
+        <div class="card-body p-3">
+          <div class="table-responsive">
+            <table class="table align-middle table-hover modern-users-table mb-0">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Last Login</th>
+                  <th>Created</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="usersTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div id="actionToast" class="toast align-items-center text-bg-success border-0" role="status" aria-live="polite" aria-atomic="true">
+        <div class="d-flex">
+          <div id="actionToastBody" class="toast-body">Action completed.</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="jobModal">
+      <div class="modal-dialog modal-lg modal-dialog-centered ">
+        <div class="modal-content job-modal">
+          <div class="modal-header job-header">
+            <div>
+              <h4 id="modalTitle" class="mb-0"></h4>
+              <small class="text-light opacity-75">Manage Job Details</small>
+            </div>
+            <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+
+            <form id="jobForm">
+
+              <!-- BASIC INFO -->
+              <div class="form-card">
+                <h6 class="card-title">Basic Information</h6>
+
+                <div class="row g-3">
+
+                  <div class="col-md-4">
+                    <label for="jobCodeInput">Job Code</label>
+                    <input id="jobCodeInput" name="jobCode" class="form-control modern-input editable" autocomplete="off">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="jobTitleInput">Title</label>
+                    <input id="jobTitleInput" name="title" class="form-control modern-input editable" autocomplete="off">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="jobTypeInput">Type</label>
+                    <select id="jobTypeInput" name="type" class="form-select modern-input editable">
+                      <option value="">Select Type</option>
+                      <option>Full Time</option>
+                      <option>Part Time</option>
+                      <option>Contract</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="jobHoursInput">Job Hours</label>
+                    <input id="jobHoursInput" name="hours" class="form-control modern-input editable" autocomplete="off">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="jobLocationInput">Location</label>
+                    <input id="jobLocationInput" name="location" class="form-control modern-input editable" autocomplete="off">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="jobExperienceInput">Experience</label>
+                    <input id="jobExperienceInput" name="experience" class="form-control modern-input editable" autocomplete="off">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="jobEmailInput">Email</label>
+                    <input id="jobEmailInput" name="email" class="form-control modern-input editable" autocomplete="email">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="jobOpeningsInput">Openings</label>
+                    <input id="jobOpeningsInput" name="openings" type="number" class="form-control modern-input editable" autocomplete="off">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="jobPostedOnInput">Posted On</label>
+                    <input id="jobPostedOnInput" name="postedOn" type="date" class="form-control modern-input editable" autocomplete="off">
+                  </div>
+
+                  <div class="col-12">
+                    <label for="jobDescriptionInput">Description</label>
+                    <textarea id="jobDescriptionInput" name="description" rows="3" class="form-control modern-input editable" autocomplete="off"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- DUTIES -->
+              <div class="form-card">
+                <div class="card-header-flex">
+                  <h6>Duties</h6>
+                  <button type="button" id="addDutyBtn" class="add-btn">
+                    <i class="bi bi-plus-lg"></i>
+                  </button>
+                </div>
+                <ul id="dutiesList" class="dyn-list"></ul>
+              </div>
+
+              <!-- EDUCATION -->
+              <div class="form-card">
+                <div class="card-header-flex">
+                  <h6>Education</h6>
+                  <button type="button" id="addEducationBtn" class="add-btn">
+                    <i class="bi bi-plus-lg"></i>
+                  </button>
+                </div>
+                <ul id="educationList" class="dyn-list"></ul>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="modal-footer job-footer">
+            <button id="deleteJobBtn" class="btn btn-danger px-4">Delete</button>
+            <div>
+              <button id="editJobBtn" class="btn custom-edit-btn px-4">Edit</button>
+
+              <button id="saveJobBtn" class="btn btn-primary px-4" style="display:none">
+                Save Changes
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CHANGE PASSWORD MODAL -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="change-pass-title-wrap">
+              <span class="change-pass-icon"><i class="bi bi-shield-lock"></i></span>
+              <div>
+                <h5 class="modal-title">Change Password</h5>
+                <p class="change-pass-subtitle">Secure your dashboard access</p>
+              </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <form id="changePasswordForm" class="change-pass-form">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label" for="currentPassword">Current Password</label>
+                <input type="password" id="currentPassword" class="form-control" autocomplete="current-password" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="newPassword">New Password</label>
+                <input type="password" id="newPassword" class="form-control" minlength="8" autocomplete="new-password" required>
+              </div>
+              <div>
+                <label class="form-label" for="confirmNewPassword">Confirm New Password</label>
+                <input type="password" id="confirmNewPassword" class="form-control" minlength="8" autocomplete="new-password" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary change-pass-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary change-pass-submit-btn">Update Password</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+
+      const adminApp = document.getElementById('adminApp');
+      const adminLoginView = document.getElementById('adminLoginView');
+      const integratedLoginForm = document.getElementById('integratedLoginForm');
+      const integratedLoginAlert = document.getElementById('integratedLoginAlert');
+      const integratedLoginBtn = document.getElementById('integratedLoginBtn');
+      const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+      const integratedLoginPassword = document.getElementById('integratedLoginPassword');
+      const adminForgotPasswordLink = document.getElementById('adminForgotPasswordLink');
+      const adminForgotModal = new bootstrap.Modal(document.getElementById('adminForgotModal'));
+      const adminForgotForm = document.getElementById('adminForgotForm');
+      const adminForgotAlert = document.getElementById('adminForgotAlert');
+      const adminForgotEmail = document.getElementById('adminForgotEmail');
+      const adminForgotOtp = document.getElementById('adminForgotOtp');
+      const adminForgotNewPassword = document.getElementById('adminForgotNewPassword');
+      const adminForgotConfirmPassword = document.getElementById('adminForgotConfirmPassword');
+      const adminSendOtpBtn = document.getElementById('adminSendOtpBtn');
+      const adminVerifyOtpBtn = document.getElementById('adminVerifyOtpBtn');
+      const sidebarProfileName = document.getElementById('sidebarProfileName');
+      const sidebarProfileImage = document.getElementById('sidebarProfileImage');
+      const sidebarProfileRole = document.getElementById('sidebarProfileRole');
+      const navApplicationsCount = document.getElementById('navApplicationsCount');
+      const applicationsUnreadBadge = document.getElementById('applicationsUnreadBadge');
+      const superAdminBanner = document.getElementById('superAdminBanner');
+      const navUsers = document.getElementById('navUsers');
+      const usersSection = document.getElementById('usersSection');
+      const usersTable = document.getElementById('usersTable');
+      const usersCreateCard = document.getElementById('usersCreateCard');
+      const createUserForm = document.getElementById('createUserForm');
+      const backFromUsers = document.getElementById('backFromUsers');
+      const actionToastEl = document.getElementById('actionToast');
+      const actionToastBody = document.getElementById('actionToastBody');
+      const actionToast = actionToastEl ? new bootstrap.Toast(actionToastEl, { delay: 2200 }) : null;
+      let adminForgotVerificationToken = null;
+
+      const showIntegratedLogin = (message = '') => {
+        adminApp.classList.add('d-none');
+        adminLoginView.classList.remove('d-none');
+
+        if (message) {
+          integratedLoginAlert.className = 'alert alert-danger';
+          integratedLoginAlert.textContent = message;
+        } else {
+          integratedLoginAlert.className = 'alert d-none';
+          integratedLoginAlert.textContent = '';
+        }
+      };
+
+      function parseJwtPayload(jwtToken) {
+        try {
+          return JSON.parse(atob(jwtToken.split('.')[1]));
+        } catch {
+          return null;
+        }
+      }
+
+      function isTokenExpired(jwtToken) {
+        const payload = parseJwtPayload(jwtToken);
+        if (!payload?.exp) return true;
+        return Date.now() >= payload.exp * 1000;
+      }
+
+      function clearAdminSession() {
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_user');
+      }
+
+      function showActionToast(message, variant = 'success') {
+        if (!actionToastEl || !actionToastBody || !actionToast) return;
+        actionToastEl.classList.remove('text-bg-success', 'text-bg-danger', 'text-bg-warning', 'text-bg-info');
+        actionToastEl.classList.add(`text-bg-${variant}`);
+        actionToastBody.textContent = message;
+        actionToast.show();
+      }
+
+      function expireSessionNow(message = 'Session expired. Please login again.') {
+        clearAdminSession();
+        showIntegratedLogin(message);
+      }
+
+      function watchSessionExpiry(jwtToken) {
+        const payload = parseJwtPayload(jwtToken);
+        if (!payload?.exp) {
+          expireSessionNow();
+          return;
+        }
+
+        const expiresAtMs = payload.exp * 1000;
+        const delay = expiresAtMs - Date.now();
+
+        if (delay <= 0) {
+          expireSessionNow();
+          return;
+        }
+
+        setTimeout(() => expireSessionNow(), delay);
+        setInterval(() => {
+          if (Date.now() >= expiresAtMs) expireSessionNow();
+        }, 15000);
+      }
+
+      if (toggleLoginPassword && integratedLoginPassword) {
+        toggleLoginPassword.onclick = () => {
+          const isPassword = integratedLoginPassword.type === 'password';
+          integratedLoginPassword.type = isPassword ? 'text' : 'password';
+          toggleLoginPassword.innerHTML = isPassword
+            ? '<i class="bi bi-eye-slash"></i>'
+            : '<i class="bi bi-eye"></i>';
+          toggleLoginPassword.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+        };
+      }
+
+      integratedLoginForm.onsubmit = async (e) => {
+        e.preventDefault();
+
+        integratedLoginAlert.className = 'alert d-none';
+        integratedLoginBtn.disabled = true;
+
+        const email = document.getElementById('integratedLoginEmail').value.trim();
+        const password = document.getElementById('integratedLoginPassword').value;
+
+        try {
+          const res = await fetch(window.apiUrl('/admin/login'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+
+          const data = await res.json();
+          if (!res.ok || !data.success) throw new Error(data.message || 'Login failed');
+
+          localStorage.removeItem('candidate_token');
+          localStorage.removeItem('candidate_user');
+          localStorage.setItem('admin_token', data.token);
+          localStorage.setItem('admin_user', JSON.stringify(data.user || null));
+          location.reload();
+        } catch (err) {
+          integratedLoginAlert.className = 'alert alert-danger';
+          integratedLoginAlert.textContent = err.message;
+        } finally {
+          integratedLoginBtn.disabled = false;
+        }
+      };
+
+      function setForgotAlert(type, message) {
+        adminForgotAlert.className = `alert alert-${type} mt-3`;
+        adminForgotAlert.textContent = message;
+      }
+
+      adminForgotPasswordLink.onclick = (e) => {
+        e.preventDefault();
+        adminForgotForm.reset();
+        adminForgotVerificationToken = null;
+        adminForgotAlert.className = 'alert d-none mt-3';
+        adminForgotAlert.textContent = '';
+        adminForgotModal.show();
+      };
+
+      adminSendOtpBtn.onclick = async () => {
+        const email = adminForgotEmail.value.trim();
+        if (!email) {
+          setForgotAlert('danger', 'Please enter email first.');
+          return;
+        }
+
+        try {
+          const res = await fetch(window.apiUrl('/admin/forgot-password/request-otp'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          const data = await res.json();
+          if (!res.ok || !data.success) throw new Error(data.message || 'Failed to send OTP');
+
+          adminForgotVerificationToken = null;
+          setForgotAlert('success', 'OTP sent to your email.');
+        } catch (err) {
+          setForgotAlert('danger', err.message);
+        }
+      };
+
+      adminVerifyOtpBtn.onclick = async () => {
+        const email = adminForgotEmail.value.trim();
+        const otp = adminForgotOtp.value.trim();
+        if (!email || !otp) {
+          setForgotAlert('danger', 'Please enter email and OTP.');
+          return;
+        }
+
+        try {
+          const res = await fetch(window.apiUrl('/admin/forgot-password/verify-otp'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, otp })
+          });
+          const data = await res.json();
+          if (!res.ok || !data.success) throw new Error(data.message || 'Failed to verify OTP');
+
+          adminForgotVerificationToken = data.verificationToken;
+          setForgotAlert('success', 'OTP verified. You can reset password now.');
+        } catch (err) {
+          setForgotAlert('danger', err.message);
+        }
+      };
+
+      adminForgotForm.onsubmit = async (e) => {
+        e.preventDefault();
+
+        const email = adminForgotEmail.value.trim();
+        const newPassword = adminForgotNewPassword.value;
+        const confirmPassword = adminForgotConfirmPassword.value;
+
+        if (!adminForgotVerificationToken) {
+          setForgotAlert('danger', 'Please verify OTP first.');
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          setForgotAlert('danger', 'New password and confirm password do not match.');
+          return;
+        }
+
+        try {
+          const res = await fetch(window.apiUrl('/admin/forgot-password/reset'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email,
+              newPassword,
+              verificationToken: adminForgotVerificationToken
+            })
+          });
+          const data = await res.json();
+          if (!res.ok || !data.success) throw new Error(data.message || 'Failed to reset password');
+
+          setForgotAlert('success', 'Password reset successful. Please login.');
+          document.getElementById('integratedLoginEmail').value = email;
+          setTimeout(() => adminForgotModal.hide(), 900);
+        } catch (err) {
+          setForgotAlert('danger', err.message);
+        }
+      };
+
+      const token = localStorage.getItem('admin_token');
+      if (!token) {
+        showIntegratedLogin();
+        return;
+      }
+
+      if (isTokenExpired(token)) {
+        expireSessionNow();
+        return;
+      }
+
+      function getRoleFromToken(jwtToken) {
+        try {
+          const payload = JSON.parse(atob(jwtToken.split('.')[1]));
+          return payload.role || null;
+        } catch {
+          return null;
+        }
+      }
+
+      const storedAdminUser = JSON.parse(localStorage.getItem('admin_user') || 'null');
+      const currentUserRole = storedAdminUser?.role || getRoleFromToken(token);
+
+      if (!['super_admin', 'admin', 'recruiter', 'user'].includes(currentUserRole)) {
+        clearAdminSession();
+        showIntegratedLogin('Your account does not have dashboard access.');
+        return;
+      }
+
+      watchSessionExpiry(token);
+
+      adminLoginView.classList.add('d-none');
+      adminApp.classList.remove('d-none');
+
+      const displayLabel = (
+        storedAdminUser?.displayName ||
+        storedAdminUser?.name ||
+        (storedAdminUser?.email ? storedAdminUser.email.split('@')[0] : '') ||
+        'User'
+      );
+      sidebarProfileName.textContent = displayLabel;
+      sidebarProfileImage.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayLabel)}`;
+      sidebarProfileRole.textContent = currentUserRole
+        .split('_')
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
+
+      if (currentUserRole === 'super_admin') {
+        document.body.classList.add('super-admin-ui');
+        if (superAdminBanner) superAdminBanner.classList.remove('d-none');
+      }
+
+      const canManageJobs = ['super_admin', 'admin'].includes(currentUserRole);
+      const canViewUsers = ['super_admin', 'admin'].includes(currentUserRole);
+      const canManageUsers = currentUserRole === 'super_admin';
+      const canDeleteApplications = ['super_admin', 'admin'].includes(currentUserRole);
+
+      const API = '/jobs';
+      const pageSize = 6;
+
+      let allJobs = [], filteredJobs = [], currentPage = 1, currentJobId = null, isCreate = false;
+      let latestJobData = null;
+
+
+      const jobModal = new bootstrap.Modal(document.getElementById('jobModal'));
+      const jobForm = document.getElementById('jobForm');
+      const changePasswordModal = new bootstrap.Modal(document.getElementById('changePasswordModal'));
+      const changePasswordForm = document.getElementById('changePasswordForm');
+
+      const fetchAuth = (url, opt = {}) => {
+        const method = (opt.method || 'GET').toUpperCase();
+
+        return fetch(window.apiUrl(url), {
+          ...opt,
+          cache: method === 'GET' ? 'no-store' : opt.cache,
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+        }).then(async (r) => {
+        const raw = await r.text();
+        let data = {};
+        try {
+          data = raw ? JSON.parse(raw) : {};
+        } catch {
+          data = { message: raw || `HTTP ${r.status}` };
+        }
+
+        if (r.status === 401) {
+          expireSessionNow('Session expired. Please login again.');
+          throw new Error('Unauthorized');
+        }
+
+        if (r.status === 403) {
+          throw new Error(data.message || 'Forbidden');
+        }
+
+        if (!r.ok) {
+          throw new Error(data.message || 'Request failed');
+        }
+
+          return data;
+        });
+      };
+
+      if (!canManageJobs) {
+        addJobBtn.style.display = 'none';
+        editJobBtn.style.display = 'none';
+        deleteJobBtn.style.display = 'none';
+        saveJobBtn.style.display = 'none';
+      }
+
+      if (!canViewUsers) {
+        navUsers.style.display = 'none';
+      }
+
+      if (canManageUsers) {
+        usersCreateCard.classList.remove('d-none');
+      }
+
+      changePasswordTrigger.onclick = () => {
+        changePasswordForm.reset();
+        changePasswordModal.show();
+      };
+
+      changePasswordForm.onsubmit = async (e) => {
+        e.preventDefault();
+
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+        if (newPassword !== confirmNewPassword) {
+          alert('New password and confirm password do not match.');
+          return;
+        }
+
+        const res = await fetchAuth('/admin/change-password', {
+          method: 'PUT',
+          body: JSON.stringify({ currentPassword, newPassword })
+        });
+
+        if (!res.success) {
+          alert(res.message || 'Failed to change password.');
+          return;
+        }
+
+        alert('Password updated successfully.');
+        changePasswordModal.hide();
+      };
+
+      /* ---------- NAV ---------- */
+
+
+      navHome.onclick = () => show('home');
+      navJobs.onclick = () => {
+        show('jobs');
+
+        // Reset filters and pagination
+        searchInput.value = '';
+        typeFilter.value = '';
+        filteredJobs = [...allJobs];
+        currentPage = 1;
+
+        renderJobs();
+      };
+      navApplications.onclick = loadApplications;
+      navUsers.onclick = loadUsers;
+      backFromUsers.onclick = () => show('home');
+
+      /* ---------- JOBS ---------- */
+      function setEditable(edit) {
+        if (!canManageJobs) edit = false;
+
+        [...jobForm.elements].forEach(e => {
+          if (e.tagName !== "BUTTON") {
+            if (e.tagName === "SELECT") {
+              e.disabled = false;
+              e.classList.toggle('readonly-view', !edit);
+              e.tabIndex = edit ? 0 : -1;
+            } else {
+              e.readOnly = !edit;
+              e.classList.toggle('readonly-view', !edit);
+            }
+          }
+        });
+
+        editJobBtn.style.display = edit || isCreate ? 'none' : 'inline-block';
+        saveJobBtn.style.display = edit ? 'inline-block' : 'none';
+        addDutyBtn.style.display = edit ? 'inline-block' : 'none';
+        addEducationBtn.style.display = edit ? 'inline-block' : 'none';
+
+
+        if (edit) {
+          makeListEditable('dutiesList');
+          makeListEditable('educationList');
+        } else {
+          makeListReadOnly('dutiesList');
+          makeListReadOnly('educationList');
+        }
+      }
+      function showNotification(message) {
+        alert(message); // Simple version
+      }
+
+      function validateDynamicList(listId, labelName) {
+        const list = document.getElementById(listId);
+        const inputs = list.querySelectorAll("input");
+
+        let hasEmpty = false;
+
+        inputs.forEach(input => {
+          if (input.value.trim() === "") {
+            hasEmpty = true;
+            input.classList.add("is-invalid");
+          } else {
+            input.classList.remove("is-invalid");
+          }
+        });
+
+        if (hasEmpty) {
+          showNotification(`You cannot save. ${labelName} contains empty item.`);
+          return false;
+        }
+
+        return true;
+      }
+
+
+
+      function makeListEditable(listId) {
+        const ul = document.getElementById(listId);
+
+        [...ul.children].forEach(li => {
+
+          // Always extract clean text safely
+          let text = '';
+
+          const span = li.querySelector('span');
+          const input = li.querySelector('input');
+
+          if (span) text = span.textContent.trim();
+          else if (input) text = input.value.trim();
+          else text = li.textContent.trim();
+          li.className = "list-item-modern";
+
+
+          li.innerHTML = `
+      <input type="text" class="form-control form-control-sm mb-1" value="${text}" aria-label="Editable list item" autocomplete="off">
+     <button type="button" class="remove-item">-
+</button>
+
+    `;
+
+          li.querySelector('button').onclick = () => li.remove();
+        });
+      }
+
+
+
+      function makeListReadOnly(listId) {
+        const ul = document.getElementById(listId);
+
+        [...ul.children].forEach(li => {
+          const input = li.querySelector('input');
+          if (!input) return;
+
+          const value = input.value;
+
+          li.innerHTML = `
+      <span>${value}</span>
+    `;
+        });
+      }
+
+
+      function renderDynamicList(listEl, items, editable = false) {
+        listEl.innerHTML = '';
+
+        items.forEach(it => {
+          const li = document.createElement('li');
+          li.className = "list-item-modern";
+
+          if (editable) {
+            li.innerHTML = `
+        <input type="text" class="form-control form-control-sm mb-1" value="${it}" aria-label="Editable list item" autocomplete="off">
+       <button type="button" class="remove-item">-
+</button>
+
+      `;
+            li.querySelector('button').onclick = () => li.remove();
+          } else {
+            li.innerHTML = `<span>${it}</span>`;
+          }
+
+          listEl.appendChild(li);
+        });
+      }
+
+
+
+
+      function openJob(job) {
+        isCreate = false;
+        currentJobId = job._id;
+        modalTitle.innerText = job.title;
+        jobForm.reset();
+
+        [...jobForm.elements].forEach(e => {
+          if (e.name === 'postedOn' && (job.postedOn || job.posted)) {
+            e.value = new Date(job.postedOn || job.posted).toISOString().split('T')[0];
+          }
+          else e.value = job[e.name] || '';
+        });
+
+        renderDynamicList(document.getElementById('dutiesList'), job.duties || [], false);
+        renderDynamicList(document.getElementById('educationList'), job.education || [], false);
+
+
+        setEditable(false);
+        if (!canManageJobs) {
+          editJobBtn.style.display = 'none';
+          deleteJobBtn.style.display = 'none';
+          saveJobBtn.style.display = 'none';
+        }
+        jobModal.show();
+      }
+      /* ---------- DASHBOARD CARD NAVIGATION ---------- */
+
+      document.getElementById('cardJobs').onclick = () => {
+        show('jobs');
+
+        //  Reset filters
+        searchInput.value = '';
+        typeFilter.value = '';
+        filteredJobs = [...allJobs];
+        currentPage = 1;
+
+        renderJobs();
+      };
+
+      document.getElementById('cardApplications').onclick = () => {
+        loadApplications();
+      };
+      document.getElementById('cardUnreadApplications').onclick = () => {
+        loadApplications({ unreadOnly: true });
+      };
+      function show(section) {
+
+        // Hide all sections
+        homeSection.style.display = 'none';
+        jobsSection.style.display = 'none';
+        applicationsSection.style.display = 'none';
+        usersSection.style.display = 'none';
+
+        // Hide topbar always first
+        topbar.classList.add('d-none');
+
+        // Remove animation classes
+        [homeSection, jobsSection, applicationsSection, usersSection].forEach(sec => {
+          sec.classList.remove('section-animate');
+        });
+
+        if (section === 'home') {
+          homeSection.style.display = 'block';
+          homeSection.classList.add('section-animate');
+        }
+
+        if (section === 'jobs') {
+          jobsSection.style.display = 'block';
+          jobsSection.classList.add('section-animate');
+
+          //  Show topbar ONLY here
+          topbar.classList.remove('d-none');
+        }
+
+        if (section === 'apps') {
+          applicationsSection.style.display = 'block';
+          applicationsSection.classList.add('section-animate');
+        }
+
+        if (section === 'users') {
+          usersSection.style.display = 'block';
+          usersSection.classList.add('section-animate');
+        }
+
+        // Active nav highlight
+        [navHome, navJobs, navApplications, navUsers]
+          .filter(Boolean)
+          .forEach(n => n.classList.remove('active'));
+
+        if (section === 'home') navHome.classList.add('active');
+        if (section === 'jobs') navJobs.classList.add('active');
+        if (section === 'apps') navApplications.classList.add('active');
+        if (section === 'users') navUsers.classList.add('active');
+      }
+      /* ---------- SEE JOB FROM APPLICATION ---------- */
+      window.openJobFromApplication = async (jobIdOrCode) => {
+        let job = allJobs.find(j => j._id === jobIdOrCode || j.jobCode === jobIdOrCode);
+
+        if (!job) {
+          try {
+            const res = await fetchAuth(`${API}/${jobIdOrCode}`);
+            if (res.job) job = res.job;
+            else { alert('Job not found!'); return; }
+          } catch (err) {
+            console.error(err);
+            alert('Failed to fetch job details');
+            return;
+          }
+        }
+
+        openJob(job);
+      };
+
+
+      /* ---------- ADD JOB ---------- */
+      addJobBtn.onclick = () => {
+        if (!canManageJobs) {
+          alert('Only super admin or admin can create jobs.');
+          return;
+        }
+        isCreate = true;
+        currentJobId = null;
+        modalTitle.innerText = 'Add Job';
+        jobForm.reset();
+        renderDynamicList(document.getElementById('dutiesList'), [], true);
+        renderDynamicList(document.getElementById('educationList'), [], true);
+
+        setEditable(true);
+        jobModal.show();
+      };
+
+      /* ---------- DYNAMIC LIST BUTTONS ---------- */
+      const addDutyBtn = document.getElementById('addDutyBtn');
+      addDutyBtn.onclick = () => {
+        const li = document.createElement('li');
+        li.className = "list-item-modern";
+        li.innerHTML = `<input type="text" class="form-control form-control-sm mb-2" placeholder="Duty" aria-label="Duty" autocomplete="off"> <button type="button" class="remove-item">-
+</button>
+`;
+        li.querySelector('button').onclick = () => li.remove();
+        document.getElementById('dutiesList').appendChild(li);
+      };
+
+      const addEducationBtn = document.getElementById('addEducationBtn');
+      addEducationBtn.onclick = () => {
+        const li = document.createElement('li');
+        li.className = "list-item-modern";
+        li.innerHTML = `<input type="text" class="form-control form-control-sm mb-2" placeholder="Education" aria-label="Education" autocomplete="off"> <button type="button" class="remove-item">-
+</button>
+`;
+        li.querySelector('button').onclick = () => li.remove();
+        document.getElementById('educationList').appendChild(li);
+      };
+
+      if (!canManageJobs) {
+        addDutyBtn.style.display = 'none';
+        addEducationBtn.style.display = 'none';
+      }
+
+      /* ---------- SAVE / EDIT / DELETE ---------- */
+      editJobBtn.onclick = () => {
+        if (!canManageJobs) {
+          alert('Only super admin or admin can edit jobs.');
+          return;
+        }
+        setEditable(true);
+      };
+
+      saveJobBtn.onclick = async () => {
+        if (!canManageJobs) {
+          alert('Only super admin or admin can save job changes.');
+          return;
+        }
+        const dutiesValid = validateDynamicList("dutiesList", "Duties");
+        const educationValid = validateDynamicList("educationList", "Education");
+
+        if (!dutiesValid || !educationValid) {
+          return; // STOP saving
+        }
+        const data = Object.fromEntries(new FormData(jobForm));
+
+        data.duties = [...document.querySelectorAll('#dutiesList li')].map(li => {
+          const input = li.querySelector('input');
+          const span = li.querySelector('span');
+
+          if (input) return input.value.trim();
+          if (span) return span.textContent.trim();
+
+          return '';
+        }).filter(val => val !== '');
+
+        data.education = [...document.querySelectorAll('#educationList li')].map(li => {
+          const input = li.querySelector('input');
+          const span = li.querySelector('span');
+
+          if (input) return input.value.trim();
+          if (span) return span.textContent.trim();
+
+          return '';
+        }).filter(val => val !== '');
+
+        try {
+          let res;
+
+          if (isCreate) {
+            res = await fetchAuth(API, { method: 'POST', body: JSON.stringify(data) });
+          } else {
+            res = await fetchAuth(`${API}/${currentJobId}`, { method: 'PUT', body: JSON.stringify(data) });
+          }
+
+          if (!res.success) {
+            alert(res.message || 'Unable to save job.');
+            return;
+          }
+
+          const savedJob = res.job || null;
+
+          if (savedJob) {
+            upsertLocalJob(savedJob);
+            applyFilter();
+            refreshDashboardFromLocal();
+          }
+
+          await loadJobs();
+          jobModal.hide();
+        } catch (err) {
+          alert(err.message || 'Failed to save job.');
+        }
+      };
+
+      deleteJobBtn.onclick = async () => {
+        if (!canManageJobs) {
+          alert('Only super admin or admin can delete jobs.');
+          return;
+        }
+        if (!confirm('Delete this job?')) return;
+        await fetchAuth(`${API}/${currentJobId}`, { method: 'DELETE' });
+        jobModal.hide();
+        await loadJobs();
+        show('home');
+
+      };
+
+      /* ---------- JOBS LIST ---------- */
+      function renderJobs() {
+        jobsContainer.innerHTML = '';
+        pagination.innerHTML = '';
+        const start = (currentPage - 1) * pageSize;
+        filteredJobs.slice(start, start + pageSize).forEach(job => {
+          const col = document.createElement('div');
+          col.className = 'col-md-6';
+          col.innerHTML = `
+     
+  <div class="card job-card h-100  shadow-sm">
+    <div class="card-body d-flex flex-column">
+
+      <!-- Title -->
+      <h5 class="fw-bold mb-1">${job.title}</h5>
+      <small class="text-muted mb-2">Job Code: ${job.jobCode}</small>
+
+      <!-- Description -->
+      <p class="text-muted small flex-grow-1">
+        ${job.description?.substring(0, 110) || ''}...
+      </p>
+
+      
+     <!-- Footer Section -->
+<div class="d-flex justify-content-between align-items-center mt-3">
+
+ <div>
+  <span class="badge job-type-badge">${job.type}</span>
+  <span class="ms-2 text-muted small">
+    <i class="bi bi-geo-alt-fill text-danger"></i> ${job.location}
+  </span>
+  ${job.experience ? `
+    <span class="ms-2 text-muted small">
+      <i class="bi bi-briefcase-fill text-primary"></i> ${job.experience}
+    </span>` : ''}
+</div>
+
+
+  <button class="btn btn-sm view-btn">
+    View Details
+  </button>
+
+</div>
+
+    </div>
+  </div>
+
+`;
+          col.onclick = () => openJob(job);
+          jobsContainer.appendChild(col);
+        });
+        renderJobsPagination();
+
+
+      }
+      function renderJobsPagination() {
+
+        const totalPages = Math.ceil(filteredJobs.length / pageSize) || 1;
+
+        pagination.innerHTML = `
+    <div class="card shadow-sm w-100">
+      <div class="card-body py-3">
+        <div class="d-flex justify-content-between align-items-center">
+
+          <button 
+            class="btn btn-outline-secondary btn-sm"
+            ${currentPage === 1 ? "disabled" : ""}
+            onclick="changePage(${currentPage - 1})">
+            Previous
+          </button>
+
+          <div class="fw-semibold">
+            Page 
+            <span class="active-page">${currentPage}</span> 
+            of ${totalPages}
+          </div>
+
+          <button 
+            class="btn btn-outline-secondary btn-sm"
+            ${currentPage === totalPages ? "disabled" : ""}
+            onclick="changePage(${currentPage + 1})">
+            Next
+          </button>
+
+        </div>
+      </div>
+    </div>
+  `;
+      }
+      window.changePage = function (p) {
+
+        const totalPages = Math.ceil(filteredJobs.length / pageSize) || 1;
+
+        if (p < 1 || p > totalPages) return;
+
+        currentPage = p;
+        renderJobs();
+      };
+
+      function applyFilter() {
+        const q = searchInput.value.toLowerCase();
+        const t = typeFilter.value;
+        filteredJobs = allJobs.filter(j =>
+          (!t || j.type === t) &&
+          (
+            j.title?.toLowerCase().includes(q) ||
+            j.jobCode?.toLowerCase().includes(q) ||
+            j.location?.toLowerCase().includes(q) ||
+            j.experience?.toLowerCase().includes(q)
+          )
+        );
+
+        currentPage = 1;
+        renderJobs();
+      }
+      function refreshDashboardFromLocal() {
+        document.getElementById('totalJobs').innerText = allJobs.length;
+        renderRoleSummary(allJobs);
+
+        const latest = getLatestJobFromList(allJobs);
+        latestJobData = latest;
+        document.getElementById('latestJob').innerText = latest ? latest.title : "-";
+      }
+      async function loadDashboardStats() {
+        try {
+          const appsRes = await fetchAuth('/apply/all');
+
+          const jobs = sortJobsByRecent(allJobs || []);
+          const applications = normalizeApplications(appsRes.applications || []);
+
+          // Total counts
+          document.getElementById('totalJobs').innerText = jobs.length;
+          refreshApplicationCounters(applications);
+
+          // Render role summary
+          renderRoleSummary(jobs);
+
+          // Latest Job
+          const latest = getLatestJobFromList(jobs);
+          latestJobData = latest;
+          document.getElementById('latestJob').innerText = latest ? latest.title : "-";
+          renderNotificationsFromApplications(applications);
+          /* ---------- BACK BUTTONS ---------- */
+
+          document.getElementById('backFromJobs').onclick = () => {
+            show('home');
+          };
+
+          document.getElementById('backFromApplications').onclick = () => {
+            show('home');
+          };
+        } catch (err) {
+          console.error("Dashboard load error:", err);
+        }
+      }
+
+      searchInput.oninput = typeFilter.onchange = applyFilter;
+
+      function sameId(a, b) {
+        return String(a || '') === String(b || '');
+      }
+
+      function getJobRecencyTimestamp(job) {
+        return new Date(job?.updatedAt || job?.createdAt || job?.postedOn || 0).getTime();
+      }
+
+      function sortJobsByRecent(jobs) {
+        return [...jobs].sort((a, b) =>
+          getJobRecencyTimestamp(b) - getJobRecencyTimestamp(a)
+        );
+      }
+
+      function getLatestJobFromList(jobs) {
+        if (!jobs.length) return null;
+        const sorted = sortJobsByRecent(jobs);
+        return sorted[0] || null;
+      }
+
+      function upsertLocalJob(job) {
+        if (!job || !job._id) return;
+
+        const existingIndex = allJobs.findIndex(j => sameId(j._id, job._id));
+        if (existingIndex >= 0) {
+          allJobs.splice(existingIndex, 1);
+          allJobs.unshift(job);
+        } else {
+          allJobs.unshift(job);
+        }
+
+        allJobs = sortJobsByRecent(allJobs);
+      }
+
+      async function loadJobs() {
+        const res = await fetchAuth(`${API}?_=${Date.now()}`);
+        allJobs = sortJobsByRecent(res.jobs || res || []);
+        filteredJobs = [...allJobs];
+        renderJobs();
+        await loadDashboardStats();
+
+
+      }
+      loadJobs();
+      /* ---------- LATEST JOB CARD CLICK ---------- */
+
+      document.getElementById('cardLatestJob').onclick = () => {
+        if (!latestJobData) {
+          alert("No jobs available");
+          return;
+        }
+        openJob(latestJobData);
+      };
+      function renderRoleSummary(jobs) {
+
+        const roleContainer = document.getElementById('roleSummary');
+        roleContainer.innerHTML = '';
+
+        if (!jobs.length) {
+          roleContainer.innerHTML = '<p class="text-muted">No jobs available</p>';
+          return;
+        }
+
+        // Count jobs by title
+        const roleCount = {};
+
+        jobs.forEach(job => {
+          const role = job.title?.trim() || "Unknown";
+          roleCount[role] = (roleCount[role] || 0) + 1;
+        });
+
+        // Convert to array and sort descending
+        const sortedRoles = Object.entries(roleCount)
+          .sort((a, b) => b[1] - a[1]);
+
+        sortedRoles.forEach(([role, count]) => {
+
+          const col = document.createElement('div');
+          col.className = ' col-md-4';
+
+          col.innerHTML = `
+  <div class="role-card h-100 p-4">
+    <div class="d-flex justify-content-between align-items-center">
+      
+      <div>
+        <div class="role-title">${role}</div>
+        <div class="role-count">${count}</div>
+        <div class="role-label">Open Positions</div>
+      </div>
+
+      <div class="role-icon">
+        <i class="bi bi-briefcase-fill"></i>
+      </div>
+
+    </div>
+  </div>
+`;
+
+          col.onclick = () => {
+            show('jobs');
+            searchInput.value = role;
+            applyFilter();
+          };
+
+          roleContainer.appendChild(col);
+
+
+
+        });
+      }
+      /* ============================================================
+         APPLICATIONS - UPDATED WITH JOB SEARCH + HIGHLIGHT
+      ============================================================ */
+      let allApplications = [];
+      let filteredApplications = [];
+      let appCurrentPage = 1;
+      const appPageSize = 10;
+      const APP_NOTIF_POLL_MS = 15000;
+      const knownApplicationIds = new Set();
+      const realtimeUnreadApplicationIds = new Set();
+      let applicationsNotifPollTimer = null;
+      let realtimeUnreadInitialized = false;
+
+      function getApplicationId(app) {
+        return String(app?._id || app?.id || app?.applicationId || '');
+      }
+
+      function getRealtimeUnreadStorageKey() {
+        const userKey = storedAdminUser?.id || storedAdminUser?._id || storedAdminUser?.email || 'dashboard_user';
+        return `admin_realtime_unread_app_ids_${String(userKey)}`;
+      }
+
+      function persistRealtimeUnreadIds() {
+        localStorage.setItem(getRealtimeUnreadStorageKey(), JSON.stringify([...realtimeUnreadApplicationIds]));
+      }
+
+      function removeFromRealtimeUnread(appId) {
+        const normalizedId = String(appId || '');
+        if (!normalizedId) return;
+        realtimeUnreadApplicationIds.delete(normalizedId);
+      }
+
+      function syncRealtimeUnreadState(apps, options = {}) {
+        const seedFromServerUnread = Boolean(options.seedFromServerUnread);
+        const list = Array.isArray(apps) ? apps : [];
+        const liveIds = new Set();
+
+        list.forEach((app) => {
+          const appId = getApplicationId(app);
+          if (!appId) return;
+          liveIds.add(appId);
+          if (!knownApplicationIds.has(appId)) {
+            knownApplicationIds.add(appId);
+            if (realtimeUnreadInitialized && !seedFromServerUnread) {
+              realtimeUnreadApplicationIds.add(appId);
+            }
+          }
+        });
+
+        for (const id of [...knownApplicationIds]) {
+          if (!liveIds.has(id)) knownApplicationIds.delete(id);
+        }
+        for (const id of [...realtimeUnreadApplicationIds]) {
+          if (!liveIds.has(id)) realtimeUnreadApplicationIds.delete(id);
+        }
+
+        if (!realtimeUnreadInitialized && seedFromServerUnread) {
+          const savedIds = JSON.parse(localStorage.getItem(getRealtimeUnreadStorageKey()) || '[]');
+          const hasSaved = Array.isArray(savedIds) && savedIds.length > 0;
+
+          if (hasSaved) {
+            realtimeUnreadApplicationIds.clear();
+            savedIds.forEach((id) => {
+              const normalizedId = String(id || '');
+              if (normalizedId && liveIds.has(normalizedId)) {
+                realtimeUnreadApplicationIds.add(normalizedId);
+              }
+            });
+          } else {
+            list.forEach((app) => {
+              const appId = getApplicationId(app);
+              if (!appId) return;
+              if (!app.isRead) realtimeUnreadApplicationIds.add(appId);
+            });
+          }
+          realtimeUnreadInitialized = true;
+        }
+
+        if (!realtimeUnreadInitialized && !seedFromServerUnread) {
+          realtimeUnreadInitialized = true;
+        }
+
+        persistRealtimeUnreadIds();
+      }
+
+      function startApplicationsNotificationPolling() {
+        if (applicationsNotifPollTimer) return;
+
+        applicationsNotifPollTimer = setInterval(async () => {
+          try {
+            const res = await fetchAuth('/apply/all');
+            const latest = normalizeApplications(res.applications || []);
+            syncRealtimeUnreadState(latest);
+
+            allApplications = latest;
+            refreshApplicationCounters(allApplications);
+            renderNotificationsFromApplications(allApplications);
+
+            if (applicationsSection.style.display === 'block') {
+              applyApplicationFilters();
+            }
+          } catch (err) {
+            console.error('Application notifications polling failed:', err);
+          }
+        }, APP_NOTIF_POLL_MS);
+      }
+
+      function normalizeApplications(apps) {
+        return (apps || []).map((a) => ({
+          ...a,
+          status: a.status || "Pending",
+          isRead: realtimeUnreadInitialized
+            ? !realtimeUnreadApplicationIds.has(getApplicationId(a))
+            : Boolean(a.isRead)
+        }));
+      }
+
+      function getUnreadApplicationsCount(apps = allApplications) {
+        const list = Array.isArray(apps) ? apps : [];
+        return list.filter((a) => {
+          const appId = getApplicationId(a);
+          if (appId && realtimeUnreadApplicationIds.has(appId)) return true;
+          return !a.isRead;
+        }).length;
+      }
+
+      function refreshApplicationCounters(apps = allApplications) {
+        const totalApps = apps.length;
+        const unreadApps = getUnreadApplicationsCount(apps);
+
+        const totalAppsEl = document.getElementById('totalApplications');
+        const unreadAppsEl = document.getElementById('totalUnreadApplications');
+
+        if (totalAppsEl) totalAppsEl.innerText = totalApps;
+        if (unreadAppsEl) unreadAppsEl.innerText = unreadApps;
+        if (navApplicationsCount) {
+          navApplicationsCount.innerText = unreadApps;
+          navApplicationsCount.classList.toggle('d-none', unreadApps === 0);
+        }
+        if (applicationsUnreadBadge) {
+          applicationsUnreadBadge.innerText = `${unreadApps} new`;
+          applicationsUnreadBadge.classList.toggle('d-none', unreadApps === 0);
+        }
+      }
+
+      function renderNotificationsFromApplications(apps = allApplications) {
+        const unreadCount = getUnreadApplicationsCount(apps);
+        notifCount.innerText = unreadCount;
+
+        const unreadFirst = [...apps].sort((a, b) => {
+          const aIsUnread = realtimeUnreadApplicationIds.has(getApplicationId(a)) || !a.isRead;
+          const bIsUnread = realtimeUnreadApplicationIds.has(getApplicationId(b)) || !b.isRead;
+          return Number(bIsUnread) - Number(aIsUnread);
+        });
+        const latestFive = unreadFirst.slice(0, 5);
+
+        notificationsList.innerHTML = `
+    <div style="max-height:300px; overflow-y:auto;">
+      ${latestFive.map(a => `
+        <li class="dropdown-item small py-2"
+            style="cursor:pointer"
+            onclick="openJobFromApplication('${a.jobId || a.jobCode}')">
+
+          <div class="fw-semibold d-flex align-items-center gap-2">
+            ${a.name}
+            ${(realtimeUnreadApplicationIds.has(getApplicationId(a)) || !a.isRead) ? '<span class="badge text-bg-danger">New</span>' : ''}
+          </div>
+          <div class="text-muted small">
+            Applied for
+          <span class="custom-designation fw-bold">${a.designation || '-'}</span>
+          </div>
+
+        </li>
+      `).join('')}
+    </div>
+
+    <li><hr class="dropdown-divider"></li>
+
+    <li id="viewAllNotifications"
+    class="dropdown-item text-center fw-bold view-all-btn"
+    style="cursor:pointer">
+  View All (${apps.length})
+</li>
+  `;
+        const viewAllBtn = document.getElementById('viewAllNotifications');
+
+        if (viewAllBtn) {
+          viewAllBtn.onclick = () => {
+            loadApplications();
+
+            const dropdownBtn = document.querySelector('[data-bs-toggle="dropdown"]');
+            const dropdownInstance = bootstrap.Dropdown.getInstance(dropdownBtn);
+            if (dropdownInstance) dropdownInstance.hide();
+          };
+        }
+      }
+
+      function renderApplicationControls() {
+
+        if (document.getElementById('appControls')) return;
+
+        const container = document.createElement('div');
+        container.id = "appControls";
+        container.className = "mt-3";
+
+        container.innerHTML = `
+  <div class="applications-controls">
+    <div class="applications-controls-grid">
+      <input id="appSearch" class="form-control applications-filter-input" placeholder="Search name / email" aria-label="Search applications by name or email" autocomplete="off">
+      <input id="jobSearch" class="form-control applications-filter-input" placeholder="Search job title / code" aria-label="Search applications by job title or code" autocomplete="off">
+
+      <select id="monthFilter" class="form-select applications-filter-select" aria-label="Filter applications by month">
+        <option value="">All Months</option>
+        ${[...Array(12)].map((_, i) =>
+            `<option value="${i + 1}">
+            ${new Date(0, i).toLocaleString('default', { month: 'long' })}
+          </option>`).join('')}
+      </select>
+
+      <select id="statusFilter" class="form-select applications-filter-select" aria-label="Filter applications by status">
+        <option value="">All Status</option>
+        <option>Pending</option>
+        <option>Reviewed</option>
+        <option>Rejected</option>
+        <option>Selected</option>
+      </select>
+
+      <select id="readFilter" class="form-select applications-filter-select" aria-label="Filter applications by read state">
+        <option value="">All Read State</option>
+        <option value="unread">Unread</option>
+        <option value="read">Read</option>
+      </select>
+    </div>
+
+    <div class="applications-actions">
+      <div class="applications-actions-left">
+        <button id="exportExcel" class="btn btn-success btn-sm">
+          <i class="bi bi-file-earmark-excel"></i> Export
+        </button>
+        <button id="markAllReadBtn" class="btn btn-outline-danger btn-sm">
+          <i class="bi bi-envelope-open me-1"></i>Mark All Read
+        </button>
+      </div>
+      <div class="applications-count">
+        Showing <span id="filteredCount">0</span>
+      </div>
+    </div>
+  </div>
+  `;
+
+        applicationsSection.insertBefore(
+          container,
+          document.getElementById("applicationsTableCard")
+        );
+
+        document.getElementById('appSearch').oninput = applyApplicationFilters;
+        document.getElementById('jobSearch').oninput = applyApplicationFilters;
+        document.getElementById('monthFilter').onchange = applyApplicationFilters;
+        document.getElementById('statusFilter').onchange = applyApplicationFilters;
+        document.getElementById('readFilter').onchange = applyApplicationFilters;
+        document.getElementById('exportExcel').onclick = exportApplicationsToExcel;
+        document.getElementById('markAllReadBtn').onclick = markAllApplicationsRead;
+
+        // No Results Message
+        const noResultDiv = document.createElement("div");
+        noResultDiv.id = "noResultsMessage";
+        noResultDiv.className = "text-center text-danger fw-bold mt-3 d-none";
+        noResultDiv.innerText = "No candidates found";
+        applicationsSection.appendChild(noResultDiv);
+      }
+
+      function renderApplicationStatusCards(apps = filteredApplications) {
+        const container = document.getElementById('applicationsStatusCards');
+        if (!container) return;
+
+        const list = Array.isArray(apps) ? apps : [];
+        const statusCount = {
+          pending: 0,
+          reviewed: 0,
+          selected: 0,
+          rejected: 0
+        };
+
+        let unread = 0;
+
+        list.forEach((app) => {
+          const key = String(app.status || 'Pending').toLowerCase();
+          if (statusCount[key] !== undefined) statusCount[key] += 1;
+          if (!app.isRead) unread += 1;
+        });
+
+        container.innerHTML = `
+          <div class="applications-status-card total">
+            <div class="applications-status-label">Total</div>
+            <div class="applications-status-value">${list.length}</div>
+          </div>
+          <div class="applications-status-card pending">
+            <div class="applications-status-label">Pending</div>
+            <div class="applications-status-value">${statusCount.pending}</div>
+          </div>
+          <div class="applications-status-card reviewed">
+            <div class="applications-status-label">Reviewed</div>
+            <div class="applications-status-value">${statusCount.reviewed}</div>
+          </div>
+          <div class="applications-status-card selected">
+            <div class="applications-status-label">Selected</div>
+            <div class="applications-status-value">${statusCount.selected}</div>
+          </div>
+          <div class="applications-status-card rejected">
+            <div class="applications-status-label">Rejected</div>
+            <div class="applications-status-value">${statusCount.rejected}</div>
+          </div>
+          <div class="applications-status-card unread">
+            <div class="applications-status-label">Unread</div>
+            <div class="applications-status-value">${unread}</div>
+          </div>
+        `;
+      }
+
+      /* ===== ESCAPE REGEX ===== */
+      function escapeRegex(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      }
+
+      /* ===== HIGHLIGHT MATCH ===== */
+      function highlightMatch(text, searchTerm) {
+        if (!searchTerm) return text;
+        const escaped = escapeRegex(searchTerm);
+        const regex = new RegExp(`(${escaped})`, "gi");
+        return text.replace(regex, `<span class="bg-warning">$1</span>`);
+      }
+
+      /* ===== APPLY APPLICATION FILTERS ===== */
+      function applyApplicationFilters() {
+        const search = document.getElementById('appSearch').value.toLowerCase();
+        const jobSearch = document.getElementById('jobSearch').value.toLowerCase();
+        const month = document.getElementById('monthFilter').value;
+        const status = document.getElementById('statusFilter').value;
+        const readFilter = document.getElementById('readFilter').value;
+
+        filteredApplications = allApplications.filter(a => {
+          const fullName = (a.name || '').toLowerCase();
+          const email = (a.email || '').toLowerCase();
+          const designation = (a.designation || '').toLowerCase();
+          const jobCode = (a.jobCode || '').toLowerCase();
+
+          //  Literal includes for filtering
+          const matchesSearch = fullName.includes(search) || email.includes(search);
+          const matchesJob = designation.includes(jobSearch) || jobCode.includes(jobSearch);
+
+          const appMonth = new Date(a.appliedAt).getMonth() + 1;
+          const matchesMonth = !month || appMonth == month;
+
+          const matchesStatus = !status || (a.status || "Pending") === status;
+          const matchesRead =
+            !readFilter ||
+            (readFilter === 'unread' && !a.isRead) ||
+            (readFilter === 'read' && a.isRead);
+
+          return matchesSearch && matchesJob && matchesMonth && matchesStatus && matchesRead;
+        });
+
+        appCurrentPage = 1;
+        renderApplicationStatusCards(filteredApplications);
+        renderApplicationsTable();
+
+        const noResults = document.getElementById("noResultsMessage");
+        noResults.classList.toggle("d-none", filteredApplications.length !== 0);
+      }
+
+      /* ===== RENDER APPLICATIONS TABLE ===== */
+      function renderApplicationsTable() {
+        const jobSearchValue = document.getElementById('jobSearch').value;
+
+        const start = (appCurrentPage - 1) * appPageSize;
+        const pageData = filteredApplications.slice(start, start + appPageSize);
+
+        applicationsTable.innerHTML = pageData.map((a, index) => `
+<tr>
+ <td>${start + index + 1}</td>
+  <td>
+    <div class="app-candidate-cell">
+      <span class="app-candidate-avatar">${(a.name || 'N').charAt(0).toUpperCase()}</span>
+      <span class="app-candidate-name">${highlightMatch(a.name || 'N/A', document.getElementById('appSearch').value)}</span>
+    </div>
+  </td>
+  <td>${highlightMatch(a.email || '', document.getElementById('appSearch').value)}</td>
+  <td><span class="app-phone">${a.phone || '-'}</span></td>
+  <td>${highlightMatch(a.jobCode || '', jobSearchValue)}</td>
+  <td><span class="app-role">${highlightMatch(a.designation || '', jobSearchValue)}</span></td>
+  <td>
+  <div class="dropdown">
+    <button class="btn btn-sm dropdown-toggle status-chip
+      ${a.status === 'Selected' ? 'status-selected' :
+            a.status === 'Rejected' ? 'status-rejected' :
+              a.status === 'Reviewed' ? 'status-reviewed' :
+                'status-pending'}"
+      type="button"
+      data-bs-toggle="dropdown">
+      ${a.status || 'Pending'}
+    </button>
+
+    <ul class="dropdown-menu app-status-menu">
+      <li>
+        <a class="dropdown-item app-status-option status-option-pending"
+          href="#"
+          onclick="updateApplicationStatus('${a._id}', 'Pending')">
+          Pending
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item app-status-option status-option-reviewed"
+          href="#"
+          onclick="updateApplicationStatus('${a._id}', 'Reviewed')">
+          Reviewed
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item app-status-option status-option-selected"
+          href="#"
+          onclick="updateApplicationStatus('${a._id}', 'Selected')">
+          Selected
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item app-status-option status-option-rejected"
+          href="#"
+          onclick="updateApplicationStatus('${a._id}', 'Rejected')">
+          Rejected
+        </a>
+      </li>
+    </ul>
+  </div>
+</td>
+
+  <td>
+    ${a.isRead ? `
+      <span class="read-pill read">
+        <i class="bi bi-check2-circle"></i>Read
+      </span>
+    ` : `
+      <button class="btn btn-sm btn-outline-danger app-read-btn"
+        onclick="markApplicationAsRead('${a._id}')">
+        Mark Read
+      </button>
+    `}
+  </td>
+
+  <td>
+  ${a.cv ? `
+    <a href="/uploads/${a.cv}" target="_blank" 
+       class="btn btn-sm custom-download-btn app-icon-btn">
+       <i class="bi bi-download"></i>
+    </a>
+  ` : `<span class="text-muted small">-</span>`}
+</td>
+  <td>
+    <button class="btn btn-sm btn-outline-dark app-job-btn"
+      onclick="openJobFromApplication('${a.jobId || a.jobCode}')">
+      See Job
+    </button>
+  </td>
+  <td>
+    ${canDeleteApplications ? `
+      <button class="btn btn-sm btn-outline-danger app-delete-btn"
+        onclick="deleteApplication('${a._id}')">
+        Delete
+      </button>
+    ` : `<span class="text-muted small">No access</span>`}
+  </td>
+  <td><span class="app-date">${new Date(a.appliedAt).toLocaleDateString()}</span></td>
+</tr>
+  `).join('');
+
+        renderApplicationPagination();
+        document.getElementById('filteredCount').innerText = filteredApplications.length;
+      }
+
+
+      function renderApplicationPagination() {
+
+        let paginationId = "appPagination";
+
+        if (!document.getElementById(paginationId)) {
+          const div = document.createElement('div');
+          div.id = paginationId;
+          div.className = "mt-4";
+          applicationsSection.appendChild(div);
+        }
+
+        const container = document.getElementById(paginationId);
+
+        const totalPages = Math.ceil(filteredApplications.length / appPageSize) || 1;
+
+        container.innerHTML = `
+    <div class="card shadow-sm">
+      <div class="card-body py-3">
+        <div class="d-flex justify-content-between align-items-center">
+
+          <button 
+            class="btn btn-outline-secondary btn-sm"
+            ${appCurrentPage === 1 ? "disabled" : ""}
+            onclick="changeAppPage(${appCurrentPage - 1})">
+            Previous
+          </button>
+
+         <div class="fw-semibold">
+  Page 
+  <span class="active-page">${appCurrentPage}</span> 
+  of ${totalPages}
+</div>
+
+          <button 
+            class="btn btn-outline-secondary btn-sm"
+            ${appCurrentPage === totalPages ? "disabled" : ""}
+            onclick="changeAppPage(${appCurrentPage + 1})">
+            Next
+          </button>
+
+        </div>
+      </div>
+    </div>
+  `;
+      }
+
+      window.changeAppPage = function (p) {
+        appCurrentPage = p;
+        renderApplicationsTable();
+      };
+
+      function exportApplicationsToExcel() {
+
+        const rows = filteredApplications.map(a => [
+          a.name,
+          a.email,
+          a.phone,
+          a.jobCode,
+          a.designation,
+          new Date(a.appliedAt).toLocaleDateString()
+        ]);
+
+        let csv = "Name,Email,Phone,Job Code,Role,Date\n";
+        rows.forEach(r => {
+          csv += r.join(",") + "\n";
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = "applications.csv";
+        link.click();
+      }
+
+      async function markAllApplicationsRead() {
+        const unreadCount = getUnreadApplicationsCount(allApplications);
+        if (!unreadCount) {
+          alert("No unread applications.");
+          return;
+        }
+
+        try {
+          const res = await fetchAuth('/apply/mark-all-read', {
+            method: 'PUT',
+            body: JSON.stringify({})
+          });
+
+          if (!res.success) {
+            alert("Failed to mark all as read");
+            return;
+          }
+
+          allApplications = allApplications.map((a) => ({
+            ...a,
+            isRead: true,
+            readAt: a.readAt || new Date().toISOString()
+          }));
+          realtimeUnreadApplicationIds.clear();
+          persistRealtimeUnreadIds();
+
+          refreshApplicationCounters(allApplications);
+          renderNotificationsFromApplications(allApplications);
+          applyApplicationFilters();
+        } catch (err) {
+          console.error(err);
+          alert("Error while marking all applications as read");
+        }
+      }
+
+      async function loadApplications(options = {}) {
+        show('apps');
+        renderApplicationControls();
+
+        const unreadOnly = Boolean(options.unreadOnly);
+        const res = await fetchAuth('/apply/all');
+        allApplications = normalizeApplications(res.applications || []);
+        syncRealtimeUnreadState(allApplications, { seedFromServerUnread: !realtimeUnreadInitialized });
+        allApplications = normalizeApplications(allApplications);
+
+        refreshApplicationCounters(allApplications);
+        renderNotificationsFromApplications(allApplications);
+
+        const readFilterEl = document.getElementById('readFilter');
+        if (readFilterEl) {
+          readFilterEl.value = unreadOnly ? 'unread' : '';
+        }
+
+        filteredApplications = [...allApplications];
+        applyApplicationFilters();
+      }
+      window.updateApplicationStatus = async function (appId, newStatus) {
+        try {
+          const res = await fetchAuth(`/apply/update/${appId}`, {
+            method: 'PUT',
+            body: JSON.stringify({ status: newStatus })
+          });
+
+          if (!res.success) {
+            alert("Status update failed");
+            return;
+          }
+
+          const app = allApplications.find(a => a._id === appId);
+          if (app) {
+            app.status = newStatus;
+            app.isRead = true;
+          }
+          removeFromRealtimeUnread(appId);
+          persistRealtimeUnreadIds();
+
+          refreshApplicationCounters(allApplications);
+          renderNotificationsFromApplications(allApplications);
+          applyApplicationFilters();
+
+        } catch (err) {
+          console.error(err);
+          alert("Error updating status");
+        }
+      };
+
+      window.markApplicationAsRead = async function (appId) {
+        try {
+          if (!appId) {
+            alert("Invalid application id");
+            return;
+          }
+
+          const res = await fetchAuth(`/apply/mark-read/${appId}`, {
+            method: 'PUT',
+            body: JSON.stringify({})
+          });
+
+          if (!res.success) {
+            alert("Failed to mark application as read");
+            return;
+          }
+
+          const app = allApplications.find((a) => a._id === appId);
+          if (app) {
+            app.isRead = true;
+            app.readAt = new Date().toISOString();
+          }
+          removeFromRealtimeUnread(appId);
+          persistRealtimeUnreadIds();
+
+          refreshApplicationCounters(allApplications);
+          renderNotificationsFromApplications(allApplications);
+          applyApplicationFilters();
+        } catch (err) {
+          console.error(err);
+          alert(err.message || "Error marking application as read");
+        }
+      };
+
+      window.deleteApplication = async function (appId) {
+        if (!canDeleteApplications) {
+          alert('Only super admin or admin can delete applications.');
+          return;
+        }
+
+        if (!appId) {
+          alert('Invalid application id');
+          return;
+        }
+
+        const confirmed = window.confirm('Delete this application permanently?');
+        if (!confirmed) return;
+
+        try {
+          const res = await fetchAuth(`/apply/delete/${appId}`, {
+            method: 'DELETE'
+          });
+
+          if (!res.success) {
+            alert(res.message || 'Failed to delete application');
+            return;
+          }
+
+          allApplications = allApplications.filter((a) => String(a._id) !== String(appId));
+          removeFromRealtimeUnread(appId);
+          knownApplicationIds.delete(String(appId));
+          persistRealtimeUnreadIds();
+          refreshApplicationCounters(allApplications);
+          renderNotificationsFromApplications(allApplications);
+          applyApplicationFilters();
+        } catch (err) {
+          console.error(err);
+          alert(err.message || 'Error deleting application');
+        }
+      };
+
+      let allUsers = [];
+
+      function toTitleCaseRole(role = '') {
+        return String(role || '')
+          .split('_')
+          .filter(Boolean)
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(' ');
+      }
+
+      function formatDateValue(value) {
+        if (!value) return '-';
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return '-';
+        return date.toLocaleDateString();
+      }
+
+      function renderUsersTable() {
+        if (!usersTable) return;
+
+        if (!allUsers.length) {
+          usersTable.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No users found</td></tr>';
+          return;
+        }
+
+        usersTable.innerHTML = allUsers.map((user) => {
+          const canEditThisUser = canManageUsers && !(String(user.id || user._id) === String(storedAdminUser?.id) && user.role === 'super_admin');
+          const canDeleteThisUser = canManageUsers && canEditThisUser && user.role !== 'super_admin';
+          const userId = user.id || user._id;
+          const userEmail = user.email || '-';
+          const initials = userEmail && userEmail !== '-'
+            ? userEmail.charAt(0).toUpperCase()
+            : 'U';
+
+          const roleCell = `<span class="role-pill">${toTitleCaseRole(user.role)}</span>`;
+
+          const statusCell = canManageUsers
+            ? `<button class="btn btn-sm ${user.isActive ? 'btn-outline-danger' : 'btn-outline-success'}" onclick="toggleUserActive('${userId}', ${user.isActive ? 'false' : 'true'})" ${canEditThisUser ? '' : 'disabled'}>${user.isActive ? 'Deactivate' : 'Activate'}</button>`
+            : `<span class="badge ${user.isActive ? 'text-bg-success' : 'text-bg-secondary'} rounded-pill px-3 py-2">${user.isActive ? 'Active' : 'Inactive'}</span>`;
+
+          return `
+            <tr>
+              <td>
+                <div class="user-email-wrap">
+                  <span class="user-avatar-dot">${initials}</span>
+                  <div>
+                    <div class="user-email-main">${userEmail}</div>
+                    <div class="user-email-sub">${toTitleCaseRole(user.role)}</div>
+                  </div>
+                </div>
+              </td>
+              <td>${roleCell}</td>
+              <td>${statusCell}</td>
+              <td>${formatDateValue(user.lastLogin)}</td>
+              <td>${formatDateValue(user.createdAt)}</td>
+              <td>
+                ${canDeleteThisUser
+              ? `<button class="btn btn-sm btn-outline-danger" onclick="deleteUser('${userId}')">Delete</button>`
+              : (canManageUsers ? '<span class="user-action-note">Protected</span>' : '<span class="user-action-note">View only</span>')}
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      async function loadUsers() {
+        if (!canViewUsers) {
+          alert('You do not have permission to view users.');
+          return;
+        }
+
+        const res = await fetchAuth('/admin/users');
+        allUsers = (res.users || []).map((u) => ({
+          ...u,
+          id: u.id || u._id
+        }));
+
+        renderUsersTable();
+        show('users');
+      }
+
+      if (createUserForm) {
+        createUserForm.onsubmit = async (e) => {
+          e.preventDefault();
+          if (!canManageUsers) {
+            alert('Only super admin can add users.');
+            return;
+          }
+
+          const email = document.getElementById('newUserEmail').value.trim();
+          const password = document.getElementById('newUserPassword').value;
+          const role = document.getElementById('newUserRole').value;
+          const displayName = document.getElementById('newUserDisplayName').value.trim();
+
+          const res = await fetchAuth('/admin/users', {
+            method: 'POST',
+            body: JSON.stringify({ email, password, role, displayName })
+          });
+
+          if (!res.success) {
+            alert(res.message || 'Failed to create user.');
+            return;
+          }
+
+          createUserForm.reset();
+          await loadUsers();
+        };
+      }
+
+      window.updateUserRole = async (userId, role) => {
+        if (!canManageUsers) {
+          alert('Only super admin can update roles.');
+          return;
+        }
+
+        const res = await fetchAuth(`/admin/users/${userId}`, {
+          method: 'PUT',
+          body: JSON.stringify({ role })
+        });
+
+        if (!res.success) {
+          alert(res.message || 'Failed to update role.');
+          return;
+        }
+
+        allUsers = allUsers.map((u) => (String(u.id || u._id) === String(userId) ? { ...u, role } : u));
+        renderUsersTable();
+      };
+
+      window.toggleUserActive = async (userId, isActive) => {
+        if (!canManageUsers) {
+          alert('Only super admin can change user status.');
+          return;
+        }
+
+        const res = await fetchAuth(`/admin/users/${userId}`, {
+          method: 'PUT',
+          body: JSON.stringify({ isActive })
+        });
+
+        if (!res.success) {
+          alert(res.message || 'Failed to update user status.');
+          return;
+        }
+
+        allUsers = allUsers.map((u) => (String(u.id || u._id) === String(userId) ? { ...u, isActive } : u));
+        renderUsersTable();
+      };
+
+      window.deleteUser = async (userId) => {
+        if (!canManageUsers) {
+          alert('Only super admin can delete users.');
+          return;
+        }
+
+        if (!userId) {
+          alert('Invalid user id.');
+          return;
+        }
+
+        const confirmed = window.confirm('Delete this user account permanently?');
+        if (!confirmed) return;
+
+        try {
+          const res = await fetchAuth(`/admin/users/${userId}`, {
+            method: 'DELETE'
+          });
+
+          if (!res.success) {
+            alert(res.message || 'Failed to delete user.');
+            return;
+          }
+
+          allUsers = allUsers.filter((u) => String(u.id || u._id) !== String(userId));
+          renderUsersTable();
+          showActionToast('User deleted successfully');
+        } catch (err) {
+          alert(err.message || 'Failed to delete user.');
+        }
+      };
+
+      /* ---------- NOTIFICATIONS ---------- */
+      (async () => {
+        const res = await fetchAuth('/apply/all');
+        allApplications = normalizeApplications(res.applications || []);
+        syncRealtimeUnreadState(allApplications, { seedFromServerUnread: true });
+        allApplications = normalizeApplications(allApplications);
+        refreshApplicationCounters(allApplications);
+        renderNotificationsFromApplications(allApplications);
+        startApplicationsNotificationPolling();
+      })();
+      /* ---------- LOGOUT ---------- */
+      logout.onclick = () => {
+        clearAdminSession();
+        localStorage.removeItem('candidate_token');
+        localStorage.removeItem('candidate_user');
+        location.href = '/admin-dashboard';
+      };
+
+    });
+  </script>
+
+</body>
+
+</html>
+
+
+

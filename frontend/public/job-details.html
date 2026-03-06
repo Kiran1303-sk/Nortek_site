@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --jd-primary: #2f3291;
+            --jd-primary-dark: #1f236f;
+            --jd-sky: #4f7df7;
+            --jd-bg: #f3f6fd;
+            --jd-card: #ffffff;
+            --jd-text: #1a2442;
+            --jd-muted: #5f6d8f;
+            --jd-border: #dde4f5;
+            --jd-shadow: 0 18px 36px rgba(17, 27, 66, 0.12);
+            --jd-radius-lg: 22px;
+            --jd-radius-md: 14px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Manrope", "Poppins", sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            color: var(--jd-text);
+            background:
+                radial-gradient(circle at 0% 0%, rgba(79, 125, 247, 0.14), transparent 34%),
+                radial-gradient(circle at 100% 100%, rgba(47, 50, 145, 0.08), transparent 38%),
+                var(--jd-bg);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        header,
+        header * {
+            font-family: sans-serif;
+        }
+
+        li a {
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .nav-item.dropdown .nav-link.dropdown-toggle::after {
+            margin-left: 8px;
+            vertical-align: middle;
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-left: 0.3em solid transparent;
+        }
+
+        .btn.con {
+            font-weight: 700;
+            border: none;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item {
+                display: flex;
+                align-items: center;
+            }
+
+            .navbar-nav .nav-link {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+            .btn.con {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .nav-item.dropdown .nav-link.dropdown-toggle::after {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .navbar-nav .nav-link {
+                text-align: left;
+                justify-content: flex-start;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        .nav-link {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .nav-link:hover {
+            color: rgb(47, 50, 145);
+        }
+
+        .con {
+            background-color: rgb(47, 50, 145);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .candidate-login-btn {
+            border-radius: 8px;
+            font-weight: 700;
+            border: 1px solid rgb(47, 50, 145);
+            color: rgb(47, 50, 145);
+            background: #fff;
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .candidate-login-btn:hover {
+            background: rgb(47, 50, 145);
+            color: #fff;
+        }
+
+        .candidate-user-btn {
+            border-radius: 8px;
+            border: 1px solid #d8deef;
+            background: #fff;
+            color: #1f2a55;
+            font-weight: 600;
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .candidate-user-btn:hover {
+            background: #f7f9ff;
+            color: #1f2a55;
+        }
+
+        .job-page {
+            margin-top: 116px;
+            margin-bottom: 80px;
+        }
+
+        .job-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 2.1fr) minmax(260px, 0.9fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        .job-main {
+            background: var(--jd-card);
+            border: 1px solid var(--jd-border);
+            border-radius: var(--jd-radius-lg);
+            box-shadow: var(--jd-shadow);
+            overflow: hidden;
+        }
+
+        .job-hero {
+            position: relative;
+            padding: 34px 34px 26px;
+            background:
+                linear-gradient(130deg, rgba(47, 50, 145, 0.95), rgba(69, 97, 215, 0.9)),
+                linear-gradient(180deg, #2f3291, #3940b0);
+            color: #fff;
+        }
+
+        .job-hero::after {
+            content: "";
+            position: absolute;
+            right: -22px;
+            top: -34px;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 65%);
+            pointer-events: none;
+        }
+
+        .job-title {
+            font-size: clamp(1.8rem, 2.5vw, 2.45rem);
+            font-weight: 800;
+            line-height: 1.16;
+            letter-spacing: 0.2px;
+            margin-bottom: 16px;
+            max-width: 90%;
+            color: #fff !important;
+        }
+
+        .job-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 14px;
+        }
+
+        .meta-chip {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            border-radius: 999px;
+            padding: 8px 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: #fff;
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .job-body {
+            padding: 26px 34px 34px;
+        }
+
+        .job-section {
+            background: #f9fbff;
+            border: 1px solid #e4eafb;
+            border-radius: var(--jd-radius-md);
+            padding: 20px 18px;
+            margin-bottom: 14px;
+        }
+
+        .job-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-section h5 {
+            margin-bottom: 10px;
+            color: var(--jd-primary);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.02rem;
+        }
+
+        .job-section p {
+            color: var(--jd-muted);
+            line-height: 1.68;
+            margin-bottom: 0;
+            white-space: pre-line;
+        }
+
+        .requirements-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            display: grid;
+            gap: 8px;
+        }
+
+        .requirements-list li {
+            color: #32426f;
+            line-height: 1.55;
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+        }
+
+        .requirements-list li i {
+            color: var(--jd-sky);
+            font-size: 1.2rem;
+            line-height: 1;
+            margin-top: 1px;
+        }
+
+        .job-side {
+            position: sticky;
+            top: 132px;
+            background: linear-gradient(156deg, #1f236f 0%, #2f3291 56%, #3f56c4 100%);
+            color: white;
+            border-radius: var(--jd-radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 24px 22px;
+            box-shadow: 0 18px 40px rgba(28, 41, 100, 0.3);
+        }
+
+        .job-side h4 {
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff !important;
+        }
+
+        .job-side p {
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.65;
+            margin-bottom: 14px;
+        }
+
+        .job-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.92rem;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 10px;
+            padding: 8px 10px;
+            margin-bottom: 8px;
+        }
+
+        #applyBtn {
+            width: 100%;
+            min-height: 44px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: var(--jd-primary-dark);
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #applyBtn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(14, 22, 60, 0.24);
+            background: #f2f5ff;
+        }
+
+        .btn-light.back-jobs {
+            border-radius: 10px;
+            min-height: 44px;
+            font-weight: 700;
+            border: none;
+        }
+
+        .modal.left .modal-dialog {
+            position: fixed;
+            left: 0;
+            margin: 0;
+            width: 400px;
+            height: 100%;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .modal.left.show .modal-dialog {
+            transform: translateX(0);
+        }
+
+        .modal.left .modal-content {
+            height: 100%;
+            border-radius: 0;
+            background: #2b2d42;
+            color: #fff;
+        }
+
+        .close-btn {
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .un:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        @media (max-width: 991px) {
+            .container {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .job-page {
+                margin-top: 98px;
+            }
+
+            .job-shell {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .job-hero {
+                padding: 24px 20px 20px;
+            }
+
+            .job-title {
+                max-width: 100%;
+                font-size: clamp(1.45rem, 7vw, 2rem);
+            }
+
+            .job-meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .job-body {
+                padding: 18px;
+            }
+
+            .job-side {
+                position: static;
+                top: auto;
+                padding: 18px;
+            }
+        }
+
+        img[width],
+        img[height] {
+            max-width: none;
+        }
+    </style>
+  <script src="/js/api-config.js"></script>
+</head>
+
+<body>
+
+     <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container-fluid px-3 px-lg-4">
+
+                <!-- Desktop Side Menu Button -->
+                <button class="btn p-0 border-0 bg-transparent d-none d-md-flex align-items-center"
+                    data-bs-toggle="modal" data-bs-target="#sideModal">
+                    <img loading="lazy" decoding="async" src="/images/hamburger-svg.svg" height="45" alt="Menu">
+                </button>
+
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center ms-2" href="#">
+                    <img loading="lazy" decoding="async" src="/images/Nortek_logo.png" alt="Nortek Logo" height="45">
+                </a>
+
+                <!-- Mobile Hamburger -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/nortek.html">HOME</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/about.html">ABOUT US</a>
+                        </li>
+
+                        <!-- Services Dropdown -->
+                        <li class="nav-item dropdown">
+                            <!-- Combined link with dropdown -->
+                            <a class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                                href="/services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                SERVICES
+                            </a>
+
+                            <!-- Dropdown Menu -->
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/webdesign.html">Web Design & App Development</a>
+                                </li>
+                                <li><a class="dropdown-item" href="/AI-Services.html">AI Services</a></li>
+                                <li><a class="dropdown-item" href="/agentic.html">Agentic AI Solutions</a></li>
+                                <li><a class="dropdown-item" href="/Sap-Erp.html">SAP ERP Services</a></li>
+                                <li><a class="dropdown-item" href="/RPA.html">RPA</a></li>
+                                <li><a class="dropdown-item" href="/Business-int.html">Business Intelligence</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/blog.html">BLOG</a>
+                        </li>
+
+                        <!-- Careers Dropdown -->
+                        <li class="nav-item dropdown">
+                            <!-- Combined link with dropdown -->
+                            <a class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                                href="/careers.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                CAREERS
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/careers.html">Browse Jobs</a></li>
+                                <li><a class="dropdown-item" href="/resume.html">Resume Marketing</a></li>
+                                <li><a class="dropdown-item" href="/visa.html">VISA Sponsorship</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Contact -->
+                        <li class="nav-item ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center">
+                            <a class="btn con px-4 py-2 w-100 w-lg-auto text-center " href="/contact.html">CONTACT</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container job-page">
+        <div class="job-shell">
+            <section class="job-main">
+                <div class="job-hero">
+                    <h1 id="jobTitle" class="job-title">Loading...</h1>
+                    <div class="job-meta-grid">
+                        <span class="meta-chip"><i class="bi bi-hash"></i> Code: <span id="jobCode">N/A</span></span>
+                        <span class="meta-chip"><i class="bi bi-briefcase"></i> <span id="jobType">N/A</span></span>
+                        <span class="meta-chip"><i class="bi bi-geo-alt"></i> <span id="jobLocation">N/A</span></span>
+                        <span class="meta-chip"><i class="bi bi-calendar-event"></i> Posted: <span id="jobPosted">N/A</span></span>
+                    </div>
+                </div>
+
+                <div class="job-body">
+                    <article class="job-section">
+                        <h5><i class="bi bi-card-text"></i> Job Description</h5>
+                        <p id="jobDescription"></p>
+                    </article>
+
+                    <article class="job-section">
+                        <h5><i class="bi bi-list-check"></i> Duties & Responsibilities</h5>
+                        <ul id="jobDuties" class="requirements-list"></ul>
+                    </article>
+
+                    <article class="job-section">
+                        <h5><i class="bi bi-mortarboard"></i> Education & Qualifications</h5>
+                        <ul id="jobEducation" class="requirements-list"></ul>
+                    </article>
+
+                    <article class="job-section">
+                        <h5><i class="bi bi-stars"></i> Experience</h5>
+                        <p id="jobExperience"></p>
+                    </article>
+                </div>
+            </section>
+
+            <aside class="job-side">
+                <h4>Apply For This Job</h4>
+                <p>Interested in this opportunity? Share your profile and let our team connect with you.</p>
+
+                <div class="job-stat">
+                    <span>Type</span>
+                    <strong id="sideJobType">N/A</strong>
+                </div>
+                <div class="job-stat">
+                    <span>Location</span>
+                    <strong id="sideJobLocation">N/A</strong>
+                </div>
+                <div class="job-stat">
+                    <span>Code</span>
+                    <strong id="sideJobCode">N/A</strong>
+                </div>
+
+                <button id="applyBtn" class="mt-3">Apply Now</button>
+                <a href="/careers.html" class="btn btn-light back-jobs w-100 mt-2">Back To Careers</a>
+            </aside>
+        </div>
+    </main>
+<footer>
+        <div class="container-fluid bg-dark text-white py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <img loading="lazy" decoding="async" src="/images/nortek_white.png" />
+                        <p>Nortek isn’t just a company, it’s a domicile of innovators where we craft futuristic tech
+                            solutions.</p>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div>
+                            <h5 style="color: grey; font-size: 16px;">SERVICES</h5>
+                            <ul style="padding: 0; list-style-type: none;">
+                                <li><a>Web Design & App Development</a></li>
+                                <li><a>AI Solutions</a></li>
+                                <li><a>Agentic AI Solutions</a></li>
+                                <li><a>SAP ERP Services</a></li>
+                                <li><a>RPA</a></li>
+                                <li><a>Business Intelligence</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div>
+                            <h5 style="color: grey;font-size: 16px;">WORK ENQUIRY</h5>
+                            <address>Interested in working with us? contact@nortekconsulting.com</address>
+                            <h5 style="color: grey;font-size: 16px;">PHONE</h5>
+                            <span><a>903.857.0121</a></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div>
+                            <h5 style="color: grey;font-size: 16px;">ADDRESS</h5>
+                            <address>2300, Valley View Ln, Ste #1040,<br>
+                                Irving, Tx, 75062.</address>
+                            <h5 style="color: grey;font-size: 16px;">SOCIAL LINKS</h5>
+                            <span><a href="#" style="color: inherit;"><span class="bi bi-facebook"
+                                        style="margin-right: 20px;"></span></a></span>
+                            <span><a href="#" style="color: inherit;"><span class="bi bi-instagram"
+                                        style="margin-right: 20px;"></span></a></span>
+                            <span><a href="#" style="color: inherit;"><span class="bi bi-linkedin"
+                                        style="margin-right: 20px;"></span></a></span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row align-items-center text-center text-md-start text-white">
+                    <div class="col-12 col-md-6 mb-3 mb-md-0">
+                        <p class="mb-0">© 2021 Nortek. All rights reserved.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <ul
+                            class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end gap-3 mb-0 text-center">
+                            <li><a href="unsubscribe.html" class="un" style="color: inherit;">Unsubscribe</a></li>
+                            <li><a href="privacy.html" class="un" style="color: inherit;">Privacy Policy</a></li>
+                            <li><a href="terms.html" class="un" style="color: inherit;">Terms & Conditions</a>
+                            </li>
+                            <li><a href="sitemap.html" class="un" style="color: inherit;">Sitemap</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal fade left" id="sideModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content p-5">
+                <div class="d-flex justify-content-end">
+                    <span class="close-btn" data-bs-dismiss="modal">&times;</span>
+                </div>
+                <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%">
+                <div style="margin-top: 50px;">
+                    <p class="small">2300, Valley View Ln, Ste #1040,<br>Irving, Tx, 75062.</p>
+                    <p class="mt-3 mb-1">903.857.0121</p>
+                    <p class="mb-4">contact@nortekconsulting.com</p>
+                </div>
+                <div class="mb-4 mt-2 d-flex gap-5">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                </div>
+                <div style="margin-top: 50px;">
+                    <a href="/contact.html" class="btn btn-light w-50">CONTACT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function sanitize(text) {
+                return String(text || '').replace(/[&<>"']/g, (m) => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                }[m]));
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const jobCode = params.get("jobCode");
+
+            if (!jobCode) { alert("No job selected"); return; }
+
+            const API_URL = window.apiUrl(`/jobs/public/${encodeURIComponent(jobCode)}`);
+
+            function renderList(data) {
+                if (!data || data.length === 0) return `<li><i class="bi bi-dot"></i> N/A</li>`;
+                return data.map(item => `<li><i class="bi bi-dot"></i> ${sanitize(item)}</li>`).join('');
+            }
+
+            fetch(API_URL)
+                .then(res => { if (!res.ok) throw new Error('Job not found'); return res.json(); })
+                .then(job => {
+                    document.getElementById("jobTitle").innerText = job.title || 'N/A';
+                    document.getElementById("jobCode").innerText = job.jobCode || 'N/A';
+                    document.getElementById("jobType").innerText = `${job.type || 'N/A'} ${job.hours ? ' | ' + job.hours : ''}`;
+                    document.getElementById("jobLocation").innerText = job.location || 'N/A';
+                    document.getElementById("jobExperience").innerText = job.experience || 'N/A';
+                    document.getElementById("sideJobCode").innerText = job.jobCode || 'N/A';
+                    document.getElementById("sideJobType").innerText = job.type || 'N/A';
+                    document.getElementById("sideJobLocation").innerText = job.location || 'N/A';
+
+
+                    const postedDate = job.postedOn || job.posted || '';
+                    document.getElementById("jobPosted").innerText = postedDate ? new Date(postedDate).toDateString() : 'N/A';
+                    document.getElementById("jobDescription").innerText = job.description || 'N/A';
+
+                    document.getElementById("jobDuties").innerHTML = renderList(job.duties || []);
+                    document.getElementById("jobEducation").innerHTML = renderList(job["education"] || []);
+
+                    document.getElementById("applyBtn").onclick = () => {
+                        const applyUrl = `/apply.html?jobCode=${job.jobCode}&designation=${encodeURIComponent(job.title)}`;
+                        window.location.href = applyUrl;
+                    };
+                })
+                .catch(err => { console.error(err); alert('Job not found or removed'); });
+        });
+    </script>
+
+  <script src="/js/nav-active.js"></script>
+</body>
+
+</html>
+
+
+
+

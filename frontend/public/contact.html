@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+
+        }
+
+
+
+
+        .box {
+            width: 275px;
+            height: 275px;
+            background-color: rgb(47, 50, 145);
+
+
+        }
+
+        .title-text {
+            font-weight: 800;
+
+            font-size: clamp(36px, 5vw, 50px);
+            margin-left: 70px;
+
+
+
+
+        }
+
+        /* Laptop & above → single line */
+        @media (min-width: 992px) {
+            .title-text {
+                white-space: nowrap;
+            }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        li a {
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .nor {
+            border-left: 4px solid rgb(47, 50, 145);
+            padding-left: 20px;
+            height: 110px;
+            border-radius: 4px;
+
+
+        }
+
+        .navbar-nav .nav-link {
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Dropdown toggle arrow alignment */
+        .nav-item.dropdown .nav-link.dropdown-toggle::after {
+            margin-left: 8px;
+            vertical-align: middle;
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-left: 0.3em solid transparent;
+        }
+
+        /* Contact button styling */
+        .btn.con {
+            font-weight: 700;
+            border: none;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Desktop specific alignment */
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item {
+                display: flex;
+                align-items: center;
+            }
+
+            .navbar-nav .nav-link {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+            .btn.con {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        /* Mobile dropdown alignment */
+        @media (max-width: 991px) {
+            .nav-item.dropdown .nav-link.dropdown-toggle::after {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .navbar-nav .nav-link {
+                text-align: left;
+                justify-content: flex-start;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        .nav-link {
+            font-weight: 700;
+        }
+
+        .nav-link:hover {
+            color: rgb(47, 50, 145);
+        }
+
+        .con {
+            background-color: rgb(47, 50, 145);
+            color: white;
+        }
+
+        .ban {
+            width: 100%;
+            height: auto;
+        }
+
+        .schedule-btn {
+            background-color: rgb(47, 50, 145);
+            color: white;
+            border-radius: 50px;
+
+        }
+
+        .schedule-btn:hover {
+            border: 2px solid#6f70ff;
+        }
+
+        .modal.left .modal-dialog {
+            position: fixed;
+            left: 0;
+            margin: 0;
+            width: 400px;
+            /* modal width */
+            height: 100%;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .modal.left.show .modal-dialog {
+            transform: translateX(0);
+        }
+
+        .modal.left .modal-content {
+            height: 100%;
+            border-radius: 0;
+            background: #2b2d42;
+            color: #fff;
+        }
+
+        .close-btn {
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .un:hover {
+            text-decoration: underline;
+
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        @media (max-width: 991px) {
+            .container {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+        }
+    
+        img[width],
+        img[height] {
+            max-width: none;
+        }
+    </style>
+
+  <script src="/js/api-config.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container-fluid px-3 px-lg-4">
+
+                <!-- Desktop Side Menu Button -->
+                <button class="btn p-0 border-0 bg-transparent d-none d-md-flex align-items-center"
+                    data-bs-toggle="modal" data-bs-target="#sideModal">
+                    <img loading="lazy" decoding="async" src="/images/hamburger-svg.svg" height="45" alt="Menu">
+                </button>
+
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center ms-2" href="#">
+                    <img loading="lazy" decoding="async" src="/images/Nortek_logo.png" alt="Nortek Logo" height="45">
+                </a>
+
+                <!-- Mobile Hamburger -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/nortek.html">HOME</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/about.html">ABOUT US</a>
+                        </li>
+
+                        <!-- Services Dropdown -->
+                        <li class="nav-item dropdown">
+                            <!-- Combined link with dropdown -->
+                            <a class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                                href="/services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                SERVICES
+                            </a>
+
+                            <!-- Dropdown Menu -->
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/webdesign.html">Web Design & App Development</a>
+                                </li>
+                                <li><a class="dropdown-item" href="/AI-Services.html">AI Services</a></li>
+                                <li><a class="dropdown-item" href="/agentic.html">Agentic AI Solutions</a></li>
+                                <li><a class="dropdown-item" href="/Sap-Erp.html">SAP ERP Services</a></li>
+                                <li><a class="dropdown-item" href="/RPA.html">RPA</a></li>
+                                <li><a class="dropdown-item" href="/Business-int.html">Business Intelligence</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/blog.html">BLOG</a>
+                        </li>
+
+                        <!-- Careers Dropdown -->
+                        <li class="nav-item dropdown">
+                            <!-- Combined link with dropdown -->
+                            <a class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                                href="/careers.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                CAREERS
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/careers.html">Browse Jobs</a></li>
+                                <li><a class="dropdown-item" href="/resume.html">Resume Marketing</a></li>
+                                <li><a class="dropdown-item" href="/visa.html">VISA Sponsorship</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Contact -->
+                        <li class="nav-item ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center">
+                            <a class="btn con px-4 py-2 w-100 w-lg-auto text-center " href="/contact.html">CONTACT</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <div
+            style="background-image: url(/images/contact-bg.jpg); background-position: center; background-size: cover; height: 90vh;width: 100%; background-repeat: no-repeat;">
+
+
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="  box " style="margin-top: -250px; position: relative;">
+
+
+            <div>
+                <h4 style="color: gray;  padding-top: 50px; font-size: 20px; margin-left: 70px;">Nortek</h4>
+            </div>
+            <div class="nortek-title d-flex align-items-center w-100 ">
+                <h1 class="text-white mb-0 w-100 title-text ">
+                    Contact Us
+                </h1>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    <main style="margin-top: 150px;">
+        <section>
+            <div class="container">
+                <div class="nor">
+                    <h6 style="color: rgb(47, 50, 145); font-size: 18px;"><i
+                            style="width: 30px; height: 2px; display: inline-block; background: rgb(47, 50, 145); position: relative; top: -5px; margin-right: 25px;"></i>Contact
+                        Form</h6>
+
+                    <h5 style="font-size: 22px; font-weight: 900;">Please Use the Form</h5>
+                </div>
+                <div class="row py-5">
+                    <div class=" col-12 col-md-6 ">
+                        <form id="contactForm">
+                            <input type="text" name="firstName" placeholder="First Name" aria-label="First Name" class="form-control mb-4 p-3" autocomplete="given-name" required>
+                            <input type="email" name="email" placeholder="Email" aria-label="Email" class="form-control mb-4 p-sm-3" autocomplete="email" required>
+                            <input type="tel" name="phone" placeholder="Phone Number" aria-label="Phone Number" class="form-control mb-4 p-3" autocomplete="tel" required>
+                            <input type="text" name="subject" placeholder="Subject" aria-label="Subject" class="form-control mb-4 p-3" autocomplete="off" required>
+                            <textarea name="message" placeholder="Message" aria-label="Message" class="form-control mb-4 p-3" rows="4" autocomplete="off" required></textarea>
+                            <div class="form-check" style="margin-top: 15px;">
+                                <input class="form-check-input" type="checkbox" name="consent" value="true" id="flexCheckDefault">
+                                <label class="form-check-label fw-bold" for="flexCheckDefault">
+                                    By Providing your phone number, you agree to receive a text message from Nortek
+                                    Consulting INC. Message and Data rates may apply, Message frequncey varies
+                                </label>
+                            </div>
+                            <div id="contactAlert" class="alert d-none mt-3"></div>
+                            <div style="margin-top: 15px;">
+                                <button id="sendMessageBtn" type="submit" class="btn w-50  justify-content-center p-3 schedule-btn">SEND MESSAGE</button>
+                            </div>
+                            <div style="margin-top: 15px;">
+                                <button type="button" class="btn  w-50  justify-content-center p-3 schedule-btn">SCHEDULE TIME WITH
+                                    US</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container-fluid" style="margin-top: 70px;">
+                <div class="row  align-items-md-center">
+                    <div class=" col-12 col-md-6">
+                        <div>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3352.202519801488!2d-97.02338367510494!3d32.83988912363748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e819dad3c62d9%3A0x408d581816928362!2sNortek%20Consulting%20INC!5e0!3m2!1sen!2sin!4v1767418711571!5m2!1sen!2sin"
+                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div>
+                            <address>
+                                <p>
+                                    <span style="color: rgb(47, 50, 145);">Address</span><br>
+                                    <span style="font-size: 20px;">2300, Valley View Ln, Ste #336,
+                                        <br>
+                                        Irving, Tx, 75062.
+                                    </span>
+                                </p>
+                                <p>
+                                    <span style="color: rgb(47, 50, 145);">Phone number</span><br>
+                                    <a href="#" style="color: inherit; font-size: 22px;">903.857.0121</a>
+                                </p>
+                                <p>
+                                    <span style="color: rgb(47, 50, 145);">Email</span><br>
+                                    <a href="#"
+                                        style="color: inherit; font-size: 22px;">contact@nortekconsulting.com</a>
+
+
+                                </p>
+                            </address>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+    <footer style="margin-top: 70px;">
+        <div class="container-fluid bg-dark text-white py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <img loading="lazy" decoding="async" src="/images/nortek_white.png" />
+                        <p>Nortek isn’t just a company, it’s a domicile of innovators where we craft futuristic tech
+                            solutions.
+                        </p>
+
+                    </div>
+                    <div class=" col-12 col-md-3">
+                        <div>
+                            <h5 style="color: grey; font-size: 16px;">SERVICES</h5>
+                            <ul style="padding: 0; list-style-type: none;">
+                                <li><a>Web Design & App Development</a></li>
+                                <li><a>AI Solutions</a></li>
+                                <li><a>Agentic AI Solutions</a></li>
+                                <li><a>SAP ERP Services</a></li>
+                                <li><a>RPA</a></li>
+                                <li><a>Business Intelligence</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class=" col-12 col-md-3">
+                        <div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">WORK ENQUIRY</h5>
+                                <address>Interested in working with us?
+                                    contact@nortekconsulting.com</address>
+                            </div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">PHONE</h5>
+                                <span><a>903.857.0121</a></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" col-12 col-md-3">
+                        <div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">ADDRESS</h5>
+                                <address>2300, Valley View Ln, Ste #1040,<br>
+                                    Irving, Tx, 75062.</address>
+                            </div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">SOCIAL LINKS</h5>
+                                <span><a href="#" style="color: inherit;"><span class="bi bi-facebook"
+                                            style="margin-right: 20px;"></span></a></span>
+                                <span><a href="#" style="color: inherit;"><span class="bi bi-instagram"
+                                            style="margin-right: 20px;"></span></a></span>
+                                <span><a href="#" style="color: inherit;"><span class="bi bi-linkedin"
+                                            style="margin-right: 20px;"></span></a></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <hr>
+                <div class="row align-items-center text-center text-md-start text-white">
+
+                    <!-- Left text -->
+                    <div class="col-12 col-md-6 mb-3 mb-md-0">
+                        <p class="mb-0">© 2021 Nortek. All rights reserved.</p>
+                    </div>
+
+                    <!-- Right links -->
+                    <div class="col-12 col-md-6">
+                        <ul
+                            class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end gap-3 mb-0 text-center">
+                            <li><a href="unsubscribe.html" class="un" style="color: inherit;">Unsubscribe</a></li>
+                            <li><a href="privacy.html" class="un" style="color: inherit;">Privacy
+                                    Policy</a></li>
+                            <li><a href="terms.html" class="un" style="color: inherit;">Terms &
+                                    Conditions</a>
+                            </li>
+                            <li><a href="sitemap.html" class="un" style="color: inherit;">Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const contactForm = document.getElementById('contactForm');
+        const contactAlert = document.getElementById('contactAlert');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+        contactForm?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            contactAlert.className = 'alert d-none';
+            sendMessageBtn.disabled = true;
+
+            const formData = new FormData(contactForm);
+            const payload = {
+                firstName: (formData.get('firstName') || '').toString().trim(),
+                email: (formData.get('email') || '').toString().trim(),
+                phone: (formData.get('phone') || '').toString().trim(),
+                subject: (formData.get('subject') || '').toString().trim(),
+                message: (formData.get('message') || '').toString().trim(),
+                consent: formData.get('consent') === 'true'
+            };
+
+            try {
+                const res = await fetch(window.apiUrl('/contact'), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                if (!res.ok || !data.success) throw new Error(data.message || 'Failed to send message');
+
+                contactAlert.className = 'alert alert-success mt-3';
+                contactAlert.textContent = 'Message sent successfully. We will contact you soon.';
+                contactForm.reset();
+            } catch (err) {
+                contactAlert.className = 'alert alert-danger mt-3';
+                contactAlert.textContent = err.message;
+            } finally {
+                sendMessageBtn.disabled = false;
+            }
+        });
+    </script>
+    <div class="modal fade left" id="sideModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content p-5">
+
+                <!-- Close -->
+                <div class="d-flex justify-content-end">
+                    <span class="close-btn" data-bs-dismiss="modal">&times;</span>
+                </div>
+
+                <!-- Content -->
+                <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%">
+                <div style="margin-top: 50px; ">
+
+                    <p class="small">
+                        2300, Valley View Ln, Ste #1040,<br>
+                        Irving, Tx, 75062.
+                    </p>
+
+                    <p class="mt-3 mb-1">903.857.0121</p>
+                    <p class="mb-4">contact@nortekconsulting.com</p>
+                </div>
+
+                <!-- Social -->
+                <div class=" mb-4 mt-2 d-flex gap-5">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                </div>
+                <div style="margin-top: 50px;">
+
+                    <a href="/contact.html" class="btn btn-light w-50">CONTACT</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  <script src="/js/nav-active.js"></script>
+</body>
+
+</html>
+
+
+
+
+

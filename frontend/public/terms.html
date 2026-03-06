@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+
+        }
+
+
+
+
+        .box {
+            width: 275px;
+            height: 275px;
+            background-color: rgb(47, 50, 145);
+
+
+        }
+
+        .title-text {
+            font-weight: 800;
+
+            font-size: clamp(36px, 5vw, 50px);
+            margin-left: 70px;
+
+
+
+
+        }
+
+        /* Laptop & above → single line */
+        @media (min-width: 992px) {
+            .title-text {
+                white-space: nowrap;
+            }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        li a {
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .nor {
+            border-left: 4px solid rgb(47, 50, 145);
+            padding-left: 20px;
+            height: 110px;
+            border-radius: 4px;
+
+
+        }
+
+        .navbar-nav .nav-link {
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Dropdown toggle arrow alignment */
+        .nav-item.dropdown .nav-link.dropdown-toggle::after {
+            margin-left: 8px;
+            vertical-align: middle;
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-left: 0.3em solid transparent;
+        }
+
+        /* Contact button styling */
+        .btn.con {
+            font-weight: 700;
+            border: none;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Desktop specific alignment */
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item {
+                display: flex;
+                align-items: center;
+            }
+
+            .navbar-nav .nav-link {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+            .btn.con {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        /* Mobile dropdown alignment */
+        @media (max-width: 991px) {
+            .nav-item.dropdown .nav-link.dropdown-toggle::after {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .navbar-nav .nav-link {
+                text-align: left;
+                justify-content: flex-start;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        .nav-link {
+            font-weight: 700;
+        }
+
+        .nav-link:hover {
+            color: rgb(47, 50, 145);
+        }
+
+        .con {
+            background-color: rgb(47, 50, 145);
+            color: white;
+        }
+
+        .ban {
+            width: 100%;
+            height: auto;
+        }
+
+        .schedule-btn {
+            background-color: rgb(47, 50, 145);
+            color: white;
+            border-radius: 50px;
+
+        }
+
+        .schedule-btn:hover {
+            border: 2px solid#6f70ff;
+        }
+
+        .modal.left .modal-dialog {
+            position: fixed;
+            left: 0;
+            margin: 0;
+            width: 400px;
+            /* modal width */
+            height: 100%;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .modal.left.show .modal-dialog {
+            transform: translateX(0);
+        }
+
+        .modal.left .modal-content {
+            height: 100%;
+            border-radius: 0;
+            background: #2b2d42;
+            color: #fff;
+        }
+
+        .close-btn {
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .un:hover {
+            text-decoration: underline;
+
+        }
+    
+        .container {
+            max-width: 1200px;
+        }
+
+        @media (max-width: 991px) {
+            .container {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+        }
+    
+        img[width],
+        img[height] {
+            max-width: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container-fluid px-3 px-lg-4">
+
+                <!-- Desktop Side Menu Button -->
+                <button class="btn p-0 border-0 bg-transparent d-none d-md-flex align-items-center"
+                    data-bs-toggle="modal" data-bs-target="#sideModal">
+                    <img loading="lazy" decoding="async" src="/images/hamburger-svg.svg" height="45" alt="Menu">
+                </button>
+
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center ms-2" href="#">
+                    <img loading="lazy" decoding="async" src="/images/Nortek_logo.png" alt="Nortek Logo" height="45">
+                </a>
+
+                <!-- Mobile Hamburger -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/nortek.html">HOME</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/about.html">ABOUT US</a>
+                        </li>
+
+                        <!-- Services Dropdown -->
+                        <li class="nav-item dropdown">
+                            <!-- Combined link with dropdown -->
+                            <a class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                                href="/services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                SERVICES
+                            </a>
+
+                            <!-- Dropdown Menu -->
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/webdesign.html">Web Design & App Development</a>
+                                </li>
+                                <li><a class="dropdown-item" href="/AI-Services.html">AI Services</a></li>
+                                <li><a class="dropdown-item" href="/agentic.html">Agentic AI Solutions</a></li>
+                                <li><a class="dropdown-item" href="/Sap-Erp.html">SAP ERP Services</a></li>
+                                <li><a class="dropdown-item" href="/RPA.html">RPA</a></li>
+                                <li><a class="dropdown-item" href="/Business-int.html">Business Intelligence</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/blog.html">BLOG</a>
+                        </li>
+
+                        <!-- Careers Dropdown -->
+                        <li class="nav-item dropdown">
+                            <!-- Combined link with dropdown -->
+                            <a class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                                href="/careers.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                CAREERS
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/careers.html">Browse Jobs</a></li>
+                                <li><a class="dropdown-item" href="/resume.html">Resume Marketing</a></li>
+                                <li><a class="dropdown-item" href="/visa.html">VISA Sponsorship</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Contact -->
+                        <li class="nav-item ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center">
+                            <a class="btn con px-4 py-2 w-100 w-lg-auto text-center " href="/contact.html">CONTACT</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <div
+            style="background-image: url(/images/tc.jpg); background-position: center; background-size: cover; height: 90vh;width: 100%; background-repeat: no-repeat;">
+
+
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="  box " style="margin-top: -250px; position: relative;">
+
+
+            <div>
+                <h4 style="color: gray;  padding-top: 50px; font-size: 20px; margin-left: 70px;">Nortek</h4>
+            </div>
+            <div class="nortek-title d-flex align-items-center w-100 ">
+                <h1 class="text-white mb-0 w-100 title-text ">
+                    Terms & Conditions
+                </h1>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    <main style="margin-top: 150px;">
+        <section>
+            <div class="container">
+                <div>
+                    <p style="text-align: justify; font-size: 18px;">Nortek.com website is a service to visitors and
+                        customers. By using the site, you are agreeing to comply with and be bound by the following
+                        terms of use. Please review the following terms carefully. If you do not agree to these terms,
+                        please do not review information or obtain goods or products from this site.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">1 . Acceptance of Agreement</h5>
+                    <p style="text-align: justify; font-size: 18px;">You agree to the terms and conditions outlined in
+                        this Terms of Use Agreement (“Agreement”) with respect to our site (the “Site”). This document
+                        constitutes the entire and only agreement between us and you, and supersedes all prior or
+                        contemporaneous agreements, representations, warranties and understandings with respect to the
+                        Site, the content, products or services provided by or through the Site, and the subject matter
+                        of this Agreement. This Agreement may be amended by us at our discretion. The latest Agreement
+                        will be posted on the Site, and it is mandatory for you to view the agreement before browsing
+                        the site. Once you view and browse our page, you have read and agreed to this document by
+                        default.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">2 . Intellectual Property ; Limited License
+                        to Users</h5>
+                    <p style="text-align: justify; font-size: 18px;">The Materials and Services on this Site, as well as
+                        their selection and arrangement, are protected by copyright, trademark, patent, and/or other
+                        intellectual property laws, and any unauthorized use of the Materials or Services at this Site
+                        may violate such laws and the Terms of Use. Except as expressly provided herein, Nortek Software
+                        Solutions Pvt Ltd., and its suppliers do not grant any express or implied rights to use the
+                        Materials and Services. Bu browsing our site, you, by default, agree not to copy, republish,
+                        frame, download, transmit, modify, rent, lease, loan, sell, assign, distribute, license,
+                        sub-license, reverse engineer, or create derivative works based on the Site, its Materials, or
+                        its Services or their selection and arrangement, except as expressly authorized herein. In
+                        addition, you agree not to use any data mining, robots, or similar data gathering and extraction
+                        methods in connection with the Site.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">3 . Copyright</h5>
+                    <p style="text-align: justify; font-size: 18px;">The content, organization, graphics, design, audio,
+                        animation, video, compilation, magnetic translation, digital conversion and other matters
+                        related to the Site are protected under applicable copyrights, trademarks and other proprietary
+                        (including but not limited to intellectual property) rights. The copying, redistribution, use or
+                        publication by you of any such matters or any part of the Site, except as allowed by Section 4,
+                        is strictly prohibited. You do not acquire ownership rights to any content, document or other
+                        materials viewed through the Site. The posting of information or materials on the Site does not
+                        constitute a waiver of any right in such information and materials.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">4 . Trademarks</h5>
+                    <p style="text-align: justify; font-size: 18px;">The trademarks, logos, and service marks (“Marks”)
+                        displayed on this Site are the property of Nortek Software Solutions Pvt Ltd., . or other third
+                        parties. You are not permitted to use the Marks without the prior written consent of Nortek
+                        Software Solutions Pvt Ltd.,. or such third party that may own the Marks. Macromedia™, Adobe™,
+                        Adobe™ FrameMaker™ are registered trade marks of Adobe, Inc. and SAP, SAP Netweaver, GRC, SAP
+                        GRC, SAP Business One, SAP Business by Design, SAP Data Services, SAP Business objects, SAP HANA
+                        and other relevant logos are trademarks are registered trademarks of SAP AG in the United States
+                        and/or other countries. All other trademarks and registered trademarks are the property of their
+                        respective owners.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">5 . Patents</h5>
+                    <p style="text-align: justify; font-size: 18px;">Certain Nortek Software Solutions Pvt Ltd.,
+                        technologies included in the Software are protected by the respective patents.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">6 . Use of Software</h5>
+                    <p style="text-align: justify; font-size: 18px;">The software and accompanying documentation that is
+                        made available to download from this Site is the copyrighted and/or patented work of Nortek
+                        Software Solutions Pvt Ltd.,. and/or its suppliers. Use of the software is governed by the terms
+                        of the license agreement that accompanies or is included with such software. Such terms are
+                        available for review and are incorporated herein by this reference. You will not be able to
+                        download or install any software that is accompanied by or includes a license agreement unless
+                        you agree to the terms of such license agreement. If you do not agree to such terms, you will
+                        not be able to use the software. Absent a license agreement that accompanies the software, use
+                        of the software will be governed by the Terms of Use. You agree that you will not decompile,
+                        reverse engineer, or otherwise attempt to discover the source code of the software available on
+                        the Site.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">7 . Limited Right to Use</h5>
+                    <p style="text-align: justify; font-size: 18px;">The viewing, printing or downloading of any
+                        content, graphic, form or document from the Site grants you only a limited, nonexclusive license
+                        for use solely by you for your own personal use and not for republication, distribution,
+                        assignment, sub-license, sale, preparation of derivative works or other use. No part of any
+                        content, form or document may be reproduced in any form or incorporated into any information
+                        retrieval system, electronic or mechanical, other than for your personal use (but not for resale
+                        or redistribution). Nortek Software Solutions Pvt Ltd., reserves the right to revoke the
+                        authorization to view, download, and print the Nortek Software Solutions Pvt Ltd.,. Content and
+                        User Content available on this Site at any time, and any such use shall be discontinued
+                        immediately upon notice from Nortek Software Solutions Pvt Ltd.,. The rights granted to you
+                        constitute a license and not a transfer of title.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">8 . Editing, Deleting, and Modification</h5>
+                    <p style="text-align: justify; font-size: 18px;">We reserve the right in our sole discretion to edit
+                        or delete any documents, information or other content appearing on the Site.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">9 . Indemnification</h5>
+                    <p style="text-align: justify; font-size: 18px;">You agree to indemnify, defend and hold us and our
+                        partners, attorneys, staff and affiliates (collectively, “Affiliated Parties”) harmless from any
+                        liability, loss, claim and expense, including reasonable attorney’s fees, related to your
+                        violation of this Agreement or use of the Site.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">10 . Nontransferable</h5>
+                    <p style="text-align: justify; font-size: 18px;">Your right to use the Site is not transferable. Any
+                        password or right given to you to obtain information or documents is not transferable.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">11 . Disclaimer and Limits</h5>
+                    <p style="text-align: justify; font-size: 18px;">THE INFORMATION FROM OR THROUGH THE SITE ARE
+                        PROVIDED “AS-IS,” “AS AVAILABLE,” AND ALL WARRANTIES, EXPRESS OR IMPLIED, ARE DISCLAIMED
+                        (INCLUDING BUT NOT LIMITED TO THE DISCLAIMER OF ANY IMPLIED WARRANTIES OF MERCHANTABILITY AND
+                        FITNESS FOR A PARTICULAR PURPOSE). THE INFORMATION AND SERVICES MAY CONTAIN BUGS, ERRORS,
+                        PROBLEMS OR OTHER LIMITATIONS. WE AND OUR AFFILIATED PARTIES HAVE NO LIABILITY WHATSOEVER FOR
+                        YOUR USE OF ANY INFORMATION OR SERVICE. IN PARTICULAR, BUT NOT AS A LIMITATION THEREOF, WE AND
+                        OUR AFFILIATED PARTIES ARE NOT LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL
+                        DAMAGES (INCLUDING DAMAGES FOR LOSS OF BUSINESS, LOSS OF PROFITS, LITIGATION, OR THE LIKE),
+                        WHETHER BASED ON BREACH OF CONTRACT, BREACH OF WARRANTY, TORT (INCLUDING NEGLIGENCE), PRODUCT
+                        LIABILITY OR OTHERWISE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THE NEGATION OF
+                        DAMAGES SET FORTH ABOVE ARE FUNDAMENTAL ELEMENTS OF THE BASIS OF THE BARGAIN BETWEEN US AND YOU.
+                        THIS SITE AND THE INFORMATION WOULD NOT BE PROVIDED WITHOUT SUCH LIMITATIONS. NO ADVICE OR
+                        INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM US THROUGH THE SITE SHALL CREATE ANY
+                        WARRANTY, REPRESENTATION OR GUARANTEE NOT EXPRESSLY STATED IN THIS AGREEMENT. ALL RESPONSIBILITY
+                        OR LIABILITY FOR ANY DAMAGES CAUSED BY VIRUSES CONTAINED WITHIN THE ELECTRONIC FILE CONTAINING
+                        THE FORM OR DOCUMENT IS DISCLAIMED. WE WILL NOT BE LIABLE TO YOU FOR ANY INCIDENTAL, SPECIAL OR
+                        CONSEQUENTIAL DAMAGES OF ANY KIND THAT MAY RESULT FROM USE OF OR INABILITY TO USE OUR SITE. OUR
+                        MAXIMUM LIABILITY TO YOU UNDER ALL CIRCUMSTANCES WILL BE EQUAL TO THE PURCHASE PRICE YOU PAY FOR
+                        ANY GOODS, SERVICES OR INFORMATION.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">12 . Use Of Information</h5>
+                    <p style="text-align: justify; font-size: 18px;">We reserve the right, and you authorize us, to the
+                        use and assignment of all information regarding Site uses by you and all information provided by
+                        you in any manner consistent with our Privacy Policy.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">13 . Privacy Policy</h5>
+                    <p style="text-align: justify; font-size: 18px;">Our Privacy Policy, as it may change from time to
+                        time, is a part of this Agreement.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">14 . Links to other Websites</h5>
+                    <p style="text-align: justify; font-size: 18px;">The Site may contain links to other Websites. We
+                        are not responsible for the content, accuracy or opinions express in such Web sites, and such
+                        Web sites are not investigated, monitored or checked for accuracy or completeness by us.
+                        Inclusion of any linked Website on our Site does not imply approval or endorsement of the linked
+                        Website by us. If you decide to leave our Site and access these third-party sites, you do so at
+                        your own risk.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">15 . Information and Press Releases</h5>
+                    <p style="text-align: justify; font-size: 18px;">The Site contains information and press releases
+                        about us. While this information was believed to be accurate as of the date prepared, we
+                        disclaim any duty or obligation to update this information or any press releases. Information
+                        about companies other than ours contained in the press release or otherwise, should not be
+                        relied upon as being provided or endorsed by us.</p>
+                </div>
+                <div>
+                    <h5 style="color:rgb(47, 50, 145) ; font-weight: bold;">16 . Miscellaneous</h5>
+                    <p style="text-align: justify; font-size: 18px;">This Agreement shall be treated as though it were
+                        executed and performed in Hyderabad, India and shall be governed by and construed in accordance
+                        with the laws of the State and Central (India) (without regard to conflict of law principles).
+                        Any cause of action by you with respect to the Site (and/or any information, products or
+                        services related thereto) must be instituted within one (1) year after the cause of action arose
+                        or be forever waived and barred. All actions shall be subject to the limitations set forth in
+                        Section 8 and Section 10. The language in this Agreement shall be interpreted as to its fair
+                        meaning and not strictly for or against either party. All legal proceedings arising out of or in
+                        connection with this Agreement shall be brought solely in the Jurisdiction of United States of
+                        America. You expressly submit to the exclusive jurisdiction of said courts and consents to
+                        extra-territorial service of process. Should any part of this Agreement be held invalid or
+                        unenforceable, that portion shall be construed consistent with applicable law and the remaining
+                        portions shall remain in full force and effect. To the extent that anything in or associated
+                        with the Site is in conflict or inconsistent with this Agreement, this Agreement shall take
+                        precedence. Our failure to enforce any provision of this Agreement shall not be deemed a waiver
+                        of such provision nor of the right to enforce such provision.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer style="margin-top: 70px;">
+        <div class="container-fluid bg-dark text-white py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <img loading="lazy" decoding="async" src="/images/nortek_white.png" />
+                        <p>Nortek isn’t just a company, it’s a domicile of innovators where we craft futuristic tech
+                            solutions.
+                        </p>
+
+                    </div>
+                    <div class=" col-12 col-md-3">
+                        <div>
+                            <h5 style="color: grey; font-size: 16px;">SERVICES</h5>
+                            <ul style="padding: 0; list-style-type: none;">
+                                <li><a>Web Design & App Development</a></li>
+                                <li><a>AI Solutions</a></li>
+                                <li><a>Agentic AI Solutions</a></li>
+                                <li><a>SAP ERP Services</a></li>
+                                <li><a>RPA</a></li>
+                                <li><a>Business Intelligence</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class=" col-12 col-md-3">
+                        <div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">WORK ENQUIRY</h5>
+                                <address>Interested in working with us?
+                                    contact@nortekconsulting.com</address>
+                            </div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">PHONE</h5>
+                                <span><a>903.857.0121</a></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" col-12 col-md-3">
+                        <div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">ADDRESS</h5>
+                                <address>2300, Valley View Ln, Ste #1040,<br>
+                                    Irving, Tx, 75062.</address>
+                            </div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">SOCIAL LINKS</h5>
+                                <span><a href="#" style="color: inherit;"><span class="bi bi-facebook"
+                                            style="margin-right: 20px;"></span></a></span>
+                                <span><a href="#" style="color: inherit;"><span class="bi bi-instagram"
+                                            style="margin-right: 20px;"></span></a></span>
+                                <span><a href="#" style="color: inherit;"><span class="bi bi-linkedin"
+                                            style="margin-right: 20px;"></span></a></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <hr>
+                <div class="row align-items-center text-center text-md-start text-white">
+
+                    <!-- Left text -->
+                    <div class="col-12 col-md-6 mb-3 mb-md-0">
+                        <p class="mb-0">© 2021 Nortek. All rights reserved.</p>
+                    </div>
+
+                    <!-- Right links -->
+                    <div class="col-12 col-md-6">
+                        <ul
+                            class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end gap-3 mb-0 text-center">
+                            <li><a href="unsubscribe.html" class="un" style="color: inherit;">Unsubscribe</a></li>
+                            <li><a href="privacy.html" class="un" style="color: inherit;">Privacy Policy</a></li>
+                            <li><a href="terms.html" class="un" style="color: inherit;">Terms & Conditions</a>
+                            </li>
+                            <li><a href="sitemap.html" class="un" style="color: inherit;">Sitemap</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="modal fade left" id="sideModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content p-5">
+
+                <!-- Close -->
+                <div class="d-flex justify-content-end">
+                    <span class="close-btn" data-bs-dismiss="modal">&times;</span>
+                </div>
+
+                <!-- Content -->
+                <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%">
+                <div style="margin-top: 50px; ">
+
+                    <p class="small">
+                        2300, Valley View Ln, Ste #1040,<br>
+                        Irving, Tx, 75062.
+                    </p>
+
+                    <p class="mt-3 mb-1">903.857.0121</p>
+                    <p class="mb-4">contact@nortekconsulting.com</p>
+                </div>
+
+                <!-- Social -->
+                <div class=" mb-4 mt-2 d-flex gap-5">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                </div>
+                <div style="margin-top: 50px;">
+
+                    <a href="/contact.html" class="btn btn-light w-50">CONTACT</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  <script src="/js/nav-active.js"></script>
+</body>
+
+</html>
+

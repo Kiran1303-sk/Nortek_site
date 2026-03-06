@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site-theme.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      .box {
+        width: 275px;
+        height: 275px;
+        background-color: rgb(47, 50, 145);
+      }
+
+      .title-text {
+        font-weight: 800;
+        font-size: clamp(36px, 5vw, 50px);
+        margin-left: 70px;
+      }
+
+      @media (min-width: 992px) {
+        .title-text {
+          white-space: nowrap;
+        }
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+      }
+
+      .con {
+        background-color: rgb(47, 50, 145);
+        color: white;
+      }
+
+      .candidate-login-btn {
+        border-radius: 8px;
+        font-weight: 700;
+        border: 1px solid rgb(47, 50, 145);
+        color: rgb(47, 50, 145);
+        background: #fff;
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .candidate-login-btn:hover {
+        background: rgb(47, 50, 145);
+        color: #fff;
+      }
+
+      .candidate-user-btn {
+        border-radius: 8px;
+        border: 1px solid #d8deef;
+        background: #fff;
+        color: #1f2a55;
+        font-weight: 600;
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .candidate-user-btn:hover {
+        background: #f7f9ff;
+        color: #1f2a55;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      .box {
+        width: 275px;
+        height: 275px;
+        background-color: rgb(47, 50, 145);
+      }
+
+      .title-text {
+        font-weight: 800;
+        font-size: clamp(36px, 5vw, 50px);
+        margin-left: 70px;
+      }
+
+      @media (min-width: 992px) {
+        .title-text {
+          white-space: nowrap;
+        }
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+      }
+
+      li a {
+        list-style: none;
+        text-decoration: none;
+      }
+
+      .tek {
+        border-left: 4px solid rgb(47, 50, 145);
+        padding-left: 20px;
+        height: 130px;
+        border-radius: 4px;
+      }
+
+      .nav-link {
+        font-weight: 700;
+      }
+
+      .nav-link:hover {
+        color: rgb(47, 50, 145);
+      }
+
+      .btn.con {
+        font-weight: 700;
+        border: none;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .con {
+        background-color: rgb(47, 50, 145);
+        color: white;
+      }
+
+      .bts {
+        background: white;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 6px;
+      }
+
+      /* Modal */
+      .modal.left .modal-dialog {
+        position: fixed;
+        left: 0;
+        margin: 0;
+        width: 400px;
+        height: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+      }
+
+      .modal.left.show .modal-dialog {
+        transform: translateX(0);
+      }
+
+      .modal.left .modal-content {
+        height: 100%;
+        border-radius: 0;
+        background: #2b2d42;
+        color: #fff;
+      }
+
+      .close-btn {
+        font-size: 26px;
+        cursor: pointer;
+      }
+
+      .un:hover {
+        text-decoration: underline;
+      }
+    </style>
+    <script src="/js/api-config.js"></script>
+</head>
+
+  <body>
+    <header>
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid px-3 px-lg-4">
+          <button
+            class="btn p-0 border-0 bg-transparent d-none d-md-flex align-items-center"
+            data-bs-toggle="modal"
+            data-bs-target="#sideModal"
+          >
+            <img loading="lazy" decoding="async" src="../uploads/images/hamburger-svg.svg" height="45" alt="Menu" />
+          </button>
+          <a class="navbar-brand d-flex align-items-center ms-2" href="#"
+            ><img loading="lazy" decoding="async" src="../uploads/images/Nortek_logo.png" alt="Nortek Logo" height="45"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link px-lg-2 px-xl-3" href="/nortek.html">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-lg-2 px-xl-3" href="/about.html">ABOUT US</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                  href="/services.html"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  >SERVICES</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="/webdesign.html">Web Design & App Development</a>
+                  </li>
+                  <li><a class="dropdown-item" href="/AI-Services.html">AI Services</a></li>
+                  <li><a class="dropdown-item" href="/agentic.html">Agentic AI Solutions</a></li>
+                  <li><a class="dropdown-item" href="/Sap-Erp.html">SAP ERP Services</a></li>
+                  <li><a class="dropdown-item" href="/RPA.html">RPA</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/Business-int.html">Business Intelligence</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-lg-2 px-xl-3" href="/blog.html">BLOG</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                  href="/careers.html"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  >CAREERS</a
+                >
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/careers.html">Browse Jobs</a></li>
+                  <li><a class="dropdown-item" href="/resume.html">Resume Marketing</a></li>
+                  <li><a class="dropdown-item" href="/visa.html">VISA Sponsorship</a></li>
+                </ul>
+              </li>
+              <li class="nav-item ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center">
+                <a class="btn con px-4 py-2 w-100 w-lg-auto text-center" href="/contact.html"
+                  >CONTACT</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div
+      style="
+        background-image: url(../uploads/images/service5.jpg);
+        height: 90vh;
+        background-size: cover;
+      "
+    ></div>
+
+    <div class="container">
+      <div class="box col-12 col-md-3" style="margin-top: -250px">
+        <h4 style="color: gray; padding-top: 50px; margin-left: 70px">Nortek</h4>
+        <h1 class="text-white title-text">Apply Now</h1>
+        <h4 id="jobTitle" class="text-white" style="margin-left: 70px; margin-top: 10px"></h4>
+      </div>
+    </div>
+
+    <section style="margin: 100px 0">
+      <div class="container">
+        <div class="row">
+          <!-- FORM -->
+          <div class="col-12 col-md-6">
+            <form id="applyForm" enctype="multipart/form-data">
+              <!-- Hidden job data -->
+              <input type="hidden" name="jobCode" id="jobCode" />
+              <input type="hidden" name="designation" id="designation" />
+
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="firstName"
+                  aria-label="First Name"
+                  class="form-control p-3"
+                  placeholder="First Name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="lastName"
+                  aria-label="Last Name"
+                  class="form-control p-3"
+                  placeholder="Last Name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="email"
+                  name="email"
+                  aria-label="Email"
+                  class="form-control p-3"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="tel"
+                  name="phone"
+                  aria-label="Phone Number"
+                  class="form-control p-3"
+                  placeholder="Phone Number"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label>Upload CV (PDF, DOC, DOCX – Max 5MB)</label>
+                <input
+                  type="file"
+                  name="cv"
+                  aria-label="Upload CV"
+                  class="form-control p-3"
+                  accept=".pdf,.doc,.docx"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="btn p-3"
+                style="background: rgb(47, 50, 145); color: white; border-radius: 50px"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <img loading="lazy" decoding="async" src="../uploads/images/careers-img (1).jpg" width="100%" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container-fluid bg-dark text-white py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <img loading="lazy" decoding="async" src="../uploads/images/nortek_white.png" />
+              <p>
+                Nortek isn’t just a company, it’s a domicile of innovators where we craft futuristic
+                tech solutions.
+              </p>
+            </div>
+            <div class="col-12 col-md-3">
+              <div>
+                <h5 style="color: grey; font-size: 16px">SERVICES</h5>
+                <ul style="padding: 0; list-style-type: none">
+                  <li><a>Web Design & App Development</a></li>
+                  <li><a>AI Solutions</a></li>
+                  <li><a>Agentic AI Solutions</a></li>
+                  <li><a>SAP ERP Services</a></li>
+                  <li><a>RPA</a></li>
+                  <li><a>Business Intelligence</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div>
+                <h5 style="color: grey; font-size: 16px">WORK ENQUIRY</h5>
+                <address>Interested in working with us? contact@nortekconsulting.com</address>
+                <h5 style="color: grey; font-size: 16px">PHONE</h5>
+                <span><a>903.857.0121</a></span>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div>
+                <h5 style="color: grey; font-size: 16px">ADDRESS</h5>
+                <address>
+                  2300, Valley View Ln, Ste #1040,<br />
+                  Irving, Tx, 75062
+                </address>
+                <h5 style="color: grey; font-size: 16px">SOCIAL LINKS</h5>
+                <span
+                  ><a href="#" style="color: inherit"
+                    ><span class="bi bi-facebook" style="margin-right: 20px"></span></a
+                ></span>
+                <span
+                  ><a href="#" style="color: inherit"
+                    ><span class="bi bi-instagram" style="margin-right: 20px"></span></a
+                ></span>
+                <span
+                  ><a href="#" style="color: inherit"
+                    ><span class="bi bi-linkedin" style="margin-right: 20px"></span></a
+                ></span>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="row align-items-center text-center text-md-start text-white">
+            <div class="col-12 col-md-6 mb-3 mb-md-0">
+              <p class="mb-0">© 2021 Nortek. All rights reserved.</p>
+            </div>
+            <div class="col-12 col-md-6">
+              <ul
+                class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end gap-3 mb-0 text-center"
+              >
+                <li>
+                  <a href="unsubscribe.html" class="un" style="color: inherit">Unsubscribe</a>
+                </li>
+                <li><a href="privacy.html" class="un" style="color: inherit">Privacy Policy</a></li>
+                <li>
+                  <a href="terms.html" class="un" style="color: inherit">Terms & Conditions</a>
+                </li>
+                <li><a href="sitemap.html" class="un" style="color: inherit">Sitemap</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal fade left" id="sideModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content p-5">
+          <div class="d-flex justify-content-end">
+            <span class="close-btn" data-bs-dismiss="modal">&times;</span>
+          </div>
+          <img loading="lazy" decoding="async" src="../uploads/images/nortek_white.png" width="50%" />
+          <div style="margin-top: 50px">
+            <p class="small">2300, Valley View Ln, Ste #1040,<br />Irving, Tx, 75062.</p>
+            <p class="mt-3 mb-1">903.857.0121</p>
+            <p class="mb-4">contact@nortekconsulting.com</p>
+          </div>
+          <div class="mb-4 mt-2 d-flex gap-5">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+          <div style="margin-top: 50px">
+            <a href="/contact.html" class="btn btn-light w-50">CONTACT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      function sanitize(text) {
+        return String(text || '').replace(
+          /[&<>"']/g,
+          (m) =>
+            ({
+              '&': '&amp;',
+              '<': '&lt;',
+              '>': '&gt;',
+              '"': '&quot;',
+              "'": '&#39;',
+            })[m]
+        );
+      }
+
+      function renderJobs(filteredJobs) {
+        jobsContainer.innerHTML = '';
+        filteredJobs.forEach((job) => {
+          jobsContainer.innerHTML += `
+            <div class="row bts py-3">
+                <div class="col-12 col-md-9">
+                    <h5 style="color: rgb(47, 50, 145);">${job.title} - ${job.code}</h5>
+                    <img loading="lazy" decoding="async" src="../uploads/images/suitcase.png" height="25px" />&nbsp;&nbsp;<span>${job.type}</span>&nbsp;&nbsp;
+                    <img loading="lazy" decoding="async" src="../uploads/images/marker.png" height="25px" />&nbsp;&nbsp;<span>${job.location}</span>&nbsp;&nbsp;
+                    <img loading="lazy" decoding="async" src="../uploads/images/cal.png" height="25px" />&nbsp;&nbsp;<span>Posted on: ${job.posted}</span>
+                </div>
+                <div class="col-12 col-md-3">
+                    <!-- CHANGE HERE: link to job-details.html instead of apply.html -->
+                    <a href="job-details.html?jobCode=${job.code}&designation=${encodeURIComponent(job.title)}">
+                        <button class="btn w-100 justify-content-center" style="border-radius:50px; background:rgb(47, 50, 145); color:white;">VIEW AND APPLY</button>
+                    </a>
+                </div>
+            </div>
+        `;
+        });
+      }
+
+      // === 1️⃣ Read URL parameters and fill hidden inputs & heading ===
+
+      const params = new URLSearchParams(window.location.search);
+      const jobCode = params.get('jobCode') || '';
+      const designation = params.get('designation') || '';
+
+      const jobCodeInput = document.getElementById('jobCode');
+      const designationInput = document.getElementById('designation');
+      const jobTitle = document.getElementById('jobTitle');
+
+      if (jobCodeInput) jobCodeInput.value = jobCode;
+      if (designationInput) designationInput.value = designation;
+      if (jobTitle) jobTitle.textContent = designation;
+
+      // Scroll to form after page load for better UX
+      window.addEventListener('load', () => {
+        const form = document.getElementById('applyForm');
+        if (form) form.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // === 2️⃣ Form submission handler ===
+      const applyForm = document.getElementById('applyForm');
+
+      if (applyForm) {
+        applyForm.addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          // CV size validation
+          const cvFile = this.cv.files[0];
+          if (!cvFile) {
+            alert('❌ Please upload your CV');
+            return;
+          }
+          if (cvFile.size > 5 * 1024 * 1024) {
+            // 5MB
+            alert('❌ CV size exceeds 5MB');
+            return;
+          }
+
+          // Combine first + last name
+          const formData = new FormData(this);
+          const firstName = formData.get('firstName')?.trim();
+          const lastName = formData.get('lastName')?.trim();
+
+          if (!firstName || !lastName) {
+            alert('❌ Please enter both first and last name');
+            return;
+          }
+
+          formData.delete('firstName');
+          formData.delete('lastName');
+          formData.append('name', `${firstName} ${lastName}`);
+
+          try {
+            const response = await fetch(window.apiUrl('/apply'), {
+              method: 'POST',
+              body: formData,
+            });
+
+            const data = await response.json();
+            if (!response.ok || !data.success) {
+              throw new Error(data.message || 'HTTP error! status: ' + response.status);
+            }
+
+            if (data.success) {
+              alert('✅ Application submitted successfully');
+              this.reset();
+            } else {
+              alert(`❌ Failed to submit application: ${data.message || 'Unknown error'}`);
+            }
+          } catch (err) {
+            console.error(err);
+            alert(`❌ Server error: ${err.message}`);
+          }
+        });
+      }
+    </script>
+
+    <script src="/js/nav-active.js"></script>
+  </body>
+</html>
+
+
+
+

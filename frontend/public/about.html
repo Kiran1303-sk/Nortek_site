@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+
+        }
+
+
+
+
+        .box {
+            width: 275px;
+            height: 275px;
+            background-color: rgb(47, 50, 145);
+
+
+        }
+
+        .title-text {
+            font-weight: 800;
+
+            font-size: clamp(36px, 5vw, 50px);
+            margin-left: 70px;
+
+
+
+
+        }
+
+        /* Laptop & above → single line */
+        @media (min-width: 992px) {
+            .title-text {
+                white-space: nowrap;
+            }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        li a {
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .tek {
+            border-left: 4px solid rgb(47, 50, 145);
+            padding-left: 20px;
+            height: 120px;
+            border-radius: 4px;
+
+        }
+
+        .nor {
+            border-left: 4px solid rgb(47, 50, 145);
+            padding-left: 20px;
+            height: 85px;
+            border-radius: 4px;
+
+
+        }
+
+        .navbar-nav .nav-link {
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Dropdown toggle arrow alignment */
+        .nav-item.dropdown .nav-link.dropdown-toggle::after {
+            margin-left: 8px;
+            vertical-align: middle;
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-left: 0.3em solid transparent;
+        }
+
+        /* Contact button styling */
+        .btn.con {
+            font-weight: 700;
+            border: none;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Desktop specific alignment */
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item {
+                display: flex;
+                align-items: center;
+            }
+
+            .navbar-nav .nav-link {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+            .btn.con {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        /* Mobile dropdown alignment */
+        @media (max-width: 991px) {
+            .nav-item.dropdown .nav-link.dropdown-toggle::after {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .navbar-nav .nav-link {
+                text-align: left;
+                justify-content: flex-start;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        .nav-link {
+            font-weight: 700;
+        }
+
+        .nav-link:hover {
+            color: rgb(47, 50, 145);
+        }
+
+        .con {
+            background-color: rgb(47, 50, 145);
+            color: white;
+        }
+
+        .nortek-title {
+            color: rgb(47, 50, 145);
+            font-weight: 900;
+            line-height: 1;
+            font-size: clamp(48px, 10vw, 130px);
+            /* responsive magic */
+        }
+
+        .modal.left .modal-dialog {
+            position: fixed;
+            left: 0;
+            margin: 0;
+            width: 400px;
+            /* modal width */
+            height: 100%;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .modal.left.show .modal-dialog {
+            transform: translateX(0);
+        }
+
+        .modal.left .modal-content {
+            height: 100%;
+            border-radius: 0;
+            background: #2b2d42;
+            color: #fff;
+        }
+
+        .close-btn {
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .un:hover {
+            text-decoration: underline;
+
+        }
+
+        .about-page {
+            background-color: #f0f1f2;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .about-hero-banner {
+            background-image: url(/images/about-banner.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 90vh;
+            width: 100%;
+        }
+
+        .about-hero-card {
+            margin-top: -250px !important;
+            position: relative;
+        }
+
+        .about-hero-label {
+            color: gray;
+            padding-top: 50px;
+            font-size: 20px;
+            margin-left: 70px;
+            margin-bottom: 8px;
+        }
+
+        .about-content-section {
+            padding-top: 100px !important;
+        }
+
+        .about-copy {
+            margin-top: 50px !important;
+        }
+
+        .about-achievements {
+            margin-top: 100px !important;
+            padding-bottom: 100px !important;
+        }
+
+        .about-achievement-row {
+            margin-top: 100px !important;
+        }
+
+        .brochure-section .container {
+            padding-top: 100px !important;
+            padding-bottom: 100px !important;
+        }
+
+        .brochure-form-col {
+            margin-top: 60px !important;
+        }
+
+        .brochure-form {
+            margin-top: 30px !important;
+        }
+
+        @media (max-width: 991px) {
+            .container {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .about-hero-banner {
+                height: 56vh;
+                min-height: 300px;
+            }
+
+            .about-hero-card {
+                margin-top: -130px !important;
+                width: min(240px, 100%);
+                min-height: 170px;
+                padding-bottom: 18px;
+            }
+
+            .about-hero-label {
+                margin-left: 24px !important;
+                padding-top: 24px !important;
+                font-size: 18px !important;
+            }
+
+            .about-hero-card .title-text {
+                margin-left: 24px !important;
+                font-size: clamp(30px, 8vw, 40px);
+            }
+
+            .about-content-section {
+                padding-top: 70px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container-fluid px-3 px-lg-4">
+
+                <!-- Desktop Side Menu Button -->
+                <button class="btn p-0 border-0 bg-transparent d-none d-md-flex align-items-center"
+                    data-bs-toggle="modal" data-bs-target="#sideModal">
+                    <img loading="lazy" decoding="async" src="/images/hamburger-svg.svg" height="45" alt="Menu">
+                </button>
+
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center ms-2" href="#">
+                    <img loading="lazy" decoding="async" src="/images/Nortek_logo.png" alt="Nortek Logo" height="45">
+                </a>
+
+                <!-- Mobile Hamburger -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/nortek.html">HOME</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/about.html">ABOUT US</a>
+                        </li>
+
+                        <!-- Services Dropdown -->
+                        <li class="nav-item dropdown">
+                            <!-- Combined link with dropdown -->
+                            <a class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                                href="/services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                SERVICES
+                            </a>
+
+                            <!-- Dropdown Menu -->
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/webdesign.html">Web Design & App Development</a>
+                                </li>
+                                <li><a class="dropdown-item" href="/AI-Services.html">AI Services</a></li>
+                                <li><a class="dropdown-item" href="/agentic.html">Agentic AI Solutions</a></li>
+                                <li><a class="dropdown-item" href="/Sap-Erp.html">SAP ERP Services</a></li>
+                                <li><a class="dropdown-item" href="/RPA.html">RPA</a></li>
+                                <li><a class="dropdown-item" href="/Business-int.html">Business Intelligence</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-lg-2 px-xl-3" href="/blog.html">BLOG</a>
+                        </li>
+
+                        <!-- Careers Dropdown -->
+                        <li class="nav-item dropdown">
+                            <!-- Combined link with dropdown -->
+                            <a class="nav-link dropdown-toggle d-flex align-items-center px-lg-2 px-xl-3"
+                                href="/careers.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                CAREERS
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/careers.html">Browse Jobs</a></li>
+                                <li><a class="dropdown-item" href="/resume.html">Resume Marketing</a></li>
+                                <li><a class="dropdown-item" href="/visa.html">VISA Sponsorship</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Contact -->
+                        <li class="nav-item ms-lg-3 mt-3 mt-lg-0 d-flex align-items-center">
+                            <a class="btn con px-4 py-2 w-100 w-lg-auto text-center " href="/contact.html">CONTACT</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="about-page">
+
+        <div class="about-hero-banner">
+
+
+        </div>
+        <div class="container">
+            <div class="box col-12 col-md-3 about-hero-card">
+
+
+                <div>
+                    <h4 class="about-hero-label">Nortek</h4>
+                </div>
+                <div class="nortek-title d-flex align-items-center w-100 ">
+                    <h1 class="text-white mb-0 w-100 title-text ">
+                        About Nortek
+                    </h1>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="container-fluid">
+            <div class="container about-content-section">
+                <div class="row about-main-row">
+                    <div class=" col-12 col-md-6">
+                        <div class="tek">
+                            <h5><i
+                                    style="width: 30px; height: 2px; display: inline-block; background: rgb(47, 50, 145); position: relative; top: -5px; margin-right: 25px;"></i>About
+                            </h5>
+
+                            <h1 style="font-weight: 900; font-size: 60px;">Who we are</h1>
+                        </div>
+                        <div class="about-copy">
+                            <p style="color:rgb(47, 50, 145)  ; font-size: 18px; text-align: justify;">Nortek is not
+                                just a service provider.
+                                We
+                                are
+                                a brand entitled to deliver futuristic driven
+                                solutions and services.</p>
+                            <p style="font-size: 18px; text-align: justify;">For over two decades, Nortek has gathered
+                                experience in multiple
+                                areas
+                                of IT industries. From
+                                Robotic Process Automation (RPA) to Change Management (CM), our expertise has
+                                consistently
+                                grown. This experience helps us face, communicate, and mitigate challenges which might
+                                stand
+                                in
+                                the way of your revolutionizing solutions.</p>
+                            <p style="font-size: 18px; text-align: justify;">Our deep expertise in evaluating the client
+                                requirements coupled
+                                with
+                                the right solutions help us
+                                offer robust services to our customers. We deliver this with strategic project
+                                management
+                                and
+                                execution tools. This helps us improve organizational efficiency and empower customers
+                                to
+                                achieve an upward trajectory.</p>
+                        </div>
+                        <div>
+
+                            <h1 class="nortek-title">Nortek.</h1>
+
+                        </div>
+
+
+                    </div>
+                    <div class=" col-12 col-md-6">
+                        <img loading="lazy" decoding="async" src="/images/about-bg.png" style="width: 100%; height: auto;" />
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="container about-achievements">
+                <div class="nor">
+                    <h6 style="color: rgb(47, 50, 145); font-size: 18px;">Achievements</h6>
+
+                    <h5 style="font-size: 22px; font-weight: 900;">Our achievement scale</h5>
+                </div>
+                <div class="row about-achievement-row">
+                    <div class=" col-12 col-md-4">
+                        <div>
+                            <h6 style="color: rgb(47, 50, 145);">Projects Delivered</h6>
+                        </div>
+                        <div>
+                            <h1><span style="font-size: 100px; font-weight: bold;">269</span> <span>Projects</span></h1>
+                        </div>
+                        <p style="font-size: 18px; text-align: justify;">Till now, we have successfully<br> delivered an
+                            array of
+                            projects<br>
+                            related to the technologies we<br> are proficient in.</p>
+
+                    </div>
+                    <div class=" col-12 col-md-4">
+                        <div>
+                            <h6 style="color: rgb(47, 50, 145);">Satisfied</h6>
+                        </div>
+                        <div>
+                            <h1><span style="font-size: 100px; font-weight: bold;">173</span>+<span>Clients</span></h1>
+                        </div>
+                        <p style="font-size: 18px; text-align: justify;">Through our journey, we were<br> successful in
+                            adding new<br>
+                            customers
+                            to
+                            our family along<br> with retaining existing ones.</p>
+
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div>
+                            <h6 style="color: rgb(47, 50, 145);">Covered</h6>
+                        </div>
+                        <div>
+                            <h1><span style="font-size: 100px; font-weight: bold;">8</span> <span>Countries</span></h1>
+                        </div>
+                        <p style="font-size: 18px; text-align: justify;">In serving multiple clients and<br> delivering
+                            projects, we have<br>
+                            covered
+                            over 23 countries. We<br> are adding more every day!</p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid brochure-section" style="background-color: rgb(47, 50, 145);">
+        <div class="container">
+            <div class="row">
+                <div class=" col-12 col-md-6">
+                    <div>
+                        <h5 style="color: #bfbfbf; font-size: 14px;">BROCHURE</h5>
+                    </div>
+                    <div>
+                        <h1 style="font-size: 48px; font-weight: bolder;  color: white;">Get a copy
+                            of our
+                            latest<br> Corporate Brochure</h1>
+                    </div>
+                    <p style="color: #bfbfbf; font-size: 18px; margin-top: 20px;text-align: justify;">Nortek Consulting
+                        comprises of a team
+                        with over 20+ years of industry experience and enhanced
+                        customer service capabilities. By leveraging cutting-edge technologies, Nortek puts forward a
+                        path to business possibilities. Know how.</p>
+                </div>
+                <div class="col-12 col-md-6 brochure-form-col">
+                    <form>
+                        <input class="form-control" type="email" name="email" placeholder="Company Mail" aria-label="Company Email" autocomplete="email"
+                            style="padding: 20px;" />
+                    </form>
+                    <div class="brochure-form" style="text-align: center;">
+                        <button class="btn btn-outline-light"
+                            style="background-color:rgb(47, 50, 145) ; color: white;">Download Brochure</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container my-5 px-lg-5 client-logo-strip">
+        <div class="row justify-content-center">
+            <div class="col-12 justify-content-center">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <img loading="lazy" decoding="async" src="/images/c1.png" class="img-fluid mx-auto d-block" alt="">
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img loading="lazy" decoding="async" src="/images/c2.png" class="img-fluid mx-auto d-block" alt="">
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img loading="lazy" decoding="async" src="/images/c3.png" class="img-fluid mx-auto d-block" alt="">
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img loading="lazy" decoding="async" src="/images/c4.png" class="img-fluid mx-auto d-block" alt="">
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img loading="lazy" decoding="async" src="/images/c5.png" class="img-fluid mx-auto d-block" alt="">
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img loading="lazy" decoding="async" src="/images/c6.png" class="img-fluid mx-auto d-block" alt="">
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img loading="lazy" decoding="async" src="/images/c7.png" class="img-fluid mx-auto d-block" alt="">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container-fluid bg-dark text-white py-5">
+            <div class="container">
+                <div class="row">
+                    <div class=" col-12 col-md-3">
+                        <img loading="lazy" decoding="async" src="/images/nortek_white.png" />
+                        <p>Nortek isn’t just a company, it’s a domicile of innovators where we craft futuristic tech
+                            solutions.
+                        </p>
+
+                    </div>
+                    <div class=" col-12 col-md-3">
+                        <div>
+                            <h5 style="color: grey; font-size: 16px;">SERVICES</h5>
+                            <ul style="padding: 0; list-style-type: none;">
+                                <li><a>Web Design & App Development</a></li>
+                                <li><a>AI Solutions</a></li>
+                                <li><a>Agentic AI Solutions</a></li>
+                                <li><a>SAP ERP Services</a></li>
+                                <li><a>RPA</a></li>
+                                <li><a>Business Intelligence</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class=" col-12 col-md-3">
+                        <div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">WORK ENQUIRY</h5>
+                                <address>Interested in working with us?
+                                    contact@nortekconsulting.com</address>
+                            </div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">PHONE</h5>
+                                <span><a>903.857.0121</a></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" col-12 col-md-3">
+                        <div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">ADDRESS</h5>
+                                <address>2300, Valley View Ln, Ste #1040,<br>
+                                    Irving, Tx, 75062.</address>
+                            </div>
+                            <div>
+                                <h5 style="color: grey;font-size: 16px;">SOCIAL LINKS</h5>
+                                <span><a href="#" style="color: inherit;"><span class="bi bi-facebook"
+                                            style="margin-right: 20px;"></span></a></span>
+                                <span><a href="#" style="color: inherit;"><span class="bi bi-instagram"
+                                            style="margin-right: 20px;"></span></a></span>
+                                <span><a href="#" style="color: inherit;"><span class="bi bi-linkedin"
+                                            style="margin-right: 20px;"></span></a></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <hr>
+                <div class="row align-items-center text-center text-md-start text-white">
+
+                    <!-- Left text -->
+                    <div class="col-12 col-md-6 mb-3 mb-md-0">
+                        <p class="mb-0">© 2021 Nortek. All rights reserved.</p>
+                    </div>
+
+                    <!-- Right links -->
+                    <div class="col-12 col-md-6">
+                        <ul
+                            class="list-unstyled d-flex flex-column flex-md-row justify-content-md-end gap-3 mb-0 text-center">
+                            <li><a href="unsubscribe.html" class="un" style="color: inherit;">Unsubscribe</a></li>
+                            <li><a href="privacy.html" class="un" style="color: inherit;">Privacy Policy</a></li>
+                            <li><a href="terms.html" class="un" style="color: inherit;">Terms & Conditions</a>
+                            </li>
+                            <li><a href="sitemap.html" class="un" style="color: inherit;">Sitemap</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        new Swiper(".mySwiper", {
+            loop: true,
+            spaceBetween: 30,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                0: { slidesPerView: 1 },        // mobile
+                576: { slidesPerView: 1 },      // sm
+                768: { slidesPerView: 2 },      // md
+                992: { slidesPerView: 3 },      // lg
+                1200: { slidesPerView: 4 }      // xl
+            }
+        });
+    </script>
+    <div class="modal fade left" id="sideModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content p-5">
+
+                <!-- Close -->
+                <div class="d-flex justify-content-end">
+                    <span class="close-btn" data-bs-dismiss="modal">&times;</span>
+                </div>
+
+                <!-- Content -->
+                <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%">
+                <div style="margin-top: 50px; ">
+
+                    <p class="small">
+                        2300, Valley View Ln, Ste #1040,<br>
+                        Irving, Tx, 75062.
+                    </p>
+
+                    <p class="mt-3 mb-1">903.857.0121</p>
+                    <p class="mb-4">contact@nortekconsulting.com</p>
+                </div>
+
+                <!-- Social -->
+                <div class=" mb-4 mt-2 d-flex gap-5">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                </div>
+                <div style="margin-top: 50px;">
+
+                    <a href="/contact.html" class="btn btn-light w-50">CONTACT</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  <script src="/js/nav-active.js"></script>
+</body>
+
+</html>
+

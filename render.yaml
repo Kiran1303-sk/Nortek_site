@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: nortek-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+
+  - type: static
+    name: nortek-frontend
+    rootDir: frontend
+    staticPublishPath: public
+    pullRequestPreviewsEnabled: true
+    autoDeploy: true

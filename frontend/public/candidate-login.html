@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site-theme.css">
+  <style>
+    :root {
+      --brand: rgb(47, 50, 145);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #eef1ff, #f7f8fc);
+      padding: 16px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 460px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+      padding: 24px;
+    }
+
+    .btn-brand {
+      background: var(--brand);
+      color: #fff;
+      border: none;
+    }
+
+    .btn-brand:hover {
+      background: #23267b;
+      color: #fff;
+    }
+  </style>
+  <script src="/js/api-config.js"></script>
+</head>
+
+<body>
+  <div class="auth-card">
+    <h4 class="fw-bold mb-2">Candidate Access</h4>
+    <p class="text-muted mb-3">Login or create an account to apply for jobs.</p>
+    <div id="alertBox" class="alert d-none"></div>
+
+    <ul class="nav nav-tabs mb-3" id="authTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#loginPane" type="button" role="tab">Login</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signupPane" type="button" role="tab">Sign Up</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="forgot-tab" data-bs-toggle="tab" data-bs-target="#forgotPane" type="button" role="tab">Forgot Password</button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="loginPane" role="tabpanel">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" id="loginEmail" class="form-control" autocomplete="username" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" id="loginPassword" class="form-control" autocomplete="current-password" required>
+          </div>
+          <button class="btn btn-brand w-100" type="submit">Login</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade" id="signupPane" role="tabpanel">
+        <form id="signupForm">
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="signupName" class="form-control" autocomplete="name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" id="signupEmail" class="form-control" autocomplete="email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" id="signupPassword" class="form-control" minlength="8" autocomplete="new-password" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">OTP</label>
+            <div class="input-group">
+              <input type="text" id="signupOtp" class="form-control" placeholder="Enter 6-digit OTP" maxlength="6" autocomplete="one-time-code" required>
+              <button id="sendSignupOtpBtn" class="btn btn-outline-secondary" type="button">Send OTP</button>
+              <button id="verifySignupOtpBtn" class="btn btn-outline-secondary" type="button">Verify OTP</button>
+            </div>
+            <div class="form-text">Verify OTP before creating account.</div>
+          </div>
+          <button class="btn btn-brand w-100" type="submit">Create Account</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade" id="forgotPane" role="tabpanel">
+        <form id="forgotForm">
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" id="forgotEmail" class="form-control" autocomplete="email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">New Password</label>
+            <input type="password" id="forgotNewPassword" class="form-control" minlength="8" autocomplete="new-password" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">OTP</label>
+            <div class="input-group">
+              <input type="text" id="forgotOtp" class="form-control" placeholder="Enter 6-digit OTP" maxlength="6" autocomplete="one-time-code" required>
+              <button id="sendForgotOtpBtn" class="btn btn-outline-secondary" type="button">Send OTP</button>
+              <button id="verifyForgotOtpBtn" class="btn btn-outline-secondary" type="button">Verify OTP</button>
+            </div>
+            <div class="form-text">Verify OTP before resetting password.</div>
+          </div>
+          <button class="btn btn-brand w-100" type="submit">Reset Password</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const redirectParam = params.get('redirect');
+    const redirectTarget = redirectParam || '/careers.html';
+    const safeRedirect = redirectTarget.startsWith('/') ? redirectTarget : '/careers.html';
+
+    const alertBox = document.getElementById('alertBox');
+
+    function showAlert(type, message) {
+      alertBox.className = `alert alert-${type}`;
+      alertBox.textContent = message;
+    }
+
+    function saveCandidateSession(data) {
+      localStorage.setItem('candidate_token', data.token);
+      localStorage.setItem('candidate_user', JSON.stringify(data.user));
+    }
+
+    async function submitAuth(url, payload) {
+      const res = await fetch(window.apiUrl(url), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || 'Request failed');
+      return data;
+    }
+
+    let signupVerificationToken = null;
+    let forgotVerificationToken = null;
+
+    async function requestOtp(purpose, email) {
+      return submitAuth('/auth/candidate/request-otp', { purpose, email });
+    }
+
+    async function verifyOtp(purpose, email, otp) {
+      return submitAuth('/auth/candidate/verify-otp', { purpose, email, otp });
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        const data = await submitAuth('/auth/candidate/login', {
+          email: document.getElementById('loginEmail').value.trim(),
+          password: document.getElementById('loginPassword').value
+        });
+        saveCandidateSession(data);
+        showAlert('success', 'Login successful. Redirecting...');
+        setTimeout(() => { window.location.href = safeRedirect; }, 700);
+      } catch (err) {
+        showAlert('danger', err.message);
+      }
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        if (!signupVerificationToken) {
+          throw new Error('Please verify signup OTP first.');
+        }
+
+        const data = await submitAuth('/auth/candidate/register', {
+          name: document.getElementById('signupName').value.trim(),
+          email: document.getElementById('signupEmail').value.trim(),
+          password: document.getElementById('signupPassword').value,
+          verificationToken: signupVerificationToken
+        });
+        saveCandidateSession(data);
+        showAlert('success', 'Account created. Redirecting...');
+        setTimeout(() => { window.location.href = safeRedirect; }, 700);
+      } catch (err) {
+        showAlert('danger', err.message);
+      }
+    });
+
+    document.getElementById('sendSignupOtpBtn').addEventListener('click', async () => {
+      try {
+        const email = document.getElementById('signupEmail').value.trim();
+        if (!email) throw new Error('Enter email first.');
+        await requestOtp('signup', email);
+        signupVerificationToken = null;
+        showAlert('success', 'Signup OTP sent to your email.');
+      } catch (err) {
+        showAlert('danger', err.message);
+      }
+    });
+
+    document.getElementById('verifySignupOtpBtn').addEventListener('click', async () => {
+      try {
+        const email = document.getElementById('signupEmail').value.trim();
+        const otp = document.getElementById('signupOtp').value.trim();
+        if (!email || !otp) throw new Error('Enter email and OTP.');
+
+        const data = await verifyOtp('signup', email, otp);
+        signupVerificationToken = data.verificationToken;
+        showAlert('success', 'Signup OTP verified. You can create your account now.');
+      } catch (err) {
+        showAlert('danger', err.message);
+      }
+    });
+
+    document.getElementById('sendForgotOtpBtn').addEventListener('click', async () => {
+      try {
+        const email = document.getElementById('forgotEmail').value.trim();
+        if (!email) throw new Error('Enter email first.');
+        await requestOtp('forgot_password', email);
+        forgotVerificationToken = null;
+        showAlert('success', 'Forgot-password OTP sent to your email.');
+      } catch (err) {
+        showAlert('danger', err.message);
+      }
+    });
+
+    document.getElementById('verifyForgotOtpBtn').addEventListener('click', async () => {
+      try {
+        const email = document.getElementById('forgotEmail').value.trim();
+        const otp = document.getElementById('forgotOtp').value.trim();
+        if (!email || !otp) throw new Error('Enter email and OTP.');
+
+        const data = await verifyOtp('forgot_password', email, otp);
+        forgotVerificationToken = data.verificationToken;
+        showAlert('success', 'OTP verified. You can reset password now.');
+      } catch (err) {
+        showAlert('danger', err.message);
+      }
+    });
+
+    document.getElementById('forgotForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      try {
+        if (!forgotVerificationToken) throw new Error('Please verify OTP first.');
+
+        await submitAuth('/auth/candidate/forgot-password/reset', {
+          email: document.getElementById('forgotEmail').value.trim(),
+          newPassword: document.getElementById('forgotNewPassword').value,
+          verificationToken: forgotVerificationToken
+        });
+
+        forgotVerificationToken = null;
+        document.getElementById('forgotOtp').value = '';
+        showAlert('success', 'Password reset successful. Please login.');
+      } catch (err) {
+        showAlert('danger', err.message);
+      }
+    });
+  </script>
+  <script src="/js/nav-active.js"></script>
+</body>
+
+</html>
+
+
+
+
+

@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/nortek.html",
+      "type": 302
+    }
+  ]
+}
