@@ -4615,7 +4615,7 @@
 
   <td>
   ${a.cv ? `
-    <a href="/uploads/${a.cv}" target="_blank" 
+    <a href="${window.apiUrl(`/uploads/${a.cv}`)}" target="_blank" 
        class="btn btn-sm custom-download-btn app-icon-btn">
        <i class="bi bi-download"></i>
     </a>
@@ -5073,7 +5073,7 @@
         clearAdminSession();
         localStorage.removeItem('candidate_token');
         localStorage.removeItem('candidate_user');
-        location.href = '/admin-dashboard';
+        location.href = '/admin-dashboard.html';
       };
 
     });
@@ -5082,6 +5082,8 @@
 </body>
 
 </html>
+
+
 
 
 

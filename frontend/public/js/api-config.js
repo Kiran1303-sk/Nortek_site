@@ -1,3 +1,4 @@
+/* eslint-env browser */
 (function () {
   function normalizeBase(url) {
     return String(url || '').replace(/\/+$/, '');

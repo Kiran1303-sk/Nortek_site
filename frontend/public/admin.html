@@ -47,7 +47,7 @@
   </div>
 
 <script>
-window.location.replace('/admin-dashboard');
+window.location.replace('/admin-dashboard.html');
 
 const form = document.getElementById('loginForm');
 const alertBox = document.getElementById('alert');
@@ -79,7 +79,7 @@ form.addEventListener('submit', async e => {
     alertBox.className = 'alert alert-success';
     alertBox.textContent = '✅ Login successful! Redirecting...';
 
-    setTimeout(() => window.location.href = '/admin-dashboard', 1500);
+    setTimeout(() => window.location.href = '/admin-dashboard.html', 1500);
 
   } catch (err) {
     alertBox.className = 'alert alert-danger';
@@ -93,6 +93,7 @@ form.addEventListener('submit', async e => {
   <script src="/js/nav-active.js"></script>
 </body>
 </html>
+
 
 
 

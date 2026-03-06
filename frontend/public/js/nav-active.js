@@ -1,3 +1,4 @@
+/* eslint-env browser */
 (() => {
   const path = window.location.pathname.toLowerCase();
   const navLinks = Array.from(document.querySelectorAll(".navbar .nav-link"));
