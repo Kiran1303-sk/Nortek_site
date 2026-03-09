@@ -340,33 +340,4 @@ iframe {
   }
 
   /* Normalize legacy page-hero blocks that still use inline 90vh banners + -250px overlay cards */
-  div[style*="background-image"][style*="height: 90vh"],
-  div[style*="background-image"][style*="height:90vh"] {
-    height: 56vh !important;
-    min-height: 300px;
-    background-position: center !important;
-    background-size: cover !important;
-  }
-
-  .box[style*="margin-top: -250px"],
-  .box[style*="margin-top:-250px"] {
-    margin-top: -130px !important;
-    width: min(240px, 100%);
-    min-height: 170px;
-    height: auto !important;
-  }
-
-  .box[style*="margin-top: -250px"] h4,
-  .box[style*="margin-top:-250px"] h4 {
-    margin-left: 24px !important;
-    padding-top: 24px !important;
-    font-size: 18px !important;
-  }
-
-  .box[style*="margin-top: -250px"] .title-text,
-  .box[style*="margin-top:-250px"] .title-text {
-    margin-left: 24px !important;
-    font-size: clamp(30px, 8vw, 40px);
-    line-height: 1.05;
-  }
 }
