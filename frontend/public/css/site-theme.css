@@ -51,6 +51,11 @@ a:hover {
   color: var(--theme-primary);
 }
 
+:focus-visible {
+  outline: 3px solid #1b5cff;
+  outline-offset: 2px;
+}
+
 .navbar {
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--theme-border);
@@ -280,6 +285,34 @@ iframe {
   border-radius: 12px;
 }
 
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Improve scroll/paint cost on mobile sections with heavy media. */
+@media (max-width: 991px) {
+  section,
+  .about-intro-section,
+  .service-process,
+  .consultants,
+  .blog-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 700px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @media (max-width: 991px) {
   .box {
     width: 100% !important;
@@ -320,8 +353,16 @@ iframe {
   }
 
   .navbar-nav .nav-link {
-    min-height: 34px !important;
+    min-height: 44px !important;
     justify-content: flex-start !important;
+  }
+
+  button,
+  .btn,
+  a.btn,
+  input[type='submit'],
+  input[type='button'] {
+    min-height: 44px;
   }
 
   /* Keep dropdown caret from overlapping labels on mobile nav */

@@ -81,6 +81,20 @@
 
   function improveMedia() {
     document.querySelectorAll('img').forEach((img) => {
+      const widthAttr = img.getAttribute('width');
+      const heightAttr = img.getAttribute('height');
+
+      // Normalize non-numeric HTML attributes (e.g. 50%, auto, 52px) to CSS so ratio is preserved.
+      if (widthAttr && /%|px|auto/i.test(widthAttr)) {
+        img.style.width = widthAttr;
+        img.removeAttribute('width');
+      }
+      if (heightAttr && /%|px|auto/i.test(heightAttr)) {
+        if (!img.style.height) img.style.height = heightAttr === 'auto' ? 'auto' : heightAttr;
+        img.removeAttribute('height');
+      }
+
+      if (!img.style.height && img.style.width) img.style.height = 'auto';
       if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
       if (!img.getAttribute('decoding')) img.setAttribute('decoding', 'async');
       if (!img.getAttribute('alt')) img.setAttribute('alt', 'Nortek image');
@@ -108,6 +122,56 @@
       if (icon.classList.contains('bi-facebook')) a.setAttribute('aria-label', 'Facebook');
       if (icon.classList.contains('bi-instagram')) a.setAttribute('aria-label', 'Instagram');
       if (icon.classList.contains('bi-linkedin')) a.setAttribute('aria-label', 'LinkedIn');
+    });
+
+    // Give fallback names to icon-only anchors.
+    document.querySelectorAll('a').forEach((a) => {
+      if (a.getAttribute('aria-label')) return;
+      const txt = (a.textContent || '').trim();
+      if (txt) return;
+      const icon = a.querySelector('i, svg, img');
+      if (icon) a.setAttribute('aria-label', 'Open link');
+    });
+  }
+
+  function improveFormAccessibility() {
+    document.querySelectorAll('input, textarea, select').forEach((el) => {
+      if (el.getAttribute('aria-label')) return;
+      const id = el.getAttribute('id');
+      if (id && document.querySelector('label[for="' + id + '"]')) return;
+      const placeholder = (el.getAttribute('placeholder') || '').trim();
+      const name = (el.getAttribute('name') || '').trim();
+      if (placeholder) {
+        el.setAttribute('aria-label', placeholder);
+      } else if (name) {
+        el.setAttribute('aria-label', name.replace(/[_-]+/g, ' '));
+      }
+    });
+
+    document.querySelectorAll('button').forEach((btn) => {
+      if (btn.getAttribute('aria-label')) return;
+      const txt = (btn.textContent || '').trim();
+      if (txt) return;
+      const title = (btn.getAttribute('title') || '').trim();
+      btn.setAttribute('aria-label', title || 'Button');
+    });
+  }
+
+  function improveVideoPerformance() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 991px)').matches;
+
+    document.querySelectorAll('video').forEach((video) => {
+      if (!video.getAttribute('preload')) video.setAttribute('preload', 'metadata');
+      video.setAttribute('playsinline', '');
+      if (video.hasAttribute('autoplay') && (reduceMotion || isMobile)) {
+        video.removeAttribute('autoplay');
+        try {
+          video.pause();
+        } catch (_e) {
+          // Ignore media pause errors on restricted browsers.
+        }
+      }
     });
   }
 
@@ -142,6 +206,8 @@
     ensureSkipLink();
     improveMedia();
     improveLinks();
+    improveFormAccessibility();
+    improveVideoPerformance();
   }
 
   if (document.readyState === 'loading') {
