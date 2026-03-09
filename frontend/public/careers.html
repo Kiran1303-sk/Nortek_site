@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -80,7 +80,7 @@
         color: rgb(47, 50, 145);
       }
 
-      /* Laptop & above → single line */
+      /* Laptop & above â†’ single line */
       @media (min-width: 992px) {
         .title-text {
           white-space: nowrap;
@@ -747,7 +747,7 @@
           <div class="col-12 col-lg-8">
             <div id="jobsContainer" class="row row-cols-2"></div>
 
-            <!-- 🔹 MODERN PAGINATION -->
+            <!-- ðŸ”¹ MODERN PAGINATION -->
             <div class="pagination-wrapper">
               <div class="pagination-card">
                 <button id="prevGroupBtn" class="nav-btn">
@@ -776,7 +776,7 @@
               <div class="col-12 col-md-3">
                 <img loading="lazy" decoding="async" src="/images/nortek_white.png" />
                 <p>
-                  Nortek isn’t just a company, it’s a domicile of innovators where we craft
+                  Nortek isnâ€™t just a company, itâ€™s a domicile of innovators where we craft
                   futuristic tech solutions.
                 </p>
               </div>
@@ -836,7 +836,7 @@
             <div class="row align-items-center text-center text-md-start text-white">
               <!-- Left text -->
               <div class="col-12 col-md-6 mb-3 mb-md-0">
-                <p class="mb-0">© 2021 Nortek. All rights reserved.</p>
+                <p class="mb-0">Â© 2021 Nortek. All rights reserved.</p>
               </div>
 
               <!-- Right links -->
@@ -1034,7 +1034,7 @@
 
               const btn = document.createElement('button');
 
-              btn.textContent = `${start}–${end}`;
+              btn.textContent = `${start}â€“${end}`;
               btn.dataset.page = i + 1;
 
               if (currentPage === i + 1) {
@@ -1051,7 +1051,7 @@
 
               const option = document.createElement('option');
               option.value = i + 1;
-              option.textContent = `${start}–${end}`;
+              option.textContent = `${start}â€“${end}`;
               pageDropdown.appendChild(option);
             }
 
@@ -1332,8 +1332,11 @@
 
 
     <script src="/js/nav-active.js"></script>
+      <script src="/js/quality-boost.js" defer></script>
   </body>
 </html>
+
+
 
 
 
