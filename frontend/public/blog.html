@@ -6,6 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/site-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -197,6 +198,16 @@
             z-index: 2;
         }
 
+        .blog-entry {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 520px;
+        }
+
+        footer {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 360px;
+        }
+
         .blog-hero-title {
             width: min(250px, 100%);
             min-height: 220px;
@@ -254,6 +265,10 @@
             main.blog-main {
                 margin-top: 72px !important;
                 margin-bottom: 90px !important;
+            }
+
+            .blog-entry {
+                contain-intrinsic-size: 1px 680px;
             }
         }
     </style>
@@ -343,7 +358,7 @@
         </nav>
     </header>
     <div>
-        <img loading="lazy" decoding="async" src="/images/blogs.jpg" class="ban">
+        <img loading="eager" fetchpriority="high" decoding="async" src="/images/blogs.jpg" class="ban" alt="Nortek blog banner">
 
     </div>
     <div class="container blog-hero-title-wrap">
@@ -367,7 +382,7 @@
     </div>
     <main class="blog-main" style="margin-top: 150px; margin-bottom: 150px;">
         <section>
-            <div class="container">
+            <div class="container blog-entry">
                 <div class="row">
                     <div class=" col-12 col-md-3">
                         <div>
@@ -397,7 +412,7 @@
 
                     </div>
                     <div class=" col-12 col-md-3">
-                        <img loading="lazy" decoding="async" src="/images/cai.jpg" height="auto" width="100%">
+                        <img loading="lazy" decoding="async" src="/images/cai.jpg" style="width: 100%; height: auto;">
 
                     </div>
 
@@ -405,7 +420,7 @@
                 <hr style="margin-top: 50px;">
 
             </div>
-            <div class="container py-5">
+            <div class="container py-5 blog-entry">
                 <div class="row">
                     <div class=" col-12 col-md-3">
                         <div>
@@ -435,7 +450,7 @@
 
                     </div>
                     <div class=" col-12 col-md-3">
-                        <img loading="lazy" decoding="async" src="/images/5bss.jpg" height="auto" width="100%">
+                        <img loading="lazy" decoding="async" src="/images/5bss.jpg" style="width: 100%; height: auto;">
 
                     </div>
 
@@ -443,7 +458,7 @@
                 <hr style="margin-top: 50px;">
 
             </div>
-            <div class="container ">
+            <div class="container blog-entry">
                 <div class="row">
                     <div class=" col-12 col-md-3">
                         <div>
@@ -473,7 +488,7 @@
 
                     </div>
                     <div class=" col-12 col-md-3">
-                        <img loading="lazy" decoding="async" src="/images/rn.jpg" height="auto" width="100%">
+                        <img loading="lazy" decoding="async" src="/images/rn.jpg" style="width: 100%; height: auto;">
 
                     </div>
 
@@ -571,7 +586,7 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <div class="modal fade left" id="sideModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content p-5">
@@ -582,7 +597,7 @@
                 </div>
 
                 <!-- Content -->
-                <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%">
+                <img loading="lazy" decoding="async" src="/images/nortek_white.png" style="width: 50%; height: auto;">
                 <div style="margin-top: 50px; ">
 
                     <p class="small">
@@ -609,11 +624,12 @@
         </div>
     </div>
 
-  <script src="/js/nav-active.js"></script>
+  <script src="/js/nav-active.js" defer></script>
     <script src="/js/quality-boost.js" defer></script>
   </body>
 
 </html>
+
 
 
 
