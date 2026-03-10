@@ -202,16 +202,56 @@
             max-width: 1200px;
         }
 
+        .contact-hero-banner {
+            background-image: url(/images/contact-bg.jpg);
+            background-position: center;
+            background-size: cover;
+            height: 90vh;
+            width: 100%;
+            background-repeat: no-repeat;
+        }
+
+        .map-frame-wrap {
+            position: relative;
+            min-height: 320px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-frame-wrap iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
+            display: none;
+        }
+
+        .map-load-btn {
+            border: 0;
+            padding: 12px 18px;
+            border-radius: 999px;
+            background: rgb(47, 50, 145);
+            color: #fff;
+            font-weight: 700;
+        }
+
         @media (max-width: 991px) {
             .container {
                 padding-left: 14px;
                 padding-right: 14px;
             }
-        }
-    
-        img[width],
-        img[height] {
-            max-width: none;
+
+            .contact-hero-banner {
+                height: 56vh;
+                min-height: 300px;
+            }
+
+            .map-frame-wrap iframe {
+                height: 320px;
+            }
         }
     </style>
 
@@ -302,11 +342,7 @@
         </nav>
     </header>
     <div>
-        <div
-            style="background-image: url(/images/contact-bg.jpg); background-position: center; background-size: cover; height: 90vh;width: 100%; background-repeat: no-repeat;">
-
-
-        </div>
+        <div class="contact-hero-banner"></div>
 
     </div>
     <div class="container">
@@ -372,10 +408,13 @@
                 <div class="row  align-items-md-center">
                     <div class=" col-12 col-md-6">
                         <div>
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3352.202519801488!2d-97.02338367510494!3d32.83988912363748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e819dad3c62d9%3A0x408d581816928362!2sNortek%20Consulting%20INC!5e0!3m2!1sen!2sin!4v1767418711571!5m2!1sen!2sin"
-                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <div class="map-frame-wrap">
+                                <button id="loadMapBtn" type="button" class="map-load-btn">Load Map</button>
+                                <iframe id="contactMap"
+                                    data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3352.202519801488!2d-97.02338367510494!3d32.83988912363748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e819dad3c62d9%3A0x408d581816928362!2sNortek%20Consulting%20INC!5e0!3m2!1sen!2sin!4v1767418711571!5m2!1sen!2sin"
+                                    title="Nortek office location map" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                         </div>
 
                     </div>
@@ -541,6 +580,15 @@
                 sendMessageBtn.disabled = false;
             }
         });
+
+        const loadMapBtn = document.getElementById('loadMapBtn');
+        const contactMap = document.getElementById('contactMap');
+        loadMapBtn?.addEventListener('click', () => {
+            if (!contactMap || !contactMap.dataset.src) return;
+            contactMap.src = contactMap.dataset.src;
+            contactMap.style.display = 'block';
+            loadMapBtn.style.display = 'none';
+        });
     </script>
     <div class="modal fade left" id="sideModal" tabindex="-1">
         <div class="modal-dialog">
@@ -552,7 +600,7 @@
                 </div>
 
                 <!-- Content -->
-                <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%">
+                <img loading="lazy" decoding="async" src="/images/nortek_white.png" style="width: 50%; height: auto;">
                 <div style="margin-top: 50px; ">
 
                     <p class="small">
@@ -578,11 +626,12 @@
             </div>
         </div>
     </div>
-  <script src="/js/nav-active.js"></script>
+  <script src="/js/nav-active.js" defer></script>
     <script src="/js/quality-boost.js" defer></script>
   </body>
 
 </html>
+
 
 
 

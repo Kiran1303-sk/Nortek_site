@@ -136,12 +136,19 @@
         background-image: url('/images/bg.jpg');
       }
 
-      .hero-slide-2 {
-        background-image: url('/images/bg1.jpg');
+      .hero-slide-2,
+      .hero-slide-3 {
+        background-image: none;
       }
 
-      .hero-slide-3 {
-        background-image: url('/images/bg2.jpg');
+      @media (min-width: 992px) {
+        .hero-slide-2 {
+          background-image: url('/images/bg1.jpg');
+        }
+
+        .hero-slide-3 {
+          background-image: url('/images/bg2.jpg');
+        }
       }
 
       .hero-slide::before {
@@ -867,6 +874,18 @@
       }
 
       @media (max-width: 991px) {
+        .navbar {
+          backdrop-filter: none;
+        }
+
+        .heroSwiper .swiper-wrapper {
+          transform: none !important;
+        }
+
+        .heroSwiper .swiper-slide:not(:first-child) {
+          display: none;
+        }
+
         .top-info-row {
           row-gap: 0;
           padding: 0;
@@ -879,6 +898,18 @@
 
         .top-info-row > [class*='col-']:not(.top-info-video-wrap) {
           padding-top: 12px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-content,
+        .hero-content.animate {
+          animation: none !important;
+          transition: none !important;
+        }
+
+        .bgi:hover {
+          animation: none !important;
         }
       }
 
@@ -1353,7 +1384,7 @@
         <div class="col-12 col-md-4">
           <div class="d-flex process">
             <div>
-              <img loading="lazy" decoding="async" src="/images/problem.png" alt="image" height="50px" style="margin-top: 35px" />
+              <img loading="lazy" decoding="async" src="/images/problem.png" alt="image" height="50" style="margin-top: 35px" />
             </div>
             <div class="up">
               <h6>
@@ -1371,7 +1402,7 @@
         <div class="col-12 col-md-4">
           <div class="d-flex process">
             <div>
-              <img loading="lazy" decoding="async" src="/images/brain.png" alt="image" height="50px" style="margin-top: 35px" />
+              <img loading="lazy" decoding="async" src="/images/brain.png" alt="image" height="50" style="margin-top: 35px" />
             </div>
             <div class="up">
               <h6>
@@ -1391,7 +1422,7 @@
             <div>
               <img loading="lazy" decoding="async" src="/images/solution-1.png"
                 alt="image"
-                height="50px"
+                height="50"
                 style="margin-top: 35px"
               />
             </div>
@@ -1411,7 +1442,7 @@
         <div class="col-12 col-md-4">
           <div class="d-flex process">
             <div>
-              <img loading="lazy" decoding="async" src="/images/prototype.png" alt="image" height="50px" style="margin-top: 35px" />
+              <img loading="lazy" decoding="async" src="/images/prototype.png" alt="image" height="50" style="margin-top: 35px" />
             </div>
             <div class="up">
               <h6>
@@ -1429,7 +1460,7 @@
         <div class="col-12 col-md-4">
           <div class="d-flex process">
             <div>
-              <img loading="lazy" decoding="async" src="/images/envi.png" alt="image" height="50px" style="margin-top: 35px" />
+              <img loading="lazy" decoding="async" src="/images/envi.png" alt="image" height="50" style="margin-top: 35px" />
             </div>
             <div class="up">
               <h6>
@@ -1449,7 +1480,7 @@
             <div>
               <img loading="lazy" decoding="async" src="/images/project-execution.png"
                 alt="image"
-                height="50px"
+                height="50"
                 style="margin-top: 35px"
               />
             </div>
@@ -1662,43 +1693,61 @@
         </div>
       </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
     <script>
-      const swiper = new Swiper('.heroSwiper', {
-        direction: 'vertical',
-        loop: true,
-        speed: 700,
-        autoplay: { delay: 2500, disableOnInteraction: false },
-        on: {
-          init: function () {
-            this.slides[this.activeIndex].querySelector('.hero-content')?.classList.add('animate');
-          },
-          slideChangeTransitionStart: function () {
-            this.slides.forEach((slide) =>
-              slide.querySelector('.hero-content')?.classList.remove('animate')
-            );
-          },
-          slideChangeTransitionEnd: function () {
-            this.slides[this.activeIndex].querySelector('.hero-content')?.classList.add('animate');
-          },
-        },
-      });
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof Swiper !== 'function') return;
 
-      new Swiper('.mySwiper', {
-        loop: true,
-        spaceBetween: 30,
-        autoplay: {
-          delay: 2000,
-          disableOnInteraction: false,
-        },
-        breakpoints: {
-          0: { slidesPerView: 1 }, // mobile
-          576: { slidesPerView: 1 }, // sm
-          768: { slidesPerView: 2 }, // md
-          992: { slidesPerView: 3 }, // lg
-          1200: { slidesPerView: 4 }, // xl
-        },
+        const isMobile = window.matchMedia('(max-width: 991px)').matches;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const allowMotion = !isMobile && !reduceMotion;
+
+        const heroElement = document.querySelector('.heroSwiper');
+        if (heroElement) {
+          new Swiper(heroElement, {
+            direction: 'vertical',
+            speed: allowMotion ? 700 : 0,
+            allowTouchMove: true,
+            loop: allowMotion,
+            autoplay: allowMotion ? { delay: 2500, disableOnInteraction: false } : false,
+            on: {
+              init: function () {
+                this.slides[this.activeIndex].querySelector('.hero-content')?.classList.add('animate');
+              },
+              slideChangeTransitionStart: function () {
+                this.slides.forEach((slide) =>
+                  slide.querySelector('.hero-content')?.classList.remove('animate')
+                );
+              },
+              slideChangeTransitionEnd: function () {
+                this.slides[this.activeIndex].querySelector('.hero-content')?.classList.add('animate');
+              },
+            },
+          });
+        }
+
+        const clientsElement = document.querySelector('.mySwiper');
+        if (clientsElement) {
+          new Swiper(clientsElement, {
+            loop: !isMobile,
+            spaceBetween: 30,
+            autoplay:
+              isMobile || reduceMotion
+                ? false
+                : {
+                    delay: 2000,
+                    disableOnInteraction: false,
+                  },
+            breakpoints: {
+              0: { slidesPerView: 1 }, // mobile
+              576: { slidesPerView: 1 }, // sm
+              768: { slidesPerView: 2 }, // md
+              992: { slidesPerView: 3 }, // lg
+              1200: { slidesPerView: 4 }, // xl
+            },
+          });
+        }
       });
     </script>
     <div class="modal fade left" id="sideModal" tabindex="-1">
@@ -1710,7 +1759,7 @@
           </div>
 
           <!-- Content -->
-          <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%" />
+          <img loading="lazy" decoding="async" src="/images/nortek_white.png" style="width: 50%; height: auto;" />
           <div style="margin-top: 50px">
             <p class="small">
               2300, Valley View Ln, Ste #1040,<br />
@@ -1734,10 +1783,11 @@
       </div>
     </div>
 
-    <script src="/js/nav-active.js"></script>
+    <script src="/js/nav-active.js" defer></script>
       <script src="/js/quality-boost.js" defer></script>
   </body>
 </html>
+
 
 
 

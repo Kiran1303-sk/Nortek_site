@@ -266,8 +266,15 @@
       .careers-hero {
         width: 100vw;
         margin-left: calc(50% - 50vw);
-        background: url('/images/browes-jobs-banner.jpg') top center / cover no-repeat;
-        height: 100vh;
+        background: url('/images/services-banner.jpg') top center / cover no-repeat;
+        height: 70vh;
+      }
+
+      @media (min-width: 992px) {
+        .careers-hero {
+          background: url('/images/browes-jobs-banner.jpg') top center / cover no-repeat;
+          height: 100vh;
+        }
       }
 
       .job-title {
@@ -870,7 +877,7 @@
             </div>
 
             <!-- Content -->
-            <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%" />
+            <img loading="lazy" decoding="async" src="/images/nortek_white.png" style="width: 50%; height: auto;" />
             <div style="margin-top: 50px">
               <p class="small">
                 2300, Valley View Ln, Ste #1040,<br />
@@ -1331,10 +1338,11 @@
     
 
 
-    <script src="/js/nav-active.js"></script>
+    <script src="/js/nav-active.js" defer></script>
       <script src="/js/quality-boost.js" defer></script>
   </body>
 </html>
+
 
 
 

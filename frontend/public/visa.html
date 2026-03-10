@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/site-theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
         * {
             margin: 0;
@@ -206,6 +205,21 @@
         img[height] {
             max-width: none;
         }
+        .visa-hero {
+            background-image: url('/images/services-banner.jpg');
+            background-position: center;
+            background-size: cover;
+            height: 70vh;
+            width: 100%;
+            background-repeat: no-repeat;
+        }
+
+        @media (min-width: 992px) {
+            .visa-hero {
+                background-image: url('/images/visa-marketing.jpg');
+                height: 90vh;
+            }
+        }
     </style>
 
 </head>
@@ -293,11 +307,7 @@
             </div>
         </nav>
     </header>
-    <div
-        style="background-image: url(/images/visa-marketing.jpg); background-position: center; background-size: cover; height: 90vh;width: 100%; background-repeat: no-repeat;">
-
-
-    </div>
+    <div class="visa-hero"></div>
     <div class="container">
         <div class="  box col-12 col-md-3 " style="margin-top: -250px; position: relative;">
 
@@ -339,7 +349,7 @@
                 </div>
                 <div class="col-12 col-md-5">
                     <div>
-                        <img loading="lazy" decoding="async" src="/images/visa.jpg" height="auto" width="100%">
+                        <img loading="lazy" decoding="async" src="/images/visa.jpg" style="width: 100%; height: auto;">
                     </div>
 
                 </div>
@@ -489,7 +499,7 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <div class="modal fade left" id="sideModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content p-5">
@@ -500,7 +510,7 @@
                 </div>
 
                 <!-- Content -->
-                <img loading="lazy" decoding="async" src="/images/nortek_white.png" width="50%">
+                <img loading="lazy" decoding="async" src="/images/nortek_white.png" style="width: 50%; height: auto;">
                 <div style="margin-top: 50px; ">
 
                     <p class="small">
@@ -526,11 +536,12 @@
             </div>
         </div>
     </div>
-  <script src="/js/nav-active.js"></script>
+  <script src="/js/nav-active.js" defer></script>
     <script src="/js/quality-boost.js" defer></script>
   </body>
 
 </html>
+
 
 
 
