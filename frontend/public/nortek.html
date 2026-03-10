@@ -880,6 +880,12 @@
           backdrop-filter: none;
         }
 
+        .hero-content,
+        .hero-content.animate {
+          animation: none !important;
+          transition: none !important;
+        }
+
         .heroSwiper .swiper-wrapper {
           transform: none !important;
         }
@@ -900,6 +906,23 @@
 
         .top-info-row > [class*='col-']:not(.top-info-video-wrap) {
           padding-top: 12px;
+        }
+
+        .top-info-bar,
+        .about-intro-section,
+        .consultants,
+        .blog-section,
+        .client-logo-strip,
+        footer {
+          content-visibility: auto;
+          contain-intrinsic-size: 1px 800px;
+        }
+
+        .boxes,
+        .figure1,
+        .figure2,
+        .figure3 {
+          box-shadow: none !important;
         }
       }
 
@@ -1568,7 +1591,7 @@
         </div>
       </div>
     </div>
-    <div class="container my-5 px-lg-5">
+    <div class="container my-5 px-lg-5 client-logo-strip">
       <div class="row align-items-center">
         <div class="col-12">
           <div class="swiper mySwiper">
