@@ -924,6 +924,10 @@
         .figure3 {
           box-shadow: none !important;
         }
+
+        .client-logo-strip {
+          display: none;
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -1207,6 +1211,7 @@
             <video preload="none" class="top-info-video"
               src="/videos/Nortek.mp4"
               poster="/images/video-bg.jpg"
+              data-mobile-poster="/images/video-bg.jpg"
               controls
             ></video>
           </div>
@@ -1728,6 +1733,17 @@
         // Mobile already displays only first hero slide via CSS; avoid loading Swiper assets.
         if (isMobile) {
           document.querySelector('.heroSwiper .hero-content')?.classList.add('animate');
+          const infoVideo = document.querySelector('.top-info-video');
+          if (infoVideo) {
+            const poster = infoVideo.getAttribute('data-mobile-poster') || '/images/video-bg.jpg';
+            const fallbackImage = document.createElement('img');
+            fallbackImage.src = poster;
+            fallbackImage.alt = 'Nortek intro';
+            fallbackImage.className = 'top-info-video';
+            fallbackImage.loading = 'lazy';
+            fallbackImage.decoding = 'async';
+            infoVideo.replaceWith(fallbackImage);
+          }
           return;
         }
 
@@ -1853,8 +1869,30 @@
       </div>
     </div>
 
-    <script src="/js/nav-active.js" defer></script>
-      <script src="/js/quality-boost.js" defer></script>
+    <script>
+      (function () {
+        function loadScript(src) {
+          const s = document.createElement('script');
+          s.src = src;
+          s.defer = true;
+          document.body.appendChild(s);
+        }
+
+        const isMobile = window.matchMedia('(max-width: 991px)').matches;
+        const loadEnhancements = () => {
+          loadScript('/js/nav-active.js');
+          loadScript('/js/quality-boost.js');
+        };
+
+        if (isMobile && 'requestIdleCallback' in window) {
+          requestIdleCallback(loadEnhancements, { timeout: 2000 });
+        } else if (isMobile) {
+          window.addEventListener('load', loadEnhancements, { once: true });
+        } else {
+          loadEnhancements();
+        }
+      })();
+    </script>
   </body>
 </html>
 
