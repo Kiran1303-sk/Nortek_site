@@ -79,31 +79,94 @@
     document.head.appendChild(style);
   }
 
+  function isNearViewport(el, threshold) {
+    if (!el || typeof el.getBoundingClientRect !== 'function') return false;
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight || 800;
+    const margin = (threshold || 1) * vh;
+    return rect.top <= margin && rect.bottom >= -vh * 0.2;
+  }
+
+  function isLikelyCriticalImage(img) {
+    if (!img) return false;
+    if (img.getAttribute('loading') === 'eager') return true;
+    if ((img.getAttribute('fetchpriority') || '').toLowerCase() === 'high') return true;
+    if (img.hasAttribute('data-eager')) return true;
+
+    const cls = typeof img.className === 'string' ? img.className : '';
+    if (/\b(hero|banner|logo|brand)\b/i.test(cls)) return true;
+    if (img.closest('header, nav, .hero, .hero-section')) return true;
+
+    return isNearViewport(img, 1.1);
+  }
+
+  function tuneImage(img) {
+    if (!img) return;
+    const widthAttr = img.getAttribute('width');
+    const heightAttr = img.getAttribute('height');
+
+    // Normalize non-numeric HTML attributes (e.g. 50%, auto, 52px) to CSS so ratio is preserved.
+    if (widthAttr && /%|px|auto/i.test(widthAttr)) {
+      img.style.width = widthAttr;
+      img.removeAttribute('width');
+    }
+    if (heightAttr && /%|px|auto/i.test(heightAttr)) {
+      if (!img.style.height) img.style.height = heightAttr === 'auto' ? 'auto' : heightAttr;
+      img.removeAttribute('height');
+    }
+
+    if (!img.style.height && img.style.width) img.style.height = 'auto';
+
+    if (!img.getAttribute('loading')) {
+      img.setAttribute('loading', isLikelyCriticalImage(img) ? 'eager' : 'lazy');
+    }
+    if (!img.getAttribute('decoding')) img.setAttribute('decoding', 'async');
+    if (!img.getAttribute('fetchpriority') && img.getAttribute('loading') === 'lazy') {
+      img.setAttribute('fetchpriority', 'low');
+    }
+    if (!img.getAttribute('alt')) img.setAttribute('alt', 'Nortek image');
+  }
+
+  function tuneIframe(frame) {
+    if (!frame) return;
+    if (!frame.getAttribute('loading')) {
+      frame.setAttribute('loading', isNearViewport(frame, 1.0) ? 'eager' : 'lazy');
+    }
+    if (!frame.getAttribute('title')) frame.setAttribute('title', 'Embedded content');
+  }
+
+  function tuneVideo(video) {
+    if (!video) return;
+    if (!video.getAttribute('preload')) {
+      video.setAttribute('preload', isNearViewport(video, 1.0) ? 'metadata' : 'none');
+    }
+    video.setAttribute('playsinline', '');
+  }
+
   function improveMedia() {
-    document.querySelectorAll('img').forEach((img) => {
-      const widthAttr = img.getAttribute('width');
-      const heightAttr = img.getAttribute('height');
+    document.querySelectorAll('img').forEach(tuneImage);
+    document.querySelectorAll('iframe').forEach(tuneIframe);
+    document.querySelectorAll('video').forEach(tuneVideo);
 
-      // Normalize non-numeric HTML attributes (e.g. 50%, auto, 52px) to CSS so ratio is preserved.
-      if (widthAttr && /%|px|auto/i.test(widthAttr)) {
-        img.style.width = widthAttr;
-        img.removeAttribute('width');
-      }
-      if (heightAttr && /%|px|auto/i.test(heightAttr)) {
-        if (!img.style.height) img.style.height = heightAttr === 'auto' ? 'auto' : heightAttr;
-        img.removeAttribute('height');
-      }
-
-      if (!img.style.height && img.style.width) img.style.height = 'auto';
-      if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
-      if (!img.getAttribute('decoding')) img.setAttribute('decoding', 'async');
-      if (!img.getAttribute('alt')) img.setAttribute('alt', 'Nortek image');
-    });
-
-    document.querySelectorAll('iframe').forEach((frame) => {
-      if (!frame.getAttribute('loading')) frame.setAttribute('loading', 'lazy');
-      if (!frame.getAttribute('title')) frame.setAttribute('title', 'Embedded content');
-    });
+    // Apply loading hints to media added after initial render (e.g. API-rendered cards/lists).
+    if (!window.__nortekMediaObserver && document.body && typeof MutationObserver !== 'undefined') {
+      window.__nortekMediaObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          mutation.addedNodes.forEach((node) => {
+            if (!node || node.nodeType !== 1) return;
+            if (node.matches && node.matches('img')) tuneImage(node);
+            if (node.matches && node.matches('iframe')) tuneIframe(node);
+            if (node.matches && node.matches('video')) tuneVideo(node);
+            if (node.querySelectorAll) {
+              node.querySelectorAll('img').forEach(tuneImage);
+              node.querySelectorAll('iframe').forEach(tuneIframe);
+              node.querySelectorAll('video').forEach(tuneVideo);
+            }
+          });
+        });
+      });
+      window.__nortekMediaObserver.observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   function improveLinks() {
@@ -162,8 +225,7 @@
     const isMobile = window.matchMedia('(max-width: 991px)').matches;
 
     document.querySelectorAll('video').forEach((video) => {
-      if (!video.getAttribute('preload')) video.setAttribute('preload', 'metadata');
-      video.setAttribute('playsinline', '');
+      tuneVideo(video);
       if (video.hasAttribute('autoplay') && (reduceMotion || isMobile)) {
         video.removeAttribute('autoplay');
         try {
