@@ -222,7 +222,7 @@
           min-height: 360px;
         }
 
-        .box {
+        .careers-hero-box {
           margin-top: -170px !important;
           height: auto;
           min-height: 180px;
@@ -302,7 +302,8 @@
         position: relative;
         overflow: hidden;
         background: #dce2ed;
-        height: 70vh;
+        height: min(82vh, 760px);
+        min-height: 520px;
       }
 
       .careers-hero-media {
@@ -312,9 +313,15 @@
         display: block;
       }
 
+      .careers-hero-box {
+        margin-top: calc(-1 * clamp(190px, 24vh, 320px));
+        position: relative;
+        z-index: 2;
+      }
+
       @media (min-width: 992px) {
         .careers-hero {
-          height: 100vh;
+          height: min(82vh, 760px);
         }
       }
 
@@ -589,7 +596,7 @@
       </div>
 
       <div class="container">
-        <div class="box" style="margin-top: -250px">
+        <div class="box careers-hero-box">
           <h4 style="color: gray; padding-top: 50px; margin-left: 70px">Nortek</h4>
           <h1 class="text-white title-text">Browse Jobs</h1>
         </div>

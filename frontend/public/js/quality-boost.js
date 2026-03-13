@@ -244,7 +244,8 @@
     button.type = 'button';
     button.className = 'nortek-back-to-top';
     button.setAttribute('aria-label', 'Back to top');
-    button.textContent = '\u2191';
+    button.innerHTML =
+      '<span class="nortek-back-to-top-icon" aria-hidden="true">\u2191</span>';
 
     button.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -255,6 +256,7 @@
     const style = document.createElement('style');
     style.textContent =
       '.nortek-back-to-top{position:fixed;right:20px;bottom:20px;z-index:9999;border:1px solid rgba(0,0,0,.12);border-radius:12px;width:44px;height:44px;padding:0;background:rgba(255,255,255,.96);color:#1f2937;font-family:Arial,sans-serif;font-size:22px !important;line-height:1 !important;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.16);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center}' +
+      '.nortek-back-to-top-icon{display:block;font-size:24px;line-height:1;transform:translateY(-1px)}' +
       '.nortek-back-to-top:hover{background:#ffffff;box-shadow:0 10px 28px rgba(0,0,0,.22)}' +
       '.nortek-back-to-top:focus{outline:2px solid #1f2937;outline-offset:2px}';
     document.head.appendChild(style);
