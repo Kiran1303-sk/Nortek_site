@@ -237,6 +237,37 @@
     });
   }
 
+  function ensureBackToTopButton() {
+    const footer = document.querySelector('footer');
+    if (!footer || document.querySelector('.nortek-back-to-top')) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'nortek-back-to-top';
+    button.setAttribute('aria-label', 'Back to top');
+    button.textContent = 'Back to top';
+
+    button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    footer.appendChild(button);
+
+    const style = document.createElement('style');
+    style.textContent =
+      '.nortek-back-to-top{position:fixed;right:20px;bottom:20px;z-index:9999;border:none;border-radius:999px;padding:10px 14px;background:#2f3291;color:#fff;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18);display:none}' +
+      '.nortek-back-to-top:hover{background:#23266f}' +
+      '.nortek-back-to-top:focus{outline:2px solid #fff;outline-offset:2px}';
+    document.head.appendChild(style);
+
+    const toggleVisibility = () => {
+      button.style.display = window.scrollY > 220 ? 'inline-flex' : 'none';
+    };
+
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    toggleVisibility();
+  }
+
   function improveHead() {
     document.documentElement.setAttribute('lang', document.documentElement.lang || 'en');
     const title = normalizeTitle(document.title);
@@ -270,6 +301,7 @@
     improveLinks();
     improveFormAccessibility();
     improveVideoPerformance();
+    ensureBackToTopButton();
   }
 
   if (document.readyState === 'loading') {
