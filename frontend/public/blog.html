@@ -243,6 +243,22 @@
             line-height: 1.05;
         }
 
+        .blog-entry-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 991px) {
+            .blog-entry-image {
+                aspect-ratio: 16 / 9;
+                margin-top: 14px;
+            }
+        }
+
         img[width],
         img[height] {
             max-width: 100%;
@@ -418,7 +434,7 @@
 
                     </div>
                     <div class=" col-12 col-md-3">
-                        <img loading="lazy" fetchpriority="low" decoding="async" src="/images/cai-small.jpg" style="width: 100%; height: auto;">
+                        <img loading="lazy" fetchpriority="low" decoding="async" src="/images/cai-small.jpg" class="blog-entry-image">
 
                     </div>
 
@@ -454,7 +470,7 @@
 
                     </div>
                     <div class=" col-12 col-md-3">
-                        <img loading="lazy" fetchpriority="low" decoding="async" src="/images/5bss-small.jpg" style="width: 100%; height: auto;">
+                        <img loading="lazy" fetchpriority="low" decoding="async" src="/images/5bss-small.jpg" class="blog-entry-image">
 
                     </div>
 
@@ -490,7 +506,7 @@
 
                     </div>
                     <div class=" col-12 col-md-3">
-                        <img loading="lazy" fetchpriority="low" decoding="async" src="/images/rn-small.jpg" style="width: 100%; height: auto;">
+                        <img loading="lazy" fetchpriority="low" decoding="async" src="/images/rn-small.jpg" class="blog-entry-image">
 
                     </div>
 
