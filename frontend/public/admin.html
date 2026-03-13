@@ -77,7 +77,7 @@ form.addEventListener('submit', async e => {
     localStorage.setItem('admin_user', JSON.stringify(data.user || null));
 
     alertBox.className = 'alert alert-success';
-    alertBox.textContent = 'âœ… Login successful! Redirecting...';
+    alertBox.textContent = '[OK] Login successful! Redirecting...';
 
     setTimeout(() => window.location.href = '/admin-dashboard.html', 1500);
 

@@ -360,7 +360,7 @@
               </div>
 
               <div class="mb-3">
-                <label>Upload CV (PDF, DOC, DOCX â€“ Max 5MB)</label>
+                <label>Upload CV (PDF, DOC, DOCX - Max 5MB)</label>
                 <input
                   type="file"
                   name="cv"
@@ -396,7 +396,7 @@
             <div class="col-12 col-md-3">
               <img loading="lazy" decoding="async" src="/images/nortek_white.png" />
               <p>
-                Nortek isnâ€™t just a company, itâ€™s a domicile of innovators where we craft futuristic
+                Nortek isn't just a company, it's a domicile of innovators where we craft futuristic
                 tech solutions.
               </p>
             </div>
@@ -447,7 +447,7 @@
           <hr />
           <div class="row align-items-center text-center text-md-start text-white">
             <div class="col-12 col-md-6 mb-3 mb-md-0">
-              <p class="mb-0">Â© 2021 Nortek. All rights reserved.</p>
+              <p class="mb-0">(c) 2021 Nortek. All rights reserved.</p>
             </div>
             <div class="col-12 col-md-6">
               <ul
@@ -532,7 +532,7 @@
         });
       }
 
-      // === 1ï¸âƒ£ Read URL parameters and fill hidden inputs & heading ===
+      // === 1 Read URL parameters and fill hidden inputs & heading ===
 
       const params = new URLSearchParams(window.location.search);
       const jobCode = params.get('jobCode') || '';
@@ -552,7 +552,7 @@
         if (form) form.scrollIntoView({ behavior: 'smooth' });
       });
 
-      // === 2ï¸âƒ£ Form submission handler ===
+      // === 2 Form submission handler ===
       const applyForm = document.getElementById('applyForm');
 
       if (applyForm) {
@@ -562,12 +562,12 @@
           // CV size validation
           const cvFile = this.cv.files[0];
           if (!cvFile) {
-            alert('âŒ Please upload your CV');
+            alert('[X] Please upload your CV');
             return;
           }
           if (cvFile.size > 5 * 1024 * 1024) {
             // 5MB
-            alert('âŒ CV size exceeds 5MB');
+            alert('[X] CV size exceeds 5MB');
             return;
           }
 
@@ -577,7 +577,7 @@
           const lastName = formData.get('lastName')?.trim();
 
           if (!firstName || !lastName) {
-            alert('âŒ Please enter both first and last name');
+            alert('[X] Please enter both first and last name');
             return;
           }
 
@@ -597,14 +597,14 @@
             }
 
             if (data.success) {
-              alert('âœ… Application submitted successfully');
+              alert('[OK] Application submitted successfully');
               this.reset();
             } else {
-              alert(`âŒ Failed to submit application: ${data.message || 'Unknown error'}`);
+              alert(`[X] Failed to submit application: ${data.message || 'Unknown error'}`);
             }
           } catch (err) {
             console.error(err);
-            alert(`âŒ Server error: ${err.message}`);
+            alert(`[X] Server error: ${err.message}`);
           }
         });
       }
