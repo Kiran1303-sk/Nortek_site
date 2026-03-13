@@ -192,14 +192,10 @@
         }
       }
 
-      img[width] {
-        width: revert !important;
-        max-width: none;
-      }
-
+      img[width],
       img[height] {
-        height: revert !important;
-        max-width: none;
+        max-width: 100%;
+        height: auto;
       }
 
       .text-white h1,
@@ -217,12 +213,14 @@
         object-fit: contain;
       }
 
+      .row img[height='60'],
       .row img[height='60px'] {
         width: 44px;
         height: 44px !important;
         object-fit: contain;
       }
 
+      .row img[height='52'],
       .row img[height='52px'] {
         width: 44px;
         height: 44px !important;
