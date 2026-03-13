@@ -192,8 +192,18 @@
 
         .ban {
             width: 100%;
-            height: auto;
+            height: 70vh;
+            min-height: 360px;
             display: block;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (min-width: 992px) {
+            .ban {
+                height: 90vh;
+                min-height: 520px;
+            }
         }
 
         .blog-hero-title-wrap {
@@ -240,14 +250,8 @@
         }
 
         @media (max-width: 991px) {
-            .ban {
-                height: 220px;
-                object-fit: cover;
-                object-position: center;
-            }
-
             .blog-hero-title-wrap {
-                margin-top: -68px;
+                margin-top: -150px;
             }
 
             .blog-hero-title {
@@ -267,7 +271,7 @@
             }
 
             main.blog-main {
-                margin-top: 18px !important;
+                margin-top: 24px !important;
                 margin-bottom: 80px !important;
             }
 
