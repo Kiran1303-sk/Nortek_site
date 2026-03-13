@@ -238,26 +238,25 @@
   }
 
   function ensureBackToTopButton() {
-    const footer = document.querySelector('footer');
-    if (!footer || document.querySelector('.nortek-back-to-top')) return;
+    if (document.querySelector('.nortek-back-to-top')) return;
 
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'nortek-back-to-top';
     button.setAttribute('aria-label', 'Back to top');
-    button.textContent = 'Back to top';
+    button.textContent = '↑';
 
     button.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    footer.appendChild(button);
+    document.body.appendChild(button);
 
     const style = document.createElement('style');
     style.textContent =
-      '.nortek-back-to-top{position:fixed;right:20px;bottom:20px;z-index:9999;border:none;border-radius:999px;padding:10px 14px;background:#2f3291;color:#fff;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18);display:none}' +
-      '.nortek-back-to-top:hover{background:#23266f}' +
-      '.nortek-back-to-top:focus{outline:2px solid #fff;outline-offset:2px}';
+      '.nortek-back-to-top{position:fixed;right:20px;bottom:20px;z-index:9999;border:1px solid rgba(0,0,0,.12);border-radius:12px;width:44px;height:44px;padding:0;background:rgba(255,255,255,.96);color:#1f2937;font-size:22px;line-height:1;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.16);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center}' +
+      '.nortek-back-to-top:hover{background:#ffffff;box-shadow:0 10px 28px rgba(0,0,0,.22)}' +
+      '.nortek-back-to-top:focus{outline:2px solid #1f2937;outline-offset:2px}';
     document.head.appendChild(style);
 
     const toggleVisibility = () => {
