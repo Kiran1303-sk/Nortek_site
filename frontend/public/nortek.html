@@ -930,9 +930,6 @@
           box-shadow: none !important;
         }
 
-        .client-logo-strip {
-          display: none;
-        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -1821,13 +1818,13 @@
         const clientsElement = document.querySelector('.mySwiper');
         if (clientsElement) {
           new Swiper(clientsElement, {
-            loop: !isMobile,
+            loop: !reduceMotion,
             spaceBetween: 30,
             autoplay:
-              isMobile || reduceMotion
+              reduceMotion
                 ? false
                 : {
-                    delay: 2000,
+                    delay: isMobile ? 2400 : 2000,
                     disableOnInteraction: false,
                   },
             breakpoints: {
