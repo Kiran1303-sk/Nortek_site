@@ -1817,8 +1817,8 @@
 
         const clientsElement = document.querySelector('.mySwiper');
         if (clientsElement) {
-          new Swiper(clientsElement, {
-            loop: !reduceMotion,
+          const clientsSwiper = new Swiper(clientsElement, {
+            loop: true,
             spaceBetween: 30,
             autoplay:
               reduceMotion
@@ -1826,7 +1826,11 @@
                 : {
                     delay: isMobile ? 2400 : 2000,
                     disableOnInteraction: false,
+                    pauseOnMouseEnter: false,
                   },
+            observer: true,
+            observeParents: true,
+            watchOverflow: true,
             breakpoints: {
               0: { slidesPerView: 1 }, // mobile
               576: { slidesPerView: 1 }, // sm
@@ -1835,6 +1839,16 @@
               1200: { slidesPerView: 4 }, // xl
             },
           });
+          if (!reduceMotion) {
+            window.addEventListener(
+              'load',
+              () => {
+                clientsSwiper.update();
+                clientsSwiper.autoplay?.start();
+              },
+              { once: true }
+            );
+          }
         }
           })
           .catch(() => {
