@@ -1806,7 +1806,7 @@
             speed: allowMotion ? 700 : 0,
             allowTouchMove: true,
             loop: allowMotion,
-            autoplay: allowMotion && !isMobile ? { delay: 2500, disableOnInteraction: false } : false,
+            autoplay: allowMotion ? { delay: isMobile ? 3000 : 2500, disableOnInteraction: false } : false,
             on: {
               init: function () {
                 toggleHeroContentAnimation(this);
