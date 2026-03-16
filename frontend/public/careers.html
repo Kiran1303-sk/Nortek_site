@@ -242,6 +242,28 @@
           flex: 0 0 auto;
           margin-left: 8px;
         }
+
+        .jobs-scroll-mobile {
+          max-height: 68vh;
+          overflow-y: auto;
+          overflow-x: hidden;
+          padding-right: 6px;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .jobs-scroll-mobile::-webkit-scrollbar {
+          width: 7px;
+        }
+
+        .jobs-scroll-mobile::-webkit-scrollbar-thumb {
+          background: rgba(47, 50, 145, 0.45);
+          border-radius: 999px;
+        }
+
+        .jobs-scroll-mobile::-webkit-scrollbar-track {
+          background: rgba(47, 50, 145, 0.1);
+          border-radius: 999px;
+        }
       }
 
       .nortek-title {
@@ -836,7 +858,7 @@
             </div>
           </div>
           <div class="col-12 col-lg-8">
-            <div id="jobsContainer" class="row row-cols-2"></div>
+            <div id="jobsContainer" class="row row-cols-1 row-cols-lg-2 jobs-scroll-mobile"></div>
 
             <!-- ðŸ”¹ MODERN PAGINATION -->
             <div class="pagination-wrapper">
