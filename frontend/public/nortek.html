@@ -147,7 +147,17 @@
 
       .hero-slide-2,
       .hero-slide-3 {
-        background-image: none;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .hero-slide-2 {
+        background-image: url('/images/bg1.jpg');
+      }
+
+      .hero-slide-3 {
+        background-image: url('/images/bg2.jpg');
       }
 
       @media (min-width: 992px) {
@@ -889,20 +899,6 @@
           backdrop-filter: none;
         }
 
-        .hero-content,
-        .hero-content.animate {
-          animation: none !important;
-          transition: none !important;
-        }
-
-        .heroSwiper .swiper-wrapper {
-          transform: none !important;
-        }
-
-        .heroSwiper .swiper-slide:not(:first-child) {
-          display: none;
-        }
-
         .top-info-row {
           row-gap: 0;
           padding: 0;
@@ -1233,6 +1229,7 @@
               poster="/images/video-bg.jpg"
               data-mobile-poster="/images/video-bg.jpg"
               controls
+              playsinline
             ></video>
           </div>
           <div class="col-12 col-md-3">
@@ -1748,24 +1745,7 @@
       document.addEventListener('DOMContentLoaded', () => {
         const isMobile = window.matchMedia('(max-width: 991px)').matches;
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const allowMotion = !isMobile && !reduceMotion;
-
-        // Mobile already displays only first hero slide via CSS; avoid loading Swiper assets.
-        if (isMobile) {
-          document.querySelector('.heroSwiper .hero-content')?.classList.add('animate');
-          const infoVideo = document.querySelector('.top-info-video');
-          if (infoVideo) {
-            const poster = infoVideo.getAttribute('data-mobile-poster') || '/images/video-bg.jpg';
-            const fallbackImage = document.createElement('img');
-            fallbackImage.src = poster;
-            fallbackImage.alt = 'Nortek intro';
-            fallbackImage.className = 'top-info-video';
-            fallbackImage.loading = 'lazy';
-            fallbackImage.decoding = 'async';
-            infoVideo.replaceWith(fallbackImage);
-          }
-          return;
-        }
+        const allowMotion = !reduceMotion;
 
         function loadStylesheet(href) {
           return new Promise((resolve, reject) => {
@@ -1805,6 +1785,20 @@
           .then(() => {
             if (typeof Swiper !== 'function') return;
 
+        const toggleHeroContentAnimation = (swiper) => {
+          swiper.slides.forEach((slide) =>
+            slide.querySelector('.hero-content')?.classList.remove('animate')
+          );
+          const activeContent = swiper.slides[swiper.activeIndex]?.querySelector('.hero-content');
+          if (activeContent) {
+            if (allowMotion) {
+              // Restart keyframe every slide so text and visual transition begin together.
+              void activeContent.offsetWidth;
+            }
+            activeContent.classList.add('animate');
+          }
+        };
+
         const heroElement = document.querySelector('.heroSwiper');
         if (heroElement) {
           new Swiper(heroElement, {
@@ -1812,18 +1806,13 @@
             speed: allowMotion ? 700 : 0,
             allowTouchMove: true,
             loop: allowMotion,
-            autoplay: allowMotion ? { delay: 2500, disableOnInteraction: false } : false,
+            autoplay: allowMotion && !isMobile ? { delay: 2500, disableOnInteraction: false } : false,
             on: {
               init: function () {
-                this.slides[this.activeIndex].querySelector('.hero-content')?.classList.add('animate');
+                toggleHeroContentAnimation(this);
               },
               slideChangeTransitionStart: function () {
-                this.slides.forEach((slide) =>
-                  slide.querySelector('.hero-content')?.classList.remove('animate')
-                );
-              },
-              slideChangeTransitionEnd: function () {
-                this.slides[this.activeIndex].querySelector('.hero-content')?.classList.add('animate');
+                toggleHeroContentAnimation(this);
               },
             },
           });
