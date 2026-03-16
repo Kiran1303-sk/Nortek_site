@@ -3118,7 +3118,10 @@
       const toggleLoginPassword = document.getElementById('toggleLoginPassword');
       const integratedLoginPassword = document.getElementById('integratedLoginPassword');
       const adminForgotPasswordLink = document.getElementById('adminForgotPasswordLink');
-      const adminForgotModal = new bootstrap.Modal(document.getElementById('adminForgotModal'));
+      const adminForgotModalEl = document.getElementById('adminForgotModal');
+      const hasBootstrap = typeof window.bootstrap !== 'undefined';
+      const adminForgotModal =
+        hasBootstrap && adminForgotModalEl ? new bootstrap.Modal(adminForgotModalEl) : null;
       const adminForgotForm = document.getElementById('adminForgotForm');
       const adminForgotAlert = document.getElementById('adminForgotAlert');
       const adminForgotEmail = document.getElementById('adminForgotEmail');
@@ -3141,8 +3144,17 @@
       const backFromUsers = document.getElementById('backFromUsers');
       const actionToastEl = document.getElementById('actionToast');
       const actionToastBody = document.getElementById('actionToastBody');
-      const actionToast = actionToastEl ? new bootstrap.Toast(actionToastEl, { delay: 2200 }) : null;
+      const actionToast =
+        hasBootstrap && actionToastEl ? new bootstrap.Toast(actionToastEl, { delay: 2200 }) : null;
       let adminForgotVerificationToken = null;
+
+      // Ensure legacy id-to-window lookups work consistently across browsers.
+      document.querySelectorAll('[id]').forEach((node) => {
+        const id = node.id;
+        if (/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(id) && typeof window[id] === 'undefined') {
+          window[id] = node;
+        }
+      });
 
       const showIntegratedLogin = (message = '') => {
         adminApp.classList.add('d-none');
@@ -3264,7 +3276,12 @@
         adminForgotVerificationToken = null;
         adminForgotAlert.className = 'alert d-none mt-3';
         adminForgotAlert.textContent = '';
-        adminForgotModal.show();
+        if (adminForgotModal) {
+          adminForgotModal.show();
+        } else {
+          // Fallback when Bootstrap JS fails to load.
+          window.location.href = '/forgot-password.html';
+        }
       };
 
       adminSendOtpBtn.onclick = async () => {
@@ -3346,7 +3363,9 @@
 
           setForgotAlert('success', 'Password reset successful. Please login.');
           document.getElementById('integratedLoginEmail').value = email;
-          setTimeout(() => adminForgotModal.hide(), 900);
+          if (adminForgotModal) {
+            setTimeout(() => adminForgotModal.hide(), 900);
+          }
         } catch (err) {
           setForgotAlert('danger', err.message);
         }
@@ -3416,9 +3435,12 @@
       let latestJobData = null;
 
 
-      const jobModal = new bootstrap.Modal(document.getElementById('jobModal'));
+      const jobModalEl = document.getElementById('jobModal');
+      const jobModal = hasBootstrap && jobModalEl ? new bootstrap.Modal(jobModalEl) : null;
       const jobForm = document.getElementById('jobForm');
-      const changePasswordModal = new bootstrap.Modal(document.getElementById('changePasswordModal'));
+      const changePasswordModalEl = document.getElementById('changePasswordModal');
+      const changePasswordModal =
+        hasBootstrap && changePasswordModalEl ? new bootstrap.Modal(changePasswordModalEl) : null;
       const changePasswordForm = document.getElementById('changePasswordForm');
 
       const fetchAuth = (url, opt = {}) => {
@@ -3471,7 +3493,7 @@
 
       changePasswordTrigger.onclick = () => {
         changePasswordForm.reset();
-        changePasswordModal.show();
+        if (changePasswordModal) changePasswordModal.show();
       };
 
       changePasswordForm.onsubmit = async (e) => {
@@ -3497,7 +3519,7 @@
         }
 
         alert('Password updated successfully.');
-        changePasswordModal.hide();
+        if (changePasswordModal) changePasswordModal.hide();
       };
 
       /* ---------- NAV ---------- */
@@ -3674,7 +3696,7 @@
           deleteJobBtn.style.display = 'none';
           saveJobBtn.style.display = 'none';
         }
-        jobModal.show();
+        if (jobModal) jobModal.show();
       }
       /* ---------- DASHBOARD CARD NAVIGATION ---------- */
 
@@ -3779,7 +3801,7 @@
         renderDynamicList(document.getElementById('educationList'), [], true);
 
         setEditable(true);
-        jobModal.show();
+        if (jobModal) jobModal.show();
       };
 
       /* ---------- DYNAMIC LIST BUTTONS ---------- */
@@ -3875,7 +3897,7 @@
           }
 
           await loadJobs();
-          jobModal.hide();
+          if (jobModal) jobModal.hide();
         } catch (err) {
           alert(err.message || 'Failed to save job.');
         }
@@ -3888,7 +3910,7 @@
         }
         if (!confirm('Delete this job?')) return;
         await fetchAuth(`${API}/${currentJobId}`, { method: 'DELETE' });
-        jobModal.hide();
+        if (jobModal) jobModal.hide();
         await loadJobs();
         show('home');
 
