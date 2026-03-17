@@ -9,7 +9,7 @@
   const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
   const fallbackBase = isLocalhost
     ? 'http://localhost:5000'
-    : 'https://nortek-site.onrender.com/';
+    : 'https://nortek-backend.onrender.com';
 
   window.__API_BASE__ = normalizeBase(configuredBase || fallbackBase);
 
