@@ -10,7 +10,7 @@
     || window.location.protocol === 'file:';
   const fallbackBase = isLocalhost
     ? 'http://localhost:5000'
-    : 'https://nortek-backend.onrender.com';
+    : 'https://nortek-site.onrender.com';
 
   window.__API_BASE__ = normalizeBase(configuredBase || fallbackBase);
 
