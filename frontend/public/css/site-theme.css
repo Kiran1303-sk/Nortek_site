@@ -59,12 +59,12 @@ a:hover {
 .navbar {
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--theme-border);
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 }
 
 .navbar.navbar-expand-lg {
-  min-height: 62px !important;
+  min-height: 74px !important;
 }
 
 .navbar .container-fluid {
@@ -340,8 +340,8 @@ video {
   }
 
   .navbar {
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
   }
 
   .navbar-brand img {
@@ -349,7 +349,7 @@ video {
   }
 
   .navbar.navbar-expand-lg {
-    min-height: 56px !important;
+    min-height: 66px !important;
   }
 
   .navbar-nav .nav-link {
