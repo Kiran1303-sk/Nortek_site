@@ -8,9 +8,10 @@
   const configuredBase = window.__API_BASE_URL__ || window.API_BASE_URL || metaBase;
   const isLocalhost = ['localhost', '127.0.0.1', ''].includes(window.location.hostname)
     || window.location.protocol === 'file:';
+  const remoteDefaultBase = 'https://nortek-site.onrender.com';
   const fallbackBase = isLocalhost
-    ? 'http://localhost:5000'
-    : 'https://nortek-site.onrender.com';
+    ? remoteDefaultBase
+    : remoteDefaultBase;
 
   window.__API_BASE__ = normalizeBase(configuredBase || fallbackBase);
 

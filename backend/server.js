@@ -23,13 +23,19 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/nortek';
 const JWT_SECRET = process.env.JWT_SECRET || 'secret_key';
 const ADMIN_JWT_EXPIRES_IN = process.env.ADMIN_JWT_EXPIRES_IN || '30m';
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5500';
-const CORS_ALLOWED_ORIGINS = (
-  process.env.CORS_ALLOWED_ORIGINS
-  || `${CLIENT_URL},http://localhost:5000,http://localhost:5500,http://127.0.0.1:5500`
-)
+const DEFAULT_CORS_ORIGINS = [
+  CLIENT_URL,
+  'http://localhost:5000',
+  'http://localhost:5500',
+  'http://127.0.0.1:5500',
+  'https://nortek-frontend.onrender.com',
+  'https://nortek-site.onrender.com'
+];
+const ENV_CORS_ORIGINS = String(process.env.CORS_ALLOWED_ORIGINS || '')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
+const CORS_ALLOWED_ORIGINS = [...new Set([...DEFAULT_CORS_ORIGINS, ...ENV_CORS_ORIGINS])];
 const CONTACT_RECEIVER_EMAIL = process.env.CONTACT_RECEIVER_EMAIL || process.env.EMAIL_USER;
 const PASSWORD_MIN_LENGTH = Number(process.env.PASSWORD_MIN_LENGTH || 8);
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
