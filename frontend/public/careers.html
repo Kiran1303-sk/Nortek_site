@@ -1028,11 +1028,104 @@
 
           const JOBS_PER_PAGE = 4;
           const RANGES_PER_GROUP = 4;
+          const JOBS_CACHE_KEY = 'careersPublicJobsCacheV1';
+          const JOBS_CACHE_MAX_AGE_MS = 5 * 60 * 1000;
+          const JOB_HINTS_KEY = 'careersJobHintsV1';
 
           let currentPage = 1;
           let currentGroup = 0;
           let jobs = [];
           let filteredJobs = [];
+          let filtersRestored = false;
+
+          function formatPostedDate(value) {
+            const parsed = new Date(value);
+            if (Number.isNaN(parsed.getTime())) return 'N/A';
+            return parsed.toLocaleDateString('en-US', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            });
+          }
+
+          function normalizeJob(job) {
+            const createdSource = job.updatedAt || job.createdAt || job.postedOn;
+            const createdAt = new Date(createdSource);
+            const createdAtMs = Number.isNaN(createdAt.getTime()) ? 0 : createdAt.getTime();
+
+            return {
+              title: job.title || '',
+              code: job.jobCode || job.code || '',
+              type: job.type || '',
+              hours: job.hours || '',
+              experience: job.experience || '',
+              workType: job.workType || '',
+              location: job.location || '',
+              createdAt,
+              createdAtMs,
+              postedOn: formatPostedDate(job.postedOn || createdSource),
+            };
+          }
+
+          function sortJobsByLatest(list) {
+            return list.sort((a, b) => b.createdAtMs - a.createdAtMs);
+          }
+
+          function readJobsCache() {
+            try {
+              const cached = JSON.parse(localStorage.getItem(JOBS_CACHE_KEY) || 'null');
+              if (!cached || !Array.isArray(cached.jobs) || !cached.savedAt) return null;
+              if (Date.now() - cached.savedAt > JOBS_CACHE_MAX_AGE_MS) return null;
+              return cached.jobs;
+            } catch (_) {
+              return null;
+            }
+          }
+
+          function writeJobsCache(rawJobs) {
+            try {
+              localStorage.setItem(
+                JOBS_CACHE_KEY,
+                JSON.stringify({
+                  savedAt: Date.now(),
+                  jobs: rawJobs,
+                })
+              );
+            } catch (_) {}
+          }
+
+          function writeJobHints(jobList) {
+            try {
+              const hintMap = jobList.reduce((acc, job) => {
+                if (!job.code) return acc;
+                acc[job.code] = {
+                  title: job.title,
+                  jobCode: job.code,
+                  type: job.type,
+                  hours: job.hours,
+                  location: job.location,
+                  experience: job.experience,
+                  postedOn: job.postedOn,
+                };
+                return acc;
+              }, {});
+              sessionStorage.setItem(JOB_HINTS_KEY, JSON.stringify(hintMap));
+            } catch (_) {}
+          }
+
+          function applyJobs(rawJobs, { restoreSavedFilters = false } = {}) {
+            jobs = sortJobsByLatest(rawJobs.map(normalizeJob));
+            filteredJobs = [...jobs];
+            writeJobHints(jobs);
+            populateLatestYearOptions();
+
+            if (restoreSavedFilters && !filtersRestored) {
+              restoreFiltersFromStorage();
+              filtersRestored = true;
+            }
+
+            filterJobs();
+          }
 
           // ================= GET RADIO =================
           function getSelectedValue(name) {
@@ -1078,42 +1171,26 @@
           }
 
           async function fetchLiveJobs() {
-            try {
+            const cachedJobs = readJobsCache();
+            if (cachedJobs && cachedJobs.length) {
+              applyJobs(cachedJobs, { restoreSavedFilters: true });
+            } else {
               jobsContainer.innerHTML = '<p class="text-muted">Loading jobs...</p>';
+            }
+
+            try {
               const res = await fetch(API_URL);
+              if (!res.ok) {
+                throw new Error('Failed to fetch jobs');
+              }
               const data = await res.json();
-
-              jobs = data.jobs.map((job) => ({
-                title: job.title,
-                code: job.jobCode,
-                type: job.type || '',
-                hours: job.hours || '',
-                experience: job.experience || '',
-                workType: job.workType || '',
-                location: job.location,
-                createdAt: new Date(job.updatedAt || job.createdAt || job.postedOn),
-                postedOn: new Date(
-                  job.postedOn || job.updatedAt || job.createdAt
-                ).toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                }),
-              }));
-              // Always show latest jobs first
-              jobs.sort((a, b) => {
-                const aTime = Number.isNaN(a.createdAt?.getTime?.()) ? 0 : a.createdAt.getTime();
-                const bTime = Number.isNaN(b.createdAt?.getTime?.()) ? 0 : b.createdAt.getTime();
-                return bTime - aTime;
-              });
-
-              populateLatestYearOptions();
-
-              restoreFiltersFromStorage();
-
-              filterJobs();
+              const liveJobs = Array.isArray(data.jobs) ? data.jobs : [];
+              writeJobsCache(liveJobs);
+              applyJobs(liveJobs, { restoreSavedFilters: true });
             } catch (err) {
-              jobsContainer.innerHTML = '<p>Error loading jobs</p>';
+              if (!cachedJobs || !cachedJobs.length) {
+                jobsContainer.innerHTML = '<p>Error loading jobs</p>';
+              }
             }
           }
 

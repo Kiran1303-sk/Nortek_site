@@ -672,6 +672,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const JOB_HINTS_KEY = 'careersJobHintsV1';
+
             function sanitize(text) {
                 return String(text || '').replace(/[&<>"']/g, (m) => ({
                     '&': '&amp;',
@@ -694,21 +696,31 @@
                 return data.map(item => `<li><i class="bi bi-dot"></i> ${sanitize(item)}</li>`).join('');
             }
 
+            function renderSummary(job) {
+                document.getElementById("jobTitle").innerText = job.title || 'N/A';
+                document.getElementById("jobCode").innerText = job.jobCode || 'N/A';
+                document.getElementById("jobType").innerText = `${job.type || 'N/A'} ${job.hours ? ' | ' + job.hours : ''}`;
+                document.getElementById("jobLocation").innerText = job.location || 'N/A';
+                document.getElementById("jobExperience").innerText = job.experience || 'N/A';
+                document.getElementById("sideJobCode").innerText = job.jobCode || 'N/A';
+                document.getElementById("sideJobType").innerText = job.type || 'N/A';
+                document.getElementById("sideJobLocation").innerText = job.location || 'N/A';
+
+                const postedDate = job.postedOn || job.posted || '';
+                document.getElementById("jobPosted").innerText = postedDate ? new Date(postedDate).toDateString() : 'N/A';
+            }
+
+            try {
+                const hints = JSON.parse(sessionStorage.getItem(JOB_HINTS_KEY) || '{}');
+                if (hints && hints[jobCode]) {
+                    renderSummary(hints[jobCode]);
+                }
+            } catch (_) {}
+
             fetch(API_URL)
                 .then(res => { if (!res.ok) throw new Error('Job not found'); return res.json(); })
                 .then(job => {
-                    document.getElementById("jobTitle").innerText = job.title || 'N/A';
-                    document.getElementById("jobCode").innerText = job.jobCode || 'N/A';
-                    document.getElementById("jobType").innerText = `${job.type || 'N/A'} ${job.hours ? ' | ' + job.hours : ''}`;
-                    document.getElementById("jobLocation").innerText = job.location || 'N/A';
-                    document.getElementById("jobExperience").innerText = job.experience || 'N/A';
-                    document.getElementById("sideJobCode").innerText = job.jobCode || 'N/A';
-                    document.getElementById("sideJobType").innerText = job.type || 'N/A';
-                    document.getElementById("sideJobLocation").innerText = job.location || 'N/A';
-
-
-                    const postedDate = job.postedOn || job.posted || '';
-                    document.getElementById("jobPosted").innerText = postedDate ? new Date(postedDate).toDateString() : 'N/A';
+                    renderSummary(job);
                     document.getElementById("jobDescription").innerText = job.description || 'N/A';
 
                     document.getElementById("jobDuties").innerHTML = renderList(job.duties || []);
