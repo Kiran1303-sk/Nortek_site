@@ -11,8 +11,12 @@ const authorize = require('../middleware/role.middleware');
 // GET all jobs (Career page)
 router.get('/public', async (req, res) => {
   try {
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    const jobs = await Job.find().sort({ updatedAt: -1, createdAt: -1 });
+    // Public listing only needs summary fields; avoid shipping large text payloads.
+    res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
+    const jobs = await Job.find()
+      .select('title jobCode type hours experience workType location postedOn createdAt updatedAt')
+      .sort({ updatedAt: -1, createdAt: -1 })
+      .lean();
     res.json({ success: true, jobs });
   } catch (err) {
     console.error(err);
@@ -23,7 +27,7 @@ router.get('/public', async (req, res) => {
 // GET single job by jobCode (Job Details page)
 router.get('/public/:jobCode', async (req, res) => {
   try {
-    const job = await Job.findOne({ jobCode: req.params.jobCode });
+    const job = await Job.findOne({ jobCode: req.params.jobCode }).lean();
 
     if (!job) {
       return res.status(404).json({

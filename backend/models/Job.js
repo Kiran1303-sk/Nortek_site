@@ -16,6 +16,9 @@ const JobSchema = new mongoose.Schema({
   postedOn: Date                                
 }, { timestamps: true });
 
+JobSchema.index({ updatedAt: -1, createdAt: -1 });
+JobSchema.index({ jobCode: 1 });
+
 //  Prevent OverwriteModelError
 const Job = mongoose.models.Job || mongoose.model('Job', JobSchema);
 
