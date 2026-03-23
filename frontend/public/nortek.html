@@ -939,8 +939,6 @@
         justify-content: center;
         cursor: pointer;
         z-index: 2;
-        opacity: 0;
-        pointer-events: none;
         transition: opacity 0.2s ease;
       }
 
@@ -951,11 +949,6 @@
         border-bottom: 9px solid transparent;
         border-left: 14px solid #ffffff;
         margin-left: 3px;
-      }
-
-      .top-info-video-shell.is-started .top-info-video-play {
-        opacity: 1;
-        pointer-events: auto;
       }
 
       .top-info-video-shell.is-playing .top-info-video-play {
@@ -1295,7 +1288,6 @@
                 src="/videos/Nortek.mp4"
                 poster="/images/video-bg.jpg"
                 data-mobile-poster="/images/video-bg.jpg"
-                controls
                 playsinline
               ></video>
               <button type="button" class="top-info-video-play" aria-label="Play video">
@@ -1822,11 +1814,7 @@
         const topInfoVideoPlayBtn = document.querySelector('.top-info-video-play');
 
         if (topInfoVideo && topInfoVideoShell && topInfoVideoPlayBtn) {
-          let hasStartedPlayback = topInfoVideo.currentTime > 0;
-
           const syncTopVideoState = () => {
-            hasStartedPlayback = hasStartedPlayback || topInfoVideo.currentTime > 0;
-            topInfoVideoShell.classList.toggle('is-started', hasStartedPlayback);
             if (topInfoVideo.paused || topInfoVideo.ended) {
               topInfoVideoShell.classList.remove('is-playing');
             } else {
@@ -1835,12 +1823,10 @@
           };
 
           topInfoVideoPlayBtn.addEventListener('click', () => {
-            topInfoVideo.play().catch(() => {});
-          });
-          topInfoVideo.addEventListener('click', () => {
-            if (!hasStartedPlayback && topInfoVideo.paused) {
-              topInfoVideo.play().catch(() => {});
+            if (!topInfoVideo.hasAttribute('controls')) {
+              topInfoVideo.setAttribute('controls', '');
             }
+            topInfoVideo.play().catch(() => {});
           });
           topInfoVideo.addEventListener('play', syncTopVideoState);
           topInfoVideo.addEventListener('pause', syncTopVideoState);
