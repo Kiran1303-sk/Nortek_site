@@ -434,6 +434,7 @@
         }
     </style>
   <script src="/js/api-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -717,9 +718,8 @@
                 }
             } catch (_) {}
 
-            fetch(API_URL)
-                .then(res => { if (!res.ok) throw new Error('Job not found'); return res.json(); })
-                .then(job => {
+            axios.get(API_URL)
+                .then(({ data: job }) => {
                     renderSummary(job);
                     document.getElementById("jobDescription").innerText = job.description || 'N/A';
 
@@ -731,7 +731,7 @@
                         window.location.href = applyUrl;
                     };
                 })
-                .catch(err => { console.error(err); alert('Job not found or removed'); });
+                .catch(err => { console.error(err); alert(err.response?.data?.message || 'Job not found or removed'); });
         });
     </script>
 

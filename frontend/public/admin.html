@@ -23,6 +23,7 @@
     }
   </style>
   <script src="/js/api-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div class="login-box">
@@ -62,14 +63,8 @@ form.addEventListener('submit', async e => {
   const password = document.getElementById('password').value.trim();
 
   try {
-    const res = await fetch(window.apiUrl('/admin/login'), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
-
-    const data = await res.json();
-    if (!res.ok || !data.success) throw new Error(data.message || 'Login failed');
+    const { data } = await axios.post(window.apiUrl('/admin/login'), { email, password });
+    if (!data.success) throw new Error(data.message || 'Login failed');
 
     localStorage.removeItem('candidate_token');
     localStorage.removeItem('candidate_user');
@@ -82,8 +77,9 @@ form.addEventListener('submit', async e => {
     setTimeout(() => window.location.href = '/admin-dashboard.html', 1500);
 
   } catch (err) {
+    const message = err.response?.data?.message || err.message;
     alertBox.className = 'alert alert-danger';
-    alertBox.textContent = err.message;
+    alertBox.textContent = message;
     document.getElementById('password').value = '';
   } finally {
     loginBtn.disabled = false;

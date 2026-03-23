@@ -2563,6 +2563,7 @@
     }
   </style>
   <script src="/js/api-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -3243,14 +3244,8 @@
         const password = document.getElementById('integratedLoginPassword').value;
 
         try {
-          const res = await fetch(window.apiUrl('/admin/login'), {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-          });
-
-          const data = await res.json();
-          if (!res.ok || !data.success) throw new Error(data.message || 'Login failed');
+          const { data } = await axios.post(window.apiUrl('/admin/login'), { email, password });
+          if (!data.success) throw new Error(data.message || 'Login failed');
 
           localStorage.removeItem('candidate_token');
           localStorage.removeItem('candidate_user');
@@ -3258,8 +3253,9 @@
           localStorage.setItem('admin_user', JSON.stringify(data.user || null));
           location.reload();
         } catch (err) {
+          const message = err.response?.data?.message || err.message;
           integratedLoginAlert.className = 'alert alert-danger';
-          integratedLoginAlert.textContent = err.message;
+          integratedLoginAlert.textContent = message;
         } finally {
           integratedLoginBtn.disabled = false;
         }
@@ -3292,18 +3288,13 @@
         }
 
         try {
-          const res = await fetch(window.apiUrl('/admin/forgot-password/request-otp'), {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-          });
-          const data = await res.json();
-          if (!res.ok || !data.success) throw new Error(data.message || 'Failed to send OTP');
+          const { data } = await axios.post(window.apiUrl('/admin/forgot-password/request-otp'), { email });
+          if (!data.success) throw new Error(data.message || 'Failed to send OTP');
 
           adminForgotVerificationToken = null;
           setForgotAlert('success', 'OTP sent to your email.');
         } catch (err) {
-          setForgotAlert('danger', err.message);
+          setForgotAlert('danger', err.response?.data?.message || err.message);
         }
       };
 
@@ -3316,18 +3307,13 @@
         }
 
         try {
-          const res = await fetch(window.apiUrl('/admin/forgot-password/verify-otp'), {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, otp })
-          });
-          const data = await res.json();
-          if (!res.ok || !data.success) throw new Error(data.message || 'Failed to verify OTP');
+          const { data } = await axios.post(window.apiUrl('/admin/forgot-password/verify-otp'), { email, otp });
+          if (!data.success) throw new Error(data.message || 'Failed to verify OTP');
 
           adminForgotVerificationToken = data.verificationToken;
           setForgotAlert('success', 'OTP verified. You can reset password now.');
         } catch (err) {
-          setForgotAlert('danger', err.message);
+          setForgotAlert('danger', err.response?.data?.message || err.message);
         }
       };
 
@@ -3349,17 +3335,12 @@
         }
 
         try {
-          const res = await fetch(window.apiUrl('/admin/forgot-password/reset'), {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email,
-              newPassword,
-              verificationToken: adminForgotVerificationToken
-            })
+          const { data } = await axios.post(window.apiUrl('/admin/forgot-password/reset'), {
+            email,
+            newPassword,
+            verificationToken: adminForgotVerificationToken
           });
-          const data = await res.json();
-          if (!res.ok || !data.success) throw new Error(data.message || 'Failed to reset password');
+          if (!data.success) throw new Error(data.message || 'Failed to reset password');
 
           setForgotAlert('success', 'Password reset successful. Please login.');
           document.getElementById('integratedLoginEmail').value = email;
@@ -3367,7 +3348,7 @@
             setTimeout(() => adminForgotModal.hide(), 900);
           }
         } catch (err) {
-          setForgotAlert('danger', err.message);
+          setForgotAlert('danger', err.response?.data?.message || err.message);
         }
       };
 
@@ -3445,35 +3426,39 @@
 
       const fetchAuth = (url, opt = {}) => {
         const method = (opt.method || 'GET').toUpperCase();
+        const headers = {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          ...(opt.headers || {})
+        };
 
-        return fetch(window.apiUrl(url), {
-          ...opt,
-          cache: method === 'GET' ? 'no-store' : opt.cache,
-          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
-        }).then(async (r) => {
-        const raw = await r.text();
-        let data = {};
-        try {
-          data = raw ? JSON.parse(raw) : {};
-        } catch {
-          data = { message: raw || `HTTP ${r.status}` };
+        if (method === 'GET') {
+          headers['Cache-Control'] = 'no-store';
+          headers.Pragma = 'no-cache';
         }
 
-        if (r.status === 401) {
-          expireSessionNow('Session expired. Please login again.');
-          throw new Error('Unauthorized');
-        }
+        return axios({
+          url: window.apiUrl(url),
+          method,
+          headers,
+          data: opt.body
+        })
+          .then((response) => response.data)
+          .catch((err) => {
+            const status = err.response?.status;
+            const data = err.response?.data || {};
 
-        if (r.status === 403) {
-          throw new Error(data.message || 'Forbidden');
-        }
+            if (status === 401) {
+              expireSessionNow('Session expired. Please login again.');
+              throw new Error('Unauthorized');
+            }
 
-        if (!r.ok) {
-          throw new Error(data.message || 'Request failed');
-        }
+            if (status === 403) {
+              throw new Error(data.message || 'Forbidden');
+            }
 
-          return data;
-        });
+            throw new Error(data.message || err.message || 'Request failed');
+          });
       };
 
       if (!canManageJobs) {

@@ -256,6 +256,7 @@
     </style>
 
   <script src="/js/api-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -561,21 +562,16 @@
             };
 
             try {
-                const res = await fetch(window.apiUrl('/contact'), {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const data = await res.json();
-                if (!res.ok || !data.success) throw new Error(data.message || 'Failed to send message');
+                const { data } = await axios.post(window.apiUrl('/contact'), payload);
+                if (!data.success) throw new Error(data.message || 'Failed to send message');
 
                 contactAlert.className = 'alert alert-success mt-3';
                 contactAlert.textContent = 'Message sent successfully. We will contact you soon.';
                 contactForm.reset();
             } catch (err) {
+                const message = err.response?.data?.message || err.message;
                 contactAlert.className = 'alert alert-danger mt-3';
-                contactAlert.textContent = err.message;
+                contactAlert.textContent = message;
             } finally {
                 sendMessageBtn.disabled = false;
             }

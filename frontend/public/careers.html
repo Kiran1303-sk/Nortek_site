@@ -486,6 +486,7 @@
       }
     </style>
     <script src="/js/api-config.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
 </head>
 
   <body>
@@ -1179,11 +1180,7 @@
             }
 
             try {
-              const res = await fetch(API_URL);
-              if (!res.ok) {
-                throw new Error('Failed to fetch jobs');
-              }
-              const data = await res.json();
+              const { data } = await axios.get(API_URL);
               const liveJobs = Array.isArray(data.jobs) ? data.jobs : [];
               writeJobsCache(liveJobs);
               applyJobs(liveJobs, { restoreSavedFilters: true });

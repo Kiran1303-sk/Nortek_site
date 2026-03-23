@@ -42,6 +42,7 @@
     }
   </style>
   <script src="/js/api-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -149,14 +150,14 @@
     }
 
     async function submitAuth(url, payload) {
-      const res = await fetch(window.apiUrl(url), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) throw new Error(data.message || 'Request failed');
-      return data;
+      try {
+        const { data } = await axios.post(window.apiUrl(url), payload);
+        if (!data.success) throw new Error(data.message || 'Request failed');
+        return data;
+      } catch (err) {
+        const message = err.response?.data?.message || err.message;
+        throw new Error(message);
+      }
     }
 
     let signupVerificationToken = null;

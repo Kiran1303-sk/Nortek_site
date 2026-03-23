@@ -202,6 +202,7 @@
       }
     </style>
     <script src="/js/api-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
   <body>
@@ -586,14 +587,9 @@
           formData.append('name', `${firstName} ${lastName}`);
 
           try {
-            const response = await fetch(window.apiUrl('/apply'), {
-              method: 'POST',
-              body: formData,
-            });
-
-            const data = await response.json();
-            if (!response.ok || !data.success) {
-              throw new Error(data.message || 'HTTP error! status: ' + response.status);
+            const { data } = await axios.post(window.apiUrl('/apply'), formData);
+            if (!data.success) {
+              throw new Error(data.message || 'Failed to submit application');
             }
 
             if (data.success) {
@@ -604,7 +600,8 @@
             }
           } catch (err) {
             console.error(err);
-            alert(`[X] Server error: ${err.message}`);
+            const message = err.response?.data?.message || err.message;
+            alert(`[X] Server error: ${message}`);
           }
         });
       }
