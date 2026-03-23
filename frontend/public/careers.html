@@ -1079,6 +1079,7 @@
 
           async function fetchLiveJobs() {
             try {
+              jobsContainer.innerHTML = '<p class="text-muted">Loading jobs...</p>';
               const res = await fetch(API_URL);
               const data = await res.json();
 
@@ -1436,12 +1437,7 @@
             }
           });
 
-          const startJobsFetch = () => fetchLiveJobs();
-          if ('requestIdleCallback' in window) {
-            requestIdleCallback(startJobsFetch, { timeout: 1200 });
-          } else {
-            setTimeout(startJobsFetch, 0);
-          }
+          fetchLiveJobs();
           updateBadgeCount();
         });
       </script>
