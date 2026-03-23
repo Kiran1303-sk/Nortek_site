@@ -1185,8 +1185,10 @@
               writeJobsCache(liveJobs);
               applyJobs(liveJobs, { restoreSavedFilters: true });
             } catch (err) {
+              console.error('Failed to load public jobs:', err);
+              const message = err.response?.data?.message || err.message || 'Error loading jobs';
               if (!cachedJobs || !cachedJobs.length) {
-                jobsContainer.innerHTML = '<p>Error loading jobs</p>';
+                jobsContainer.innerHTML = `<p>${message}</p>`;
               }
             }
           }
