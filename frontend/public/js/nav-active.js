@@ -14,6 +14,9 @@
     "/rpa.html",
     "/business-int.html"
   ];
+  const footerServicePaths = new Set(
+    servicePaths.filter((item) => item !== "/services.html")
+  );
 
   const careerPaths = [
     "/careers.html",
@@ -38,6 +41,19 @@
     const isActive = href === activeHref;
     link.classList.toggle("active", isActive);
     if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+
+  const footerLinks = Array.from(document.querySelectorAll("footer a[href]"));
+  footerLinks.forEach((link) => {
+    const href = (link.getAttribute("href") || "").toLowerCase();
+    if (!footerServicePaths.has(href)) {return;}
+
+    const isActiveFooterService = href === path;
+    if (isActiveFooterService) {
       link.setAttribute("aria-current", "page");
     } else {
       link.removeAttribute("aria-current");

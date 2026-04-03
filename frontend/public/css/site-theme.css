@@ -267,6 +267,42 @@ footer h5 {
   letter-spacing: 0.3px;
 }
 
+footer a[href="/webdesign.html"],
+footer a[href="/AI-services.html"],
+footer a[href="/agentic.html"],
+footer a[href="/Sap-Erp.html"],
+footer a[href="/RPA.html"],
+footer a[href="/Business-int.html"] {
+  display: inline-block;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease, transform 0.2s ease;
+}
+
+footer a[href="/webdesign.html"]:hover,
+footer a[href="/AI-services.html"]:hover,
+footer a[href="/agentic.html"]:hover,
+footer a[href="/Sap-Erp.html"]:hover,
+footer a[href="/RPA.html"]:hover,
+footer a[href="/Business-int.html"]:hover,
+footer a[href="/webdesign.html"]:focus-visible,
+footer a[href="/AI-services.html"]:focus-visible,
+footer a[href="/agentic.html"]:focus-visible,
+footer a[href="/Sap-Erp.html"]:focus-visible,
+footer a[href="/RPA.html"]:focus-visible,
+footer a[href="/Business-int.html"]:focus-visible,
+footer a[aria-current="page"][href="/webdesign.html"],
+footer a[aria-current="page"][href="/AI-services.html"],
+footer a[aria-current="page"][href="/agentic.html"],
+footer a[aria-current="page"][href="/Sap-Erp.html"],
+footer a[aria-current="page"][href="/RPA.html"],
+footer a[aria-current="page"][href="/Business-int.html"] {
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-decoration-color: var(--theme-accent);
+  text-underline-offset: 4px;
+  font-weight: 700;
+  transform: translateX(2px);
+}
+
 img {
   max-width: 100%;
   height: auto;
