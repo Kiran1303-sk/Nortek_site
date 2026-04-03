@@ -217,6 +217,28 @@
             color: #fff !important;
         }
 
+        .feature-list {
+            padding: 0;
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .feature-list li span {
+            margin-left: 0 !important;
+            flex: 1;
+        }
+
+        @media (max-width: 991px) {
+            .feature-col {
+                margin-bottom: 32px;
+            }
+        }
+
         .modern img {
             width: 64px;
             height: 64px !important;
@@ -426,7 +448,7 @@
         <div style="background:rgb(47, 50, 145) ;">
             <div class="container" style="padding-top: 70px; padding-bottom: 70px;">
                 <div class="row">
-                    <div class="col-md-4 text-white">
+                    <div class="col-md-4 text-white feature-col">
                         <div>
                             <i>
                                 <img loading="lazy" decoding="async" src="/images/methodology.png" height="52">
@@ -435,7 +457,7 @@
                             <p>With the advanced capabilities of<br> conversational AI, provide better support to
                                 the<br> user.</p>
 
-                            <ul style=" padding: 0;">
+                            <ul class="feature-list">
                                 <li class=" d-flex align-items-start bi-check-circle mb-2"><span
                                         style="margin-left: 10px;">Natural Language Processing.</span></li>
                                 <li class=" d-flex align-items-start bi-check-circle mb-2"><span
@@ -449,7 +471,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-4 text-white">
+                    <div class="col-md-4 text-white feature-col">
                         <div>
                             <i>
                                 <img loading="lazy" decoding="async" src="/images/assessment.png" height="52">
@@ -457,7 +479,7 @@
                             <h4 style="margin-top: 20px;">Mundane Task<br> automation</h4>
                             <p>Repetitive tasks automation with enhanced<br> efficiency.</p>
 
-                            <ul style=" padding: 0;">
+                            <ul class="feature-list">
                                 <li class=" d-flex align-items-start bi-check-circle mb-2"><span
                                         style="margin-left: 10px;">Process automation.</span></li>
                                 <li class=" d-flex align-items-start bi-check-circle mb-2"><span
@@ -472,7 +494,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-4 text-white">
+                    <div class="col-md-4 text-white feature-col">
                         <div>
                             <i>
                                 <img loading="lazy" decoding="async" src="/images/capacity-management.png" height="52">
@@ -480,7 +502,7 @@
                             <h4 style="margin-top: 20px;">User<br> Engagement</h4>
                             <p>Real-time data management and responsive<br> replies for higher engagement.</p>
 
-                            <ul style=" padding: 0;">
+                            <ul class="feature-list">
                                 <li class=" d-flex align-items-start bi-check-circle mb-2"><span
                                         style="margin-left: 10px;">Strategic and logical responses.</span></li>
                                 <li class=" d-flex align-items-start bi-check-circle mb-2"><span
