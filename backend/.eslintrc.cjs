@@ -20,6 +20,12 @@ module.exports = {
   },
   overrides: [
     {
+      files: [".eslintrc.cjs"],
+      env: {
+        node: true
+      }
+    },
+    {
       files: ["public/**/*.js"],
       env: {
         browser: true
