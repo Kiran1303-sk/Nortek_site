@@ -145,6 +145,8 @@
     }
 
     function saveCandidateSession(data) {
+      localStorage.removeItem('admin_token');
+      localStorage.removeItem('admin_user');
       localStorage.setItem('candidate_token', data.token);
       localStorage.setItem('candidate_user', JSON.stringify(data.user));
     }
