@@ -419,7 +419,6 @@ app.post('/apply', formLimiter, upload.single('cv'), async (req, res) => {
 
     const matchedCandidate = await Candidate.findOne({ email: submittedEmail }).select('_id');
 
-    //  Save application
     const application = await Application.create({
       ...req.body,
       candidateId: matchedCandidate?._id || undefined,
@@ -428,62 +427,91 @@ app.post('/apply', formLimiter, upload.single('cv'), async (req, res) => {
       cv: req.file?.filename
     });
 
-   try {
-  await transporter.sendMail({
-    from: `"Nortek Careers" <${process.env.EMAIL_USER}>`,
-    to: application.email,
-    subject: `Application Received - ${application.designation} (${application.jobCode})`,
-    html: `
+    const emailUser = String(process.env.EMAIL_USER || '').trim();
+    const logoPath = path.join(__dirname, 'assets/email/nortek_white.png');
+    const hasLogo = fs.existsSync(logoPath);
+    const designation = String(application.designation || 'Applied Position').trim();
+    const jobCode = String(application.jobCode || 'N/A').trim();
+
+    const mailHtml = `
       <div style="font-family:Arial;background:#f4f6f9;padding:20px">
         <div style="max-width:600px;margin:auto;background:#fff;padding:30px;border-radius:8px">
-          
           <div style="text-align:center">
-            <img src="cid:norteklogo" width="140" style="margin-bottom:10px;" />
+            ${hasLogo ? '<img src="cid:norteklogo" width="140" style="margin-bottom:10px;" />' : ''}
             <h2 style="color:#2f3291;">Application Received</h2>
           </div>
-
           <p>Dear <b>${application.name}</b>,</p>
-
-          <p>Thank you for applying for the position of 
-             <b>${application.designation}</b>.
-          </p>
-
-          <p><b>Job Code:</b> ${application.jobCode}</p>
-
+          <p>Thank you for applying for the position of <b>${designation}</b>.</p>
+          <p><b>Job Code:</b> ${jobCode}</p>
           <p>Your application has been successfully received.</p>
           <p>Our HR team will review your profile and contact you if shortlisted.</p>
-
           <p style="font-size:12px;color:gray;text-align:center">
-            © 2026 Nortek Consulting. All rights reserved.
+            &copy; 2026 Nortek Consulting. All rights reserved.
           </p>
-
         </div>
       </div>
-    `,
-    
-    attachments: [
-      {
-        filename: "nortek_white.png",
-        path: path.join(__dirname, 'assets/email/nortek_white.png'),
-        cid: "norteklogo" 
+    `;
+
+    const mailText =
+      `Dear ${application.name},\n\n` +
+      `Thank you for applying for the position of ${designation}.\n` +
+      `Job Code: ${jobCode}\n\n` +
+      'Your application has been successfully received.\n' +
+      'Our HR team will review your profile and contact you if shortlisted.\n\n' +
+      'Nortek Consulting';
+
+    let emailSent = false;
+
+    if (!emailUser) {
+      console.error('Application acknowledgement email skipped: EMAIL_USER is missing');
+    } else {
+      try {
+        await transporter.sendMail({
+          from: `"Nortek Careers" <${emailUser}>`,
+          to: application.email,
+          subject: `Application Received - ${designation} (${jobCode})`,
+          text: mailText,
+          html: mailHtml,
+          ...(hasLogo
+            ? {
+                attachments: [
+                  {
+                    filename: 'nortek_white.png',
+                    path: logoPath,
+                    cid: 'norteklogo'
+                  }
+                ]
+              }
+            : {})
+        });
+        emailSent = true;
+      } catch (error) {
+        try {
+          await transporter.sendMail({
+            from: `"Nortek Careers" <${emailUser}>`,
+            to: application.email,
+            subject: `Application Received - ${designation} (${jobCode})`,
+            text: mailText,
+            html: mailHtml.replace(/<img[^>]*cid:norteklogo[^>]*>/i, '')
+          });
+          emailSent = true;
+        } catch (retryError) {
+          console.error('Application acknowledgement email failed:', retryError?.message || retryError);
+        }
       }
-    ]
-  });
+    }
 
-} catch (error) {
-  console.error("Email sending failed:", error);
-}
-
-
-    // 3️ Return response
-    res.json({ success: true, application });
-
+    res.json({
+      success: true,
+      application,
+      emailSent,
+      ...(emailSent ? {} : { warning: 'Application saved but acknowledgement email was not sent.' })
+    });
   } catch (err) {
-    console.error("Application submission error:", err);
-    res.status(500).json({ success: false, message: "Submission failed" });
+    console.error('Application submission error:', err);
+    res.status(500).json({ success: false, message: 'Submission failed' });
   }
 });
-
 // --- Get All Applications ---
 app.get('/apply/all', authAdminMiddleware, authorizeRoles('super_admin', 'admin', 'recruiter'), async (_, res) => {
   const applications = await Application.find().sort({ appliedAt: -1 });
@@ -685,3 +713,4 @@ app.delete('/apply/delete/:id', authAdminMiddleware, authorizeRoles('super_admin
 app.listen(PORT, () =>
   console.log(` Server running at http://localhost:${PORT}`)
 );
+
