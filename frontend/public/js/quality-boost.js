@@ -237,6 +237,120 @@
     });
   }
 
+  function keepFooterCurrent() {
+    const year = new Date().getFullYear();
+    const normalized = '&copy; ' + year + ' Nortek. All rights reserved.';
+
+    const apply = () => {
+      document.querySelectorAll('p.mb-0, .mb-0').forEach((el) => {
+        const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+        if (/Nortek\.\s*All rights reserved\./i.test(text)) {
+          if ((el.innerHTML || '').trim() !== normalized) {
+            el.innerHTML = normalized;
+          }
+        }
+      });
+    };
+
+    apply();
+
+    if (!window.__nortekFooterObserver && document.body && typeof MutationObserver !== 'undefined') {
+      window.__nortekFooterObserver = new MutationObserver(() => apply());
+      window.__nortekFooterObserver.observe(document.body, { childList: true, subtree: true });
+    }
+  }
+
+  function syncSocialLinks() {
+    const configured = window.__NORTEK_SOCIAL_LINKS__ || {};
+    const links = {
+      facebook: String(configured.facebook || '').trim(),
+      instagram: String(configured.instagram || '').trim(),
+      linkedin: String(configured.linkedin || '').trim(),
+    };
+
+    const socialForIcon = (iconEl) => {
+      if (!iconEl || !iconEl.classList) return '';
+      if (iconEl.classList.contains('bi-facebook')) return 'facebook';
+      if (iconEl.classList.contains('bi-instagram')) return 'instagram';
+      if (iconEl.classList.contains('bi-linkedin')) return 'linkedin';
+      return '';
+    };
+
+    const apply = () => {
+      document.querySelectorAll('.bi-facebook, .bi-instagram, .bi-linkedin').forEach((iconEl) => {
+        const key = socialForIcon(iconEl);
+        if (!key) return;
+
+        const anchor = iconEl.closest('a');
+        if (!anchor || anchor.hasAttribute('data-social-manual')) return;
+
+        const existingHref = String(anchor.getAttribute('href') || '').trim();
+        const configuredHref = links[key];
+        const nextHref = configuredHref || existingHref || '#';
+
+        anchor.setAttribute('href', nextHref);
+        anchor.setAttribute('aria-label', key.charAt(0).toUpperCase() + key.slice(1));
+
+        if (/^https?:\/\//i.test(nextHref)) {
+          anchor.setAttribute('target', '_blank');
+          anchor.setAttribute('rel', 'noopener noreferrer');
+        } else {
+          anchor.removeAttribute('target');
+        }
+      });
+    };
+
+    apply();
+
+    if (!window.__nortekSocialObserver && document.body && typeof MutationObserver !== 'undefined') {
+      window.__nortekSocialObserver = new MutationObserver(() => apply());
+      window.__nortekSocialObserver.observe(document.body, { childList: true, subtree: true });
+    }
+  }
+
+  function improveModalWorkflow() {
+    let modalTimer = null;
+    let openAt = 0;
+
+    const clearTimer = () => {
+      if (!modalTimer) return;
+      window.clearInterval(modalTimer);
+      modalTimer = null;
+    };
+
+    document.addEventListener('show.bs.modal', (event) => {
+      const modal = event && event.target;
+      if (!modal || !modal.classList || !modal.classList.contains('modal')) return;
+
+      openAt = Date.now();
+      document.body.classList.add('nortek-modal-open');
+      document.body.setAttribute('data-active-modal', modal.id || 'modal');
+      modal.setAttribute('data-opened-at', new Date(openAt).toISOString());
+
+      // Keep session seconds updated while the modal is open.
+      clearTimer();
+      modalTimer = window.setInterval(() => {
+        const elapsed = Math.max(0, Math.floor((Date.now() - openAt) / 1000));
+        modal.setAttribute('data-open-seconds', String(elapsed));
+      }, 1000);
+
+      const focusTarget = modal.querySelector('input, textarea, select, button, [href], [tabindex]:not([tabindex="-1"])');
+      if (focusTarget && typeof focusTarget.focus === 'function') {
+        window.setTimeout(() => focusTarget.focus(), 50);
+      }
+    });
+
+    document.addEventListener('hidden.bs.modal', (event) => {
+      const modal = event && event.target;
+      if (!modal || !modal.classList || !modal.classList.contains('modal')) return;
+
+      clearTimer();
+      document.body.classList.remove('nortek-modal-open');
+      document.body.removeAttribute('data-active-modal');
+      modal.removeAttribute('data-open-seconds');
+    });
+  }
+
   function ensureBackToTopButton() {
     if (document.querySelector('.nortek-back-to-top')) return;
 
@@ -302,6 +416,9 @@
     improveLinks();
     improveFormAccessibility();
     improveVideoPerformance();
+    keepFooterCurrent();
+    syncSocialLinks();
+    improveModalWorkflow();
     ensureBackToTopButton();
   }
 
