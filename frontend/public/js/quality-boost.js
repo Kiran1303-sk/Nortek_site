@@ -1,8 +1,8 @@
 /* eslint-env browser */
 (function () {
   function ensureMeta(name, content) {
-    if (!content) return;
-    let tag = document.querySelector('meta[name="' + name + '"]');
+    if (!content) {return;}
+    let tag = document.querySelector(`meta[name="${  name  }"]`);
     if (!tag) {
       tag = document.createElement('meta');
       tag.setAttribute('name', name);
@@ -14,8 +14,8 @@
   }
 
   function ensurePropertyMeta(property, content) {
-    if (!content) return;
-    let tag = document.querySelector('meta[property="' + property + '"]');
+    if (!content) {return;}
+    let tag = document.querySelector(`meta[property="${  property  }"]`);
     if (!tag) {
       tag = document.createElement('meta');
       tag.setAttribute('property', property);
@@ -28,7 +28,7 @@
 
   function normalizeTitle(title) {
     const clean = String(title || '').trim();
-    return clean ? clean + ' | Nortek' : 'Nortek';
+    return clean ? `${clean  } | Nortek` : 'Nortek';
   }
 
   function ensureCanonical() {
@@ -46,29 +46,29 @@
   }
 
   function ensureMainLandmark() {
-    if (document.querySelector('main, [role="main"]')) return;
+    if (document.querySelector('main, [role="main"]')) {return;}
     const candidate =
       document.querySelector('section') ||
       document.querySelector('.container') ||
       document.querySelector('.container-fluid');
     if (candidate) {
       candidate.setAttribute('role', 'main');
-      if (!candidate.id) candidate.id = 'main-content';
+      if (!candidate.id) {candidate.id = 'main-content';}
     }
   }
 
   function ensureSkipLink() {
-    if (document.querySelector('.skip-link')) return;
+    if (document.querySelector('.skip-link')) {return;}
     const main =
       document.querySelector('main') ||
       document.querySelector('[role="main"]') ||
       document.querySelector('section');
-    if (!main) return;
-    if (!main.id) main.id = 'main-content';
+    if (!main) {return;}
+    if (!main.id) {main.id = 'main-content';}
 
     const skip = document.createElement('a');
     skip.className = 'skip-link';
-    skip.href = '#' + main.id;
+    skip.href = `#${  main.id}`;
     skip.textContent = 'Skip to main content';
     document.body.insertAdjacentElement('afterbegin', skip);
 
@@ -80,7 +80,7 @@
   }
 
   function isNearViewport(el, threshold) {
-    if (!el || typeof el.getBoundingClientRect !== 'function') return false;
+    if (!el || typeof el.getBoundingClientRect !== 'function') {return false;}
     const rect = el.getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight || 800;
     const margin = (threshold || 1) * vh;
@@ -88,20 +88,20 @@
   }
 
   function isLikelyCriticalImage(img) {
-    if (!img) return false;
-    if (img.getAttribute('loading') === 'eager') return true;
-    if ((img.getAttribute('fetchpriority') || '').toLowerCase() === 'high') return true;
-    if (img.hasAttribute('data-eager')) return true;
+    if (!img) {return false;}
+    if (img.getAttribute('loading') === 'eager') {return true;}
+    if ((img.getAttribute('fetchpriority') || '').toLowerCase() === 'high') {return true;}
+    if (img.hasAttribute('data-eager')) {return true;}
 
     const cls = typeof img.className === 'string' ? img.className : '';
-    if (/\b(hero|banner|logo|brand)\b/i.test(cls)) return true;
-    if (img.closest('header, nav, .hero, .hero-section')) return true;
+    if (/\b(hero|banner|logo|brand)\b/i.test(cls)) {return true;}
+    if (img.closest('header, nav, .hero, .hero-section')) {return true;}
 
     return isNearViewport(img, 1.1);
   }
 
   function tuneImage(img) {
-    if (!img) return;
+    if (!img) {return;}
     const widthAttr = img.getAttribute('width');
     const heightAttr = img.getAttribute('height');
 
@@ -111,32 +111,32 @@
       img.removeAttribute('width');
     }
     if (heightAttr && /%|px|auto/i.test(heightAttr)) {
-      if (!img.style.height) img.style.height = heightAttr === 'auto' ? 'auto' : heightAttr;
+      if (!img.style.height) {img.style.height = heightAttr === 'auto' ? 'auto' : heightAttr;}
       img.removeAttribute('height');
     }
 
-    if (!img.style.height && img.style.width) img.style.height = 'auto';
+    if (!img.style.height && img.style.width) {img.style.height = 'auto';}
 
     if (!img.getAttribute('loading')) {
       img.setAttribute('loading', isLikelyCriticalImage(img) ? 'eager' : 'lazy');
     }
-    if (!img.getAttribute('decoding')) img.setAttribute('decoding', 'async');
+    if (!img.getAttribute('decoding')) {img.setAttribute('decoding', 'async');}
     if (!img.getAttribute('fetchpriority') && img.getAttribute('loading') === 'lazy') {
       img.setAttribute('fetchpriority', 'low');
     }
-    if (!img.getAttribute('alt')) img.setAttribute('alt', 'Nortek image');
+    if (!img.getAttribute('alt')) {img.setAttribute('alt', 'Nortek image');}
   }
 
   function tuneIframe(frame) {
-    if (!frame) return;
+    if (!frame) {return;}
     if (!frame.getAttribute('loading')) {
       frame.setAttribute('loading', isNearViewport(frame, 1.0) ? 'eager' : 'lazy');
     }
-    if (!frame.getAttribute('title')) frame.setAttribute('title', 'Embedded content');
+    if (!frame.getAttribute('title')) {frame.setAttribute('title', 'Embedded content');}
   }
 
   function tuneVideo(video) {
-    if (!video) return;
+    if (!video) {return;}
     if (!video.getAttribute('preload')) {
       video.setAttribute('preload', isNearViewport(video, 1.0) ? 'metadata' : 'none');
     }
@@ -153,10 +153,10 @@
       window.__nortekMediaObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           mutation.addedNodes.forEach((node) => {
-            if (!node || node.nodeType !== 1) return;
-            if (node.matches && node.matches('img')) tuneImage(node);
-            if (node.matches && node.matches('iframe')) tuneIframe(node);
-            if (node.matches && node.matches('video')) tuneVideo(node);
+            if (!node || node.nodeType !== 1) {return;}
+            if (node.matches && node.matches('img')) {tuneImage(node);}
+            if (node.matches && node.matches('iframe')) {tuneIframe(node);}
+            if (node.matches && node.matches('video')) {tuneVideo(node);}
             if (node.querySelectorAll) {
               node.querySelectorAll('img').forEach(tuneImage);
               node.querySelectorAll('iframe').forEach(tuneIframe);
@@ -173,35 +173,35 @@
     document.querySelectorAll('a[target="_blank"]').forEach((a) => {
       const rel = (a.getAttribute('rel') || '').toLowerCase();
       const parts = rel.split(/\s+/).filter(Boolean);
-      if (!parts.includes('noopener')) parts.push('noopener');
-      if (!parts.includes('noreferrer')) parts.push('noreferrer');
+      if (!parts.includes('noopener')) {parts.push('noopener');}
+      if (!parts.includes('noreferrer')) {parts.push('noreferrer');}
       a.setAttribute('rel', parts.join(' ').trim());
     });
 
     document.querySelectorAll('a').forEach((a) => {
       const icon = a.querySelector('.bi-facebook, .bi-instagram, .bi-linkedin');
-      if (!icon) return;
-      if (a.getAttribute('aria-label')) return;
-      if (icon.classList.contains('bi-facebook')) a.setAttribute('aria-label', 'Facebook');
-      if (icon.classList.contains('bi-instagram')) a.setAttribute('aria-label', 'Instagram');
-      if (icon.classList.contains('bi-linkedin')) a.setAttribute('aria-label', 'LinkedIn');
+      if (!icon) {return;}
+      if (a.getAttribute('aria-label')) {return;}
+      if (icon.classList.contains('bi-facebook')) {a.setAttribute('aria-label', 'Facebook');}
+      if (icon.classList.contains('bi-instagram')) {a.setAttribute('aria-label', 'Instagram');}
+      if (icon.classList.contains('bi-linkedin')) {a.setAttribute('aria-label', 'LinkedIn');}
     });
 
     // Give fallback names to icon-only anchors.
     document.querySelectorAll('a').forEach((a) => {
-      if (a.getAttribute('aria-label')) return;
+      if (a.getAttribute('aria-label')) {return;}
       const txt = (a.textContent || '').trim();
-      if (txt) return;
+      if (txt) {return;}
       const icon = a.querySelector('i, svg, img');
-      if (icon) a.setAttribute('aria-label', 'Open link');
+      if (icon) {a.setAttribute('aria-label', 'Open link');}
     });
   }
 
   function improveFormAccessibility() {
     document.querySelectorAll('input, textarea, select').forEach((el) => {
-      if (el.getAttribute('aria-label')) return;
+      if (el.getAttribute('aria-label')) {return;}
       const id = el.getAttribute('id');
-      if (id && document.querySelector('label[for="' + id + '"]')) return;
+      if (id && document.querySelector(`label[for="${  id  }"]`)) {return;}
       const placeholder = (el.getAttribute('placeholder') || '').trim();
       const name = (el.getAttribute('name') || '').trim();
       if (placeholder) {
@@ -212,9 +212,9 @@
     });
 
     document.querySelectorAll('button').forEach((btn) => {
-      if (btn.getAttribute('aria-label')) return;
+      if (btn.getAttribute('aria-label')) {return;}
       const txt = (btn.textContent || '').trim();
-      if (txt) return;
+      if (txt) {return;}
       const title = (btn.getAttribute('title') || '').trim();
       btn.setAttribute('aria-label', title || 'Button');
     });
@@ -239,7 +239,7 @@
 
   function keepFooterCurrent() {
     const year = new Date().getFullYear();
-    const normalized = '&copy; ' + year + ' Nortek. All rights reserved.';
+    const normalized = `&copy; ${  year  } Nortek. All rights reserved.`;
 
     const apply = () => {
       document.querySelectorAll('p.mb-0, .mb-0').forEach((el) => {
@@ -253,11 +253,6 @@
     };
 
     apply();
-
-    if (!window.__nortekFooterObserver && document.body && typeof MutationObserver !== 'undefined') {
-      window.__nortekFooterObserver = new MutationObserver(() => apply());
-      window.__nortekFooterObserver.observe(document.body, { childList: true, subtree: true });
-    }
   }
 
   function syncSocialLinks() {
@@ -269,20 +264,20 @@
     };
 
     const socialForIcon = (iconEl) => {
-      if (!iconEl || !iconEl.classList) return '';
-      if (iconEl.classList.contains('bi-facebook')) return 'facebook';
-      if (iconEl.classList.contains('bi-instagram')) return 'instagram';
-      if (iconEl.classList.contains('bi-linkedin')) return 'linkedin';
+      if (!iconEl || !iconEl.classList) {return '';}
+      if (iconEl.classList.contains('bi-facebook')) {return 'facebook';}
+      if (iconEl.classList.contains('bi-instagram')) {return 'instagram';}
+      if (iconEl.classList.contains('bi-linkedin')) {return 'linkedin';}
       return '';
     };
 
     const apply = () => {
       document.querySelectorAll('.bi-facebook, .bi-instagram, .bi-linkedin').forEach((iconEl) => {
         const key = socialForIcon(iconEl);
-        if (!key) return;
+        if (!key) {return;}
 
         const anchor = iconEl.closest('a');
-        if (!anchor || anchor.hasAttribute('data-social-manual')) return;
+        if (!anchor || anchor.hasAttribute('data-social-manual')) {return;}
 
         const existingHref = String(anchor.getAttribute('href') || '').trim();
         const configuredHref = links[key];
@@ -302,9 +297,10 @@
 
     apply();
 
-    if (!window.__nortekSocialObserver && document.body && typeof MutationObserver !== 'undefined') {
-      window.__nortekSocialObserver = new MutationObserver(() => apply());
-      window.__nortekSocialObserver.observe(document.body, { childList: true, subtree: true });
+    // Re-apply when a modal opens in case modal markup is injected lazily.
+    if (!window.__nortekSocialModalHooked) {
+      window.__nortekSocialModalHooked = true;
+      document.addEventListener('show.bs.modal', apply);
     }
   }
 
@@ -313,14 +309,14 @@
     let openAt = 0;
 
     const clearTimer = () => {
-      if (!modalTimer) return;
+      if (!modalTimer) {return;}
       window.clearInterval(modalTimer);
       modalTimer = null;
     };
 
     document.addEventListener('show.bs.modal', (event) => {
       const modal = event && event.target;
-      if (!modal || !modal.classList || !modal.classList.contains('modal')) return;
+      if (!modal || !modal.classList || !modal.classList.contains('modal')) {return;}
 
       openAt = Date.now();
       document.body.classList.add('nortek-modal-open');
@@ -342,7 +338,7 @@
 
     document.addEventListener('hidden.bs.modal', (event) => {
       const modal = event && event.target;
-      if (!modal || !modal.classList || !modal.classList.contains('modal')) return;
+      if (!modal || !modal.classList || !modal.classList.contains('modal')) {return;}
 
       clearTimer();
       document.body.classList.remove('nortek-modal-open');
@@ -352,7 +348,7 @@
   }
 
   function ensureBackToTopButton() {
-    if (document.querySelector('.nortek-back-to-top')) return;
+    if (document.querySelector('.nortek-back-to-top')) {return;}
 
     const button = document.createElement('button');
     button.type = 'button';
