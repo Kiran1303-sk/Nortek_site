@@ -13,7 +13,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
-// Render/other reverse proxies set X-Forwarded-For. Required for express-rate-limit.
+// Reverse proxies set X-Forwarded-For. Required for express-rate-limit.
 app.set('trust proxy', 1);
 const ADMIN_ROLES = ['super_admin', 'admin', 'recruiter', 'user'];
 
@@ -30,9 +30,7 @@ const DEFAULT_CORS_ORIGINS = [
   CLIENT_URL,
   'http://localhost:5000',
   'http://localhost:5500',
-  'http://127.0.0.1:5500',
-  'https://nortek-frontend.onrender.com',
-  'https://nortek-site.onrender.com'
+  'http://127.0.0.1:5500'
 ];
 const ENV_CORS_ORIGINS = String(process.env.CORS_ALLOWED_ORIGINS || '')
   .split(',')
@@ -412,9 +410,14 @@ app.post('/apply', formLimiter, upload.single('cv'), async (req, res) => {
   try {
     const submittedName = String(req.body.name || '').trim();
     const submittedEmail = String(req.body.email || '').toLowerCase().trim();
+    const submittedJobCode = String(req.body.jobCode || '').trim();
+    const submittedDesignation = String(req.body.designation || '').trim();
 
     if (!submittedName || !submittedEmail) {
       return res.status(400).json({ success: false, message: 'Name and email are required' });
+    }
+    if (!submittedJobCode || !submittedDesignation) {
+      return res.status(400).json({ success: false, message: 'Job selection is required' });
     }
 
     const matchedCandidate = await Candidate.findOne({ email: submittedEmail }).select('_id');
@@ -424,14 +427,16 @@ app.post('/apply', formLimiter, upload.single('cv'), async (req, res) => {
       candidateId: matchedCandidate?._id || undefined,
       name: submittedName,
       email: submittedEmail,
+      jobCode: submittedJobCode,
+      designation: submittedDesignation,
       cv: req.file?.filename
     });
 
     const emailUser = String(process.env.EMAIL_USER || '').trim();
     const logoPath = path.join(__dirname, 'assets/email/nortek_white.png');
     const hasLogo = fs.existsSync(logoPath);
-    const designation = String(application.designation || 'Applied Position').trim();
-    const jobCode = String(application.jobCode || 'N/A').trim();
+    const designation = String(submittedDesignation || application.designation || 'Applied Position').trim();
+    const jobCode = String(submittedJobCode || application.jobCode || 'N/A').trim();
 
     const mailHtml = `
       <div style="font-family:Arial;background:#f4f6f9;padding:20px">

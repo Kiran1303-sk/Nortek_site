@@ -1,6 +1,6 @@
-# Backend (Render Web Service)
+# Backend
 
-Deploy this folder as a Render **Web Service**.
+Deploy this folder on any Node.js host or convert it to serverless API routes for Vercel.
 
 - Root Directory: `backend`
 - Build Command: `npm ci`
@@ -18,7 +18,7 @@ Deploy this folder as a Render **Web Service**.
 - `NODE_ENV=production`
 
 Optional:
-- `PORT` (Render injects this)
+- `PORT`
 - `CLIENT_URL`
 - `JWT_EXPIRES_IN`
 - `ADMIN_JWT_EXPIRES_IN`

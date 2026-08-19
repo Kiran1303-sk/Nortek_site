@@ -486,6 +486,7 @@
       }
     </style>
     <script src="/js/api-config.js" defer></script>
+    <script src="/js/static-jobs.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
 </head>
 
@@ -1010,7 +1011,7 @@
 
       <script>
         document.addEventListener('DOMContentLoaded', () => {
-          const API_URL = window.apiUrl('/jobs/public');
+          const STATIC_JOBS = window.NortekJobsData || [];
 
           const jobsContainer = document.getElementById('jobsContainer');
           const keywordInput = document.getElementById('keywordInput');
@@ -1171,26 +1172,14 @@
             }
           }
 
-          async function fetchLiveJobs() {
-            const cachedJobs = readJobsCache();
-            if (cachedJobs && cachedJobs.length) {
-              applyJobs(cachedJobs, { restoreSavedFilters: true });
-            } else {
-              jobsContainer.innerHTML = '<p class="text-muted">Loading jobs...</p>';
+          function loadStaticJobs() {
+            if (STATIC_JOBS.length) {
+              writeJobsCache(STATIC_JOBS);
+              applyJobs(STATIC_JOBS, { restoreSavedFilters: true });
+              return;
             }
 
-            try {
-              const { data } = await axios.get(API_URL);
-              const liveJobs = Array.isArray(data.jobs) ? data.jobs : [];
-              writeJobsCache(liveJobs);
-              applyJobs(liveJobs, { restoreSavedFilters: true });
-            } catch (err) {
-              console.error('Failed to load public jobs:', err);
-              const message = err.response?.data?.message || err.message || 'Error loading jobs';
-              if (!cachedJobs || !cachedJobs.length) {
-                jobsContainer.innerHTML = `<p>${message}</p>`;
-              }
-            }
+            jobsContainer.innerHTML = '<p class="text-muted">No jobs available right now.</p>';
           }
 
           // ================= BUILD RANGE PAGINATION =================
@@ -1513,7 +1502,7 @@
             }
           });
 
-          fetchLiveJobs();
+          loadStaticJobs();
           updateBadgeCount();
         });
       </script>

@@ -202,6 +202,7 @@
       }
     </style>
     <script src="/js/api-config.js"></script>
+    <script src="/js/static-jobs.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
@@ -511,41 +512,31 @@
         );
       }
 
-      function renderJobs(filteredJobs) {
-        jobsContainer.innerHTML = '';
-        filteredJobs.forEach((job) => {
-          jobsContainer.innerHTML += `
-            <div class="row bts py-3">
-                <div class="col-12 col-md-9">
-                    <h5 style="color: rgb(47, 50, 145);">${job.title} - ${job.code}</h5>
-                    <img loading="lazy" decoding="async" src="/images/suitcase.png" height="25" />&nbsp;&nbsp;<span>${job.type}</span>&nbsp;&nbsp;
-                    <img loading="lazy" decoding="async" src="/images/marker.png" height="25" />&nbsp;&nbsp;<span>${job.location}</span>&nbsp;&nbsp;
-                    <img loading="lazy" decoding="async" src="/images/cal.png" height="25" />&nbsp;&nbsp;<span>Posted on: ${job.posted}</span>
-                </div>
-                <div class="col-12 col-md-3">
-                    <!-- CHANGE HERE: link to job-details.html instead of apply.html -->
-                    <a href="job-details.html?jobCode=${job.code}&designation=${encodeURIComponent(job.title)}">
-                        <button class="btn w-100 justify-content-center" style="border-radius:50px; background:rgb(47, 50, 145); color:white;">VIEW AND APPLY</button>
-                    </a>
-                </div>
-            </div>
-        `;
-        });
-      }
-
       // === 1 Read URL parameters and fill hidden inputs & heading ===
 
       const params = new URLSearchParams(window.location.search);
       const jobCode = params.get('jobCode') || '';
       const designation = params.get('designation') || '';
+      const selectedJob =
+        (window.getNortekJobByCode && window.getNortekJobByCode(jobCode)) ||
+        (designation &&
+          (window.NortekJobsData || []).find(
+            (job) => String(job.title || '').toLowerCase() === String(designation || '').toLowerCase()
+          )) ||
+        (window.NortekJobsData || []).find(
+          (job) => String(job.jobCode || '').toLowerCase() === String(jobCode || '').toLowerCase()
+        ) ||
+        null;
+      const resolvedJobCode = jobCode || selectedJob?.jobCode || '';
+      const resolvedDesignation = designation || selectedJob?.title || '';
 
       const jobCodeInput = document.getElementById('jobCode');
       const designationInput = document.getElementById('designation');
       const jobTitle = document.getElementById('jobTitle');
 
-      if (jobCodeInput) jobCodeInput.value = jobCode;
-      if (designationInput) designationInput.value = designation;
-      if (jobTitle) jobTitle.textContent = designation;
+      if (jobCodeInput) jobCodeInput.value = resolvedJobCode;
+      if (designationInput) designationInput.value = resolvedDesignation;
+      if (jobTitle) jobTitle.textContent = resolvedDesignation || 'Selected Position';
 
       // Scroll to form after page load for better UX
       window.addEventListener('load', () => {
@@ -559,6 +550,11 @@
       if (applyForm) {
         applyForm.addEventListener('submit', async function (e) {
           e.preventDefault();
+
+          if (!jobCodeInput?.value || !designationInput?.value) {
+            alert('[X] Please select a job before applying');
+            return;
+          }
 
           // CV size validation
           const cvFile = this.cv.files[0];

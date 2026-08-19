@@ -1,18 +1,16 @@
-# Nortek Project (Render-Ready Split)
+# Nortek Project
 
-This repo now includes a Render deployment split:
+This repo is split into:
 
 - `frontend/` -> static website files (`public/`)
 - `backend/` -> Node.js API, auth, jobs, and applications
 
-A Render blueprint file is included: `render.yaml`.
+## Vercel deployment
 
-## Render deployment
-
-1. Push this repo to GitHub.
-2. In Render, create Blueprint from this repo (uses `render.yaml`).
-3. Set backend env vars in Render dashboard (`MONGO_URI`, `JWT_SECRET`, mail creds, CORS origins).
-4. Set `CORS_ALLOWED_ORIGINS` to your frontend Render URL.
+1. Deploy `frontend/` as a Vercel static site.
+2. Deploy the backend separately on a Node.js host or as serverless API routes.
+3. Set the backend URL in the frontend at runtime with `window.__API_BASE_URL__` or a `<meta name="api-base-url">` tag.
+4. Configure backend env vars for MongoDB, JWT, email, and CORS.
 
 ## Local run
 
@@ -36,9 +34,9 @@ npx serve frontend/public
 
 `frontend/public/js/api-config.js` auto-selects API base:
 - localhost -> `http://localhost:5000`
-- non-localhost -> `https://nortek-backend.onrender.com` (replace with your actual backend URL)
+- non-localhost -> use the configured API base from the page or environment
 
 ## Important note
 
 Because this environment blocks file deletes/moves, the original root-level structure is still present.
-Use the new `frontend/` and `backend/` folders for Render deployment.
+Use the `frontend/` and `backend/` folders for your Vercel-friendly split deployment.
