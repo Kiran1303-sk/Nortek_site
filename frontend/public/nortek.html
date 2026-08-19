@@ -152,7 +152,7 @@
       .hero-slide-2,
       .hero-slide-3 {
         background-size: cover;
-        background-position: center;
+        background-position: center right;
         background-repeat: no-repeat;
       }
 
@@ -803,14 +803,14 @@
         }
 
         .hero-bg-media {
-          object-fit: contain;
+          object-fit: cover;
           object-position: center center;
         }
 
         .hero-slide-2,
         .hero-slide-3 {
-          background-size: contain !important;
-          background-position: center center !important;
+          background-size: cover !important;
+          background-position: center right !important;
           background-repeat: no-repeat !important;
           background-color: #f7f7f7 !important;
         }
@@ -829,7 +829,9 @@
         }
 
         .hero-content h1 {
-          font-size: clamp(1.7rem, 7vw, 2.3rem);
+          max-width: 13ch;
+          font-size: clamp(2.1rem, 6.2vw, 3.2rem);
+          line-height: 0.96;
         }
 
         .service-process {
@@ -1120,7 +1122,7 @@
       }
 
       .hero-content h1 {
-        max-width: 11ch;
+        max-width: 13ch;
         letter-spacing: -0.04em;
         line-height: 0.94;
         text-wrap: balance;
