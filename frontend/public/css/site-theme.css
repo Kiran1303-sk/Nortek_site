@@ -274,7 +274,41 @@ footer .container-fluid,
 footer.bg-dark {
   background:
     radial-gradient(circle at top left, rgba(43, 59, 191, 0.22), transparent 28%),
-    linear-gradient(180deg, #111a36 0%, #0d1429 100%) !important;
+    radial-gradient(circle at top right, rgba(14, 116, 144, 0.16), transparent 26%),
+    linear-gradient(180deg, #0f1833 0%, #0c1326 100%) !important;
+  position: relative;
+  overflow: hidden;
+  padding-top: 4.25rem !important;
+  padding-bottom: 2.75rem !important;
+}
+
+footer .container-fluid::before,
+footer .container-fluid::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+footer .container-fluid::before {
+  width: 220px;
+  height: 220px;
+  right: -70px;
+  top: -60px;
+  background: radial-gradient(circle, rgba(43, 59, 191, 0.24) 0%, rgba(43, 59, 191, 0) 68%);
+}
+
+footer .container-fluid::after {
+  width: 180px;
+  height: 180px;
+  left: -50px;
+  bottom: -70px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.14) 0%, rgba(34, 197, 94, 0) 72%);
+}
+
+footer .container {
+  position: relative;
+  z-index: 1;
 }
 
 footer p,
@@ -288,6 +322,44 @@ footer h5 {
 
 footer h5 {
   letter-spacing: 0.3px;
+}
+
+footer img {
+  max-width: 156px;
+  margin-bottom: 1rem;
+}
+
+footer hr {
+  border-color: rgba(255, 255, 255, 0.12);
+  opacity: 1;
+  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+footer .row > [class*="col-"] {
+  margin-bottom: 1.25rem;
+}
+
+footer a {
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+footer a:hover,
+footer a:focus-visible {
+  color: #ffffff !important;
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+footer .bi {
+  font-size: 1.05rem;
+}
+
+footer address {
+  line-height: 1.7;
 }
 
 footer a[href="/webdesign.html"],
