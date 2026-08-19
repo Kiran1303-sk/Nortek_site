@@ -1077,71 +1077,78 @@
 
       .hero-section {
         background:
-          radial-gradient(circle at top left, rgba(43, 59, 191, 0.2), transparent 30%),
-          linear-gradient(180deg, #091224 0%, #0f1b3b 40%, #f5f7fd 100%);
+          radial-gradient(circle at top left, rgba(43, 59, 191, 0.22), transparent 28%),
+          linear-gradient(180deg, #081123 0%, #0f1b3b 46%, #f5f7fd 100%);
       }
 
       .hero-slide::before {
         background:
-          linear-gradient(115deg, rgba(9, 18, 36, 0.72) 0%, rgba(13, 29, 74, 0.34) 52%, rgba(9, 18, 36, 0.2) 100%);
+          linear-gradient(115deg, rgba(6, 12, 28, 0.8) 0%, rgba(10, 24, 66, 0.42) 48%, rgba(9, 18, 36, 0.16) 100%);
       }
 
       .hero-content {
-        max-width: 720px;
-        padding: clamp(22px, 3vw, 36px);
-        border-radius: 28px;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
-        backdrop-filter: blur(14px);
+        max-width: 760px;
+        padding: 0;
+        margin-top: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        backdrop-filter: none;
       }
 
       .hero-content h4 {
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        padding: 7px 14px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.14);
+        padding: 0;
+        margin-bottom: 18px;
         color: #fff !important;
         letter-spacing: 0.03em;
         text-transform: uppercase;
         font-size: 0.86rem;
         font-weight: 800;
-        margin-bottom: 18px;
+        background: transparent;
       }
 
       .hero-content h4::before {
         content: "";
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
+        width: 26px;
+        height: 2px;
+        border-radius: 999px;
         background: #22c55e;
-        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.2);
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.12);
       }
 
       .hero-content h1 {
-        max-width: 12ch;
+        max-width: 11ch;
         letter-spacing: -0.04em;
-        line-height: 0.98;
+        line-height: 0.94;
+        text-wrap: balance;
       }
 
       .hero-content p {
-        max-width: 58ch;
-        color: rgba(255, 255, 255, 0.88) !important;
+        max-width: 54ch;
+        color: rgba(255, 255, 255, 0.84) !important;
+        font-weight: 500;
       }
 
       .hero-content .btn.btn-light {
-        background: linear-gradient(135deg, #ffffff 0%, #eef2ff 100%);
-        color: #1d2e8a !important;
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        min-height: 50px;
-        box-shadow: 0 16px 28px rgba(15, 23, 42, 0.18);
+        background: linear-gradient(135deg, #ffffff 0%, #edf2ff 100%);
+        color: #17276f !important;
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        min-height: 48px;
+        padding-inline: 1.35rem;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
       }
 
       .hero-content .btn.btn-light:hover {
         transform: translateY(-1px);
-        background: linear-gradient(135deg, #f8fbff 0%, #e8edff 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #e8eeff 100%);
+      }
+
+      .hero-content .row.g-3,
+      .hero-content .row.g-3.g-md-4 {
+        margin-top: 6px;
       }
 
       .hero-content .btn.btn-light span {
@@ -1153,6 +1160,40 @@
       .hero-slide-2 .hero-content,
       .hero-slide-3 .hero-content {
         margin-left: 0;
+      }
+
+      .hero-slide .container {
+        position: relative;
+      }
+
+      .hero-slide .container::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 18%;
+        width: min(34vw, 360px);
+        height: min(34vw, 360px);
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(34, 197, 94, 0.18) 0%, rgba(34, 197, 94, 0) 70%);
+        pointer-events: none;
+      }
+
+      .hero-slide .hero-content > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-slide .hero-content .row {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .hero-slide .hero-content .col-12 {
+        padding-left: 0;
+      }
+
+      .hero-slide .hero-content .btn.btn-light {
+        min-width: 170px;
       }
     </style>
   </head>
